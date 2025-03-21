@@ -64,7 +64,7 @@ public class Calibrations {
 
         /* MotionMagic constraints for teleoperated elevator */
         public static final double kMaxSpeedMotionMagic = 100;
-        public static final double kMaxAccelerationMotionMagic = 1100;
+        public static final double kMaxAccelerationMotionMagic = 550; //1100;
         public static final double kMaxCurrentPerMotor = 80;
 
         /* MotionMagic constraints for engame elevator */
@@ -77,7 +77,7 @@ public class Calibrations {
         public static final double kDefaultTolerance = 5;
 
         /* Bottom position in inches */
-        public static final double kBottomPosition = -0.2;
+        public static final double kBottomPosition = 2.0; //-0.2;
 
         /* Pendulum position in inches */
         public static final double kPendulumPosition = 24;
