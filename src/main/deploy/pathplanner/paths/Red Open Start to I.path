@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.127,
-        "y": 2.245
+        "x": 7.1296875,
+        "y": 5.9
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.103250049608818,
-        "y": 2.270002031398546
+        "x": 6.114836382596675,
+        "y": 5.622127463052431
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 5.294,
-        "y": 3.099
+        "x": 5.1187499999999995,
+        "y": 5.1411184210526315
       },
       "prevControl": {
-        "x": 5.55725,
-        "y": 2.6895
+        "x": 5.355603641967777,
+        "y": 5.221120622813582
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Red_Reef_F"
+      "linkedName": "Red_Reef_I"
     }
   ],
   "rotationTargets": [],
@@ -42,7 +42,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -151.355
+    "rotation": -48.36646066342976
   },
   "reversed": false,
   "folder": null,
