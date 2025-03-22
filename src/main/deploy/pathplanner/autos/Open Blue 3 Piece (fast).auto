@@ -11,7 +11,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Red Open Start to I"
+                  "pathName": "Blue Open Start to I"
                 }
               },
               {
@@ -68,7 +68,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Red I to Open CStation"
+                  "pathName": "Blue I to Open CStation (v=4ms)"
                 }
               },
               {
@@ -106,7 +106,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Red Open CStation to K"
+                  "pathName": "Blue Open CStation to K (v=4ms)"
                 }
               },
               {
@@ -150,7 +150,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 0.4
+                  "waitTime": 0.25
                 }
               },
               {
@@ -175,7 +175,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Red K to Open CStation"
+                  "pathName": "Blue K to Open CStation (v=4ms)"
                 }
               },
               {
@@ -213,7 +213,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Red Open CStation to L"
+                  "pathName": "Blue Open CStation to L (v=4ms)"
                 }
               },
               {
@@ -223,7 +223,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.25
+                        "waitTime": 0.5
                       }
                     },
                     {
@@ -257,7 +257,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 0.4
+                  "waitTime": 0.25
                 }
               },
               {
@@ -282,7 +282,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Red L to Open CStation"
+                  "pathName": "Blue L to Open CStation (v=4ms)"
                 }
               },
               {
