@@ -332,7 +332,7 @@ public class Calibrations {
         public static final double kAlgaeIntakeVelocity = -75;
 
         /* Current threshold for deciding when we have an algae */
-        public static final double kAlgaeIntakeThreshold = 15;
+        public static final double kAlgaeIntakeThreshold = 25;
 
     }
 }
