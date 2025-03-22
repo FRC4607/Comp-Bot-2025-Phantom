@@ -76,23 +76,30 @@ public class RobotContainer {
         configureBindings();
         
         //new EventTrigger("GoTo L1").onTrue(new L1(m_elevator, m_windmill));
-        new EventTrigger("ET GoTo L2").onTrue(new L2(m_elevator, m_windmill));
-        new EventTrigger("ET GoTo L3").onTrue(new L3(m_elevator, m_windmill));
-        new EventTrigger("ET GoTo L4").onTrue(new L4(m_elevator, m_windmill));
-        new EventTrigger("ET Lollipop Stow").onTrue(new LollipopStow(m_elevator, m_windmill));
-        new EventTrigger("ET Pendulum Stow").onTrue(new PendulumStow(m_elevator, m_windmill));
-        new EventTrigger("ET Intake Coral").onTrue(new CoralStation(m_elevator, m_windmill));
+        //new EventTrigger("ET GoTo L2").onTrue(new L2(m_elevator, m_windmill));
+        //new EventTrigger("ET GoTo L3").onTrue(new L3(m_elevator, m_windmill));
+        //new EventTrigger("ET GoTo L4").onTrue(new L4(m_elevator, m_windmill));
+        //new EventTrigger("ET Lollipop Stow").onTrue(new LollipopStow(m_elevator, m_windmill));
+        //new EventTrigger("ET Pendulum Stow").onTrue(new PendulumStow(m_elevator, m_windmill));
+        //new EventTrigger("ET Intake Coral").onTrue(new CoralStation(m_elevator, m_windmill));
         
-        NamedCommands.registerCommand("CMD Intake Coral", new CoralStation(m_elevator, m_windmill));
+        NamedCommands.registerCommand("CMD GoTo L2", new L2(m_elevator, m_windmill));
+        NamedCommands.registerCommand("CMD GoTo L3", new L3(m_elevator, m_windmill));
         NamedCommands.registerCommand("CMD GoTo L4", new L4(m_elevator, m_windmill));
+
         NamedCommands.registerCommand("CMD Lollipop Stow", new LollipopStow(m_elevator, m_windmill));
+        NamedCommands.registerCommand("CMD Pendulum Stow", new PendulumStow(m_elevator, m_windmill));
+        
+        NamedCommands.registerCommand("CMD Run Intake", new RunIntake(m_manipulator));
+        NamedCommands.registerCommand("CMD Intake Coral", new CoralStation(m_elevator, m_windmill)
+                                                            .alongWith(new RunIntake(m_manipulator)));
         NamedCommands.registerCommand("CMD Score Coral", 
                                         new RunManipulator(ManipulatorCalibrations.kL4OuttakeSpeed,
                                         ManipulatorCalibrations.kCoralAcceleration, m_manipulator)
                                         .withTimeout(ManipulatorCalibrations.kL4OuttakeTime));
+
         NamedCommands.registerCommand("CMD Align Right", new TranslationAlignToTag(0, m_drivetrain));
         NamedCommands.registerCommand("CMD Align Left", new TranslationAlignToTag(1, m_drivetrain));
-        NamedCommands.registerCommand("CMD Run Intake", new RunIntake(m_manipulator));
         
         m_autoChooser = AutoBuilder.buildAutoChooser("Do Nothing");
         
