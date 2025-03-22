@@ -31,6 +31,7 @@ import frc.robot.commands.L3;
 import frc.robot.commands.L3Stow;
 import frc.robot.commands.L4;
 import frc.robot.commands.LollipopStow;
+import frc.robot.commands.LollipopStowForAuto;
 import frc.robot.commands.PendulumStow;
 import frc.robot.commands.PrepClimb;
 import frc.robot.commands.ProcessAlgae;
@@ -85,7 +86,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("CMD GoTo L3", new L3(m_elevator, m_windmill));
         NamedCommands.registerCommand("CMD GoTo L4", new L4(m_elevator, m_windmill));
 
-        NamedCommands.registerCommand("CMD Lollipop Stow", new LollipopStow(m_elevator, m_windmill));
+        NamedCommands.registerCommand("CMD Lollipop Stow", new LollipopStowForAuto(m_elevator, m_windmill));
         NamedCommands.registerCommand("CMD Pendulum Stow", new PendulumStow(m_elevator, m_windmill));
         
         NamedCommands.registerCommand("CMD Run Intake", new RunIntake(m_manipulator));

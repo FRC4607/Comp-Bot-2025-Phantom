@@ -79,6 +79,9 @@ public class Calibrations {
         /* Bottom position in inches */
         public static final double kBottomPosition = 2.0; //-0.2;
 
+        /* Bottom position in inches for auto*/
+        public static final double kBottomPositionForAuto = 15.0;
+
         /* Pendulum position in inches */
         public static final double kPendulumPosition = 24;
 
