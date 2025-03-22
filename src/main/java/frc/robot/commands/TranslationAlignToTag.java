@@ -55,7 +55,6 @@ public class TranslationAlignToTag extends Command {
         //Get the Error
         m_txValue = NetworkTableInstance.getDefault().getTable("limelight-one").getEntry("tx")
                                              .getDouble(DriverCalibrations.kLimelightDefaultKTx);
-
         //Invert the error and calculate PID
         m_xspeed = m_profiledPid.calculate(-m_txValue);
         

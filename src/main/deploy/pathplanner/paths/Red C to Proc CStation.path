@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.294,
-        "y": 3.099
+        "x": 3.6457051282051283,
+        "y": 2.9516666666666667
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.407,
-        "y": 2.1919999999999993
+        "x": 2.8636666666666666,
+        "y": 2.214615384615384
       },
       "isLocked": false,
-      "linkedName": "Red_Reef_F"
+      "linkedName": "Red_Reef_C"
     },
     {
       "anchor": {
@@ -20,8 +20,8 @@
         "y": 0.522
       },
       "prevControl": {
-        "x": 2.0547500000000007,
-        "y": 0.7267500000000002
+        "x": 2.025384615384615,
+        "y": 1.2281410256410266
       },
       "nextControl": null,
       "isLocked": false,
@@ -34,7 +34,7 @@
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 3.0,
-    "maxAcceleration": 2.0,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -48,7 +48,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -151.355
+    "rotation": 147.20000000000002
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }

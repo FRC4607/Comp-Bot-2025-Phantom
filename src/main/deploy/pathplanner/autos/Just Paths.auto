@@ -30,39 +30,9 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "CMD GoTo L4"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "CMD Score Coral"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "CMD Lollipop Stow"
-          }
-        },
-        {
           "type": "path",
           "data": {
             "pathName": "Red F to Proc CStation"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "CMD Intake Coral"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "CMD Run Intake"
           }
         },
         {
@@ -88,30 +58,6 @@
                 }
               }
             ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "CMD Lollipop Stow"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "CMD GoTo L4"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "CMD Score Coral"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "CMD Lollipop Stow"
           }
         },
         {
