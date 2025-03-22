@@ -323,7 +323,7 @@ public class Calibrations {
         public static final double kAlgaeBargingVelocity = 300;
 
         /* Velocity to intake Algae in the floor position at */
-        public static final double kAlgaeIntakeVelocity = -35;
+        public static final double kAlgaeIntakeVelocity = -75;
 
         /* Current threshold for deciding when we have an algae */
         public static final double kAlgaeIntakeThreshold = 15;
