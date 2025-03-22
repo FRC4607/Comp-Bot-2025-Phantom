@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.031,
-        "y": 0.522
+        "x": 7.127,
+        "y": 2.245
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.811,
-        "y": 1.1267499999999995
+        "x": 6.103249999999999,
+        "y": 2.27
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 3.953,
-        "y": 2.925
+        "x": 5.294,
+        "y": 3.099
       },
       "prevControl": {
-        "x": 2.9585,
-        "y": 2.07675
+        "x": 5.55725,
+        "y": 2.6895
       },
       "nextControl": null,
       "isLocked": false,
@@ -31,26 +31,7 @@
   "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
-  "eventMarkers": [
-    {
-      "name": "Lollipop Stow",
-      "waypointRelativePos": 0.0982630272952903,
-      "endWaypointRelativePos": null,
-      "command": null
-    },
-    {
-      "name": "L4",
-      "waypointRelativePos": 0.7017369727047098,
-      "endWaypointRelativePos": null,
-      "command": null
-    },
-    {
-      "name": "Align Right",
-      "waypointRelativePos": 1.0,
-      "endWaypointRelativePos": null,
-      "command": null
-    }
-  ],
+  "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 3.0,
@@ -61,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 147.20000000000002
+    "rotation": -151.355
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 143.13
+    "rotation": -90.0
   },
   "useDefaultConstraints": true
 }

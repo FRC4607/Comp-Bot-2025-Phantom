@@ -7,31 +7,25 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Line to L4 (Processor Red)"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.5
+            "pathName": "Red Proc Start to F"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "L4 to Human Player (Processor Red)"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Is Intake Finished?"
+            "pathName": "Red F to Proc CStation"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Human Player to L4 Slow (Processor Red)"
+            "pathName": "Red Proc CStation to D"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Red D to Proc CStation"
           }
         }
       ]

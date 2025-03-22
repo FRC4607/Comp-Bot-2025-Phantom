@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.294,
-        "y": 3.099
+        "x": 3.8933974358974357,
+        "y": 2.776217948717948
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.407,
-        "y": 2.1919999999999993
+        "x": 3.111358974358974,
+        "y": 2.0391666666666657
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Red_Reef_D"
     },
     {
       "anchor": {
@@ -20,8 +20,8 @@
         "y": 0.522
       },
       "prevControl": {
-        "x": 2.0547500000000007,
-        "y": 0.7267500000000002
+        "x": 2.025384615384615,
+        "y": 1.2281410256410266
       },
       "nextControl": null,
       "isLocked": false,
@@ -31,14 +31,7 @@
   "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
-  "eventMarkers": [
-    {
-      "name": "Intake",
-      "waypointRelativePos": 0.6143920595533456,
-      "endWaypointRelativePos": null,
-      "command": null
-    }
-  ],
+  "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 3.0,
@@ -55,7 +48,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -151.355
+    "rotation": 147.20000000000002
   },
   "useDefaultConstraints": true
 }
