@@ -300,9 +300,11 @@ public class Calibrations {
         /* Stator current delta threshold to stop motors */
         public static final double kCurrentThreshold = 15;
 
-        public static final double kIntakeVelocityTolerance = 40;
+        /* Used to track state of when the intake is running full tilt */
+        public static final double kIntakeVelocityTolerance = 10;
 
-        public static final double kIntakeZeroTolerance = 7;
+        /* If the velocity goes from full tilt (50rps) to 25 assume coral has been fetched */
+        public static final double kIntakeZeroTolerance = 25;
 
         /* Coral reef L4 outtake speed, in rotations per second */
         public static final double kL4OuttakeSpeed = -30;

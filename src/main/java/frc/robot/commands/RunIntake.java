@@ -6,8 +6,8 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Calibrations.ManipulatorCalibrations;
-import frc.robot.subsystems.ManipulatorSubsystem;
 import frc.robot.subsystems.LEDSubsystem;
+import frc.robot.subsystems.ManipulatorSubsystem;
 
 /**
  * RunIntake.
