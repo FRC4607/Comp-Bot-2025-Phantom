@@ -22,6 +22,7 @@ public class TranslationAlignToTag extends Command {
     private CommandSwerveDrivetrain m_drivetrain;
     private double m_xspeed;
     private int m_pipeline;
+    private double m_txValue;
 
     private final ProfiledPIDController m_profiledPid = 
         new ProfiledPIDController(DriverCalibrations.kAprilTagTranslationXAlignmentKP,
@@ -52,18 +53,17 @@ public class TranslationAlignToTag extends Command {
         //Check if there is a target
         double isTarget = NetworkTableInstance.getDefault().getTable("limelight-one").getEntry("tv").getDouble(0);
         //Get the Error
-        double txValue = NetworkTableInstance.getDefault().getTable("limelight-one").getEntry("tx")
+        m_txValue = NetworkTableInstance.getDefault().getTable("limelight-one").getEntry("tx")
                                              .getDouble(DriverCalibrations.kLimelightDefaultKTx);
-
         //Invert the error and calculate PID
-        m_xspeed = m_profiledPid.calculate(-txValue);
+        m_xspeed = m_profiledPid.calculate(-m_txValue);
         
         m_drivetrain.setControl(m_swerveRequest
             .withVelocityX(m_xspeed)
             .withVelocityY(DriverCalibrations.kAprilTagTranslationYRate));
 
         if (isTarget > 0) {
-            if (Math.abs(txValue) < 1.75) {
+            if (Math.abs(m_txValue) < 1.75) {
                 LEDSubsystem.setCoralOnTarget();
             } else {
                 LEDSubsystem.setCoralTargeting();

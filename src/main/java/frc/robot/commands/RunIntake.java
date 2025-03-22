@@ -7,6 +7,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Calibrations.ManipulatorCalibrations;
 import frc.robot.subsystems.ManipulatorSubsystem;
+import frc.robot.subsystems.LEDSubsystem;
 
 /**
  * RunIntake.
@@ -27,6 +28,8 @@ public class RunIntake extends Command {
 
     @Override
     public void initialize() {
+        LEDSubsystem.setIntake();
+     
         m_manipulator.changeCoralState(false);
         m_isAtVelocity = false;
         m_manipulator.updateSetpoint(ManipulatorCalibrations.kMaxSpeed, ManipulatorCalibrations.kCoralAcceleration);
@@ -43,6 +46,7 @@ public class RunIntake extends Command {
 
     @Override
     public void end(boolean interrupted) {
+        LEDSubsystem.setManipulatorReady();
         m_manipulator.updateSetpoint(0, ManipulatorCalibrations.kCoralAcceleration);
         m_manipulator.changeCoralState(true);
     }

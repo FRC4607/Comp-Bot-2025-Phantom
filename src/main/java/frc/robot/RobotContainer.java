@@ -72,32 +72,50 @@ public class RobotContainer {
      * The robot container constructor.
      */
     public RobotContainer() {
+        
+        configureBindings();
+        
+        //new EventTrigger("GoTo L1").onTrue(new L1(m_elevator, m_windmill));
+        //new EventTrigger("ET GoTo L2").onTrue(new L2(m_elevator, m_windmill));
+        //new EventTrigger("ET GoTo L3").onTrue(new L3(m_elevator, m_windmill));
+        //new EventTrigger("ET GoTo L4").onTrue(new L4(m_elevator, m_windmill));
+        //new EventTrigger("ET Lollipop Stow").onTrue(new LollipopStow(m_elevator, m_windmill));
+        //new EventTrigger("ET Pendulum Stow").onTrue(new PendulumStow(m_elevator, m_windmill));
+        //new EventTrigger("ET Intake Coral").onTrue(new CoralStation(m_elevator, m_windmill));
+        
+        NamedCommands.registerCommand("CMD GoTo L2", new L2(m_elevator, m_windmill));
+        NamedCommands.registerCommand("CMD GoTo L3", new L3(m_elevator, m_windmill));
+        NamedCommands.registerCommand("CMD GoTo L4", new L4(m_elevator, m_windmill));
+
+        NamedCommands.registerCommand("CMD Lollipop Stow", new LollipopStow(m_elevator, m_windmill));
+        NamedCommands.registerCommand("CMD Pendulum Stow", new PendulumStow(m_elevator, m_windmill));
+        
+        NamedCommands.registerCommand("CMD Run Intake", new RunIntake(m_manipulator));
+        NamedCommands.registerCommand("CMD Intake Coral", new CoralStation(m_elevator, m_windmill)
+                                                            .alongWith(new RunIntake(m_manipulator)));
+        NamedCommands.registerCommand("CMD Score Coral", 
+                                        new RunManipulator(ManipulatorCalibrations.kL4OuttakeSpeed,
+                                        ManipulatorCalibrations.kCoralAcceleration, m_manipulator)
+                                        .withTimeout(ManipulatorCalibrations.kL4OuttakeTime));
+
+        NamedCommands.registerCommand("CMD Align Right", new TranslationAlignToTag(0, m_drivetrain));
+        NamedCommands.registerCommand("CMD Align Left", new TranslationAlignToTag(1, m_drivetrain));
+        
+        m_autoChooser = AutoBuilder.buildAutoChooser("Do Nothing");
+        
+        SmartDashboard.putData("Auto Mode", m_autoChooser);
         SmartDashboard.putData("Unlock", new InstantCommand(
             () -> m_elevator.setAngle(ElevatorCalibrations.kservoUnlockAngle))
             .alongWith(new InstantCommand(LEDSubsystem::setNeutral)));
-
+    
         SmartDashboard.putData("Lock", new InstantCommand(
             () -> m_elevator.setAngle(ElevatorCalibrations.kservoLockAngle))
             .alongWith(new InstantCommand(LEDSubsystem::setClimb))); 
 
-        configureBindings();
-
-        new EventTrigger("Align Right").onTrue(new TranslationAlignToTag(0, m_drivetrain));
-        new EventTrigger("Align Left").onTrue(new TranslationAlignToTag(1, m_drivetrain));
-        new EventTrigger("L4").onTrue(new L4(m_elevator, m_windmill)
-            .andThen(new CGOuttakeThenStow(
-                ManipulatorCalibrations.kL4OuttakeSpeed, 
-                ManipulatorCalibrations.kL4OuttakeTime, 
-                m_elevator, m_windmill, m_manipulator)));
-        new EventTrigger("Lollipop Stow").onTrue(new LollipopStow(m_elevator, m_windmill));
-        new EventTrigger("Intake").onTrue(new CoralStation(m_elevator, m_windmill).alongWith(new RunIntake(m_manipulator)));
-
-        NamedCommands.registerCommand("Is Intake Finished?", new IsIntakeFinished(m_manipulator).withTimeout(3));
-        
-        m_autoChooser = AutoBuilder.buildAutoChooser("3m test path");
-        SmartDashboard.putData("Auto Mode", m_autoChooser);
+        SmartDashboard.putData(m_elevator);
+        SmartDashboard.putData(m_windmill);
     }
-
+    
     /**
      * Configure bindings defines how the robot is controlled via user input.
      */

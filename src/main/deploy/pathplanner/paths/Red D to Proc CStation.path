@@ -3,42 +3,35 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.109,
-        "y": 3.935
+        "x": 3.8933974358974357,
+        "y": 2.776217948717948
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.841172157895531,
-        "y": 3.9364434927495937
+        "x": 3.111358974358974,
+        "y": 2.0391666666666657
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Red_Reef_D"
     },
     {
       "anchor": {
-        "x": 5.670184426229508,
-        "y": 3.935
+        "x": 1.031,
+        "y": 0.522
       },
       "prevControl": {
-        "x": 5.920184316269802,
-        "y": 3.9347655221964355
+        "x": 2.025384615384615,
+        "y": 1.2281410256410266
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Red_Proc_CStation"
     }
   ],
   "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
-  "eventMarkers": [
-    {
-      "name": "L4",
-      "waypointRelativePos": 0.6998898678414089,
-      "endWaypointRelativePos": null,
-      "command": null
-    }
-  ],
+  "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 3.0,
@@ -49,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -90.0
+    "rotation": 143.13
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -90.0
+    "rotation": 147.20000000000002
   },
   "useDefaultConstraints": true
 }

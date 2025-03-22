@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Calibrations.ElevatorCalibrations;
@@ -50,6 +51,8 @@ public class LollipopStow extends Command {
         if (m_windmill.isWithinTolerance(WindmillCalibrations.kLollipopTolerance)) {
             m_elevator.updateSetpoint(ElevatorCalibrations.kBottomPosition, false);
         }
+        SmartDashboard.putNumber("(m_windmill.getSetpoint()", m_windmill.getSetpoint());
+        SmartDashboard.putNumber("(m_elevator.getSetpoint()", m_elevator.getSetpoint());
     }
   
     @Override
@@ -59,8 +62,8 @@ public class LollipopStow extends Command {
 
     @Override
     public boolean isFinished() {
-        return Utils.isDoubleEqual(m_windmill.getSetpoint(), WindmillCalibrations.kLollipopPosition, 0.01)
-               && Utils.isDoubleEqual(m_elevator.getSetpoint(), ElevatorCalibrations.kBottomPosition, 0.01);
+        return Utils.isDoubleEqual(m_windmill.getSetpoint(), WindmillCalibrations.kLollipopPosition, 5.0)
+               && Utils.isDoubleEqual(m_elevator.getSetpoint(), ElevatorCalibrations.kBottomPosition, 1.0);
     }
 
 }

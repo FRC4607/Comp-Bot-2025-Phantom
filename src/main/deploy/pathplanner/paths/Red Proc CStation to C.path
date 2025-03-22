@@ -8,49 +8,30 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.811,
-        "y": 1.1267499999999995
+        "x": 1.8221311475409832,
+        "y": 1.1539446721311468
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Red_Proc_CStation"
     },
     {
       "anchor": {
-        "x": 3.953,
-        "y": 2.925
+        "x": 3.6457051282051283,
+        "y": 2.9516666666666667
       },
       "prevControl": {
-        "x": 2.9585,
-        "y": 2.07675
+        "x": 3.09516414459857,
+        "y": 2.1116769125683055
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Red_Reef_C"
     }
   ],
   "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
-  "eventMarkers": [
-    {
-      "name": "Lollipop Stow",
-      "waypointRelativePos": 0.0982630272952903,
-      "endWaypointRelativePos": null,
-      "command": null
-    },
-    {
-      "name": "L4",
-      "waypointRelativePos": 0.7017369727047098,
-      "endWaypointRelativePos": null,
-      "command": null
-    },
-    {
-      "name": "Align Right",
-      "waypointRelativePos": 1.0,
-      "endWaypointRelativePos": null,
-      "command": null
-    }
-  ],
+  "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 3.0,
