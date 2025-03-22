@@ -197,7 +197,8 @@ public class ElevatorSubsystem extends SubsystemBase {
     @Override
     public void periodic() {
 
-        if ((m_candi.getS2Closed().getValue().booleanValue() != m_pastCaNdi) && (m_pastCaNdi == false)) {
+        if ((m_candi.getS2Closed().getValue().booleanValue() != m_pastCaNdi)
+            && (m_pastCaNdi == false) && (getPosition() < ElevatorCalibrations.kResetPositionTolerance)) {
             m_motor1.setPosition(0);
         }
         m_pastCaNdi = m_candi.getS2Closed().getValue().booleanValue();
@@ -207,7 +208,7 @@ public class ElevatorSubsystem extends SubsystemBase {
         SmartDashboard.putBoolean("CANdi State", getCANdiState());
     }
 
-    public void setElevatorZero(){
+    public void setElevatorZero() {
         m_motor1.set(0);
     }
  

@@ -76,6 +76,9 @@ public class Calibrations {
         /* atTarget() returns true if within this tolerance, in inches */
         public static final double kDefaultTolerance = 5;
 
+        /* Limit to apply to the CANdi limit switch resetting the elevator 0 point */
+        public static final double kResetPositionTolerance = 1.0;
+
         /* Bottom position in inches */
         public static final double kBottomPosition = 2.0; //-0.2;
 
