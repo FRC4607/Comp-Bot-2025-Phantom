@@ -76,7 +76,7 @@ public class RobotContainer {
         configureBindings();
         
         // TODO: Where should this go?
-        NetworkTableInstance.getDefault().getTable("limelight-one").getEntry("pipeline").setDouble(1);
+        NetworkTableInstance.getDefault().getTable("limelight-one").getEntry("pipeline").setDouble(3);
 
         //new EventTrigger("GoTo L1").onTrue(new L1(m_elevator, m_windmill));
         //new EventTrigger("ET GoTo L2").onTrue(new L2(m_elevator, m_windmill));
@@ -101,8 +101,8 @@ public class RobotContainer {
                                         ManipulatorCalibrations.kCoralAcceleration, m_manipulator)
                                         .withTimeout(ManipulatorCalibrations.kL4OuttakeTime));
 
-        NamedCommands.registerCommand("CMD Align Right", new TranslationAlignToTag(1, m_drivetrain));
-        NamedCommands.registerCommand("CMD Align Left", new TranslationAlignToTag(0, m_drivetrain));
+        NamedCommands.registerCommand("CMD Align Right", new TranslationAlignToTag(2, m_drivetrain));
+        NamedCommands.registerCommand("CMD Align Left", new TranslationAlignToTag(1, m_drivetrain));
         
         m_autoChooser = AutoBuilder.buildAutoChooser("Do Nothing");
         
@@ -126,9 +126,12 @@ public class RobotContainer {
 
         m_drivetrain.setDefaultCommand(
             m_drivetrain.applyRequest(() -> m_drive
-                .withVelocityX(-m_joystick.getLeftY() * Calibrations.DriverCalibrations.kmaxSpeed)
-                .withVelocityY(-m_joystick.getLeftX() * Calibrations.DriverCalibrations.kmaxSpeed)
-                .withRotationalRate(-m_joystick.getRightX() * Calibrations.DriverCalibrations.kmaxAngularRate)
+                .withVelocityX(Math.copySign(-m_joystick.getLeftY() * -m_joystick.getLeftY(), -m_joystick.getLeftY()) 
+                                                * Calibrations.DriverCalibrations.kmaxSpeed * 0.5)
+                .withVelocityY(Math.copySign(-m_joystick.getLeftX()* -m_joystick.getLeftX(), -m_joystick.getLeftX()) 
+                                                * Calibrations.DriverCalibrations.kmaxSpeed * 0.5)
+                .withRotationalRate(Math.copySign(-m_joystick.getRightX() * -m_joystick.getRightX(), -m_joystick.getRightX()) 
+                                                * Calibrations.DriverCalibrations.kmaxAngularRate * 0.5)
             )
         );
     
@@ -177,10 +180,10 @@ public class RobotContainer {
                     m_elevator, m_windmill, m_manipulator));
 
         /* Target the left coral reef stick */
-        m_joystick.axisGreaterThan(2, 0.1).whileTrue(new TranslationAlignToTag(0, 
+        m_joystick.axisGreaterThan(2, 0.1).whileTrue(new TranslationAlignToTag(1, 
                                                                                    m_drivetrain));
         /* Target the right coral reef stick */
-        m_joystick.axisGreaterThan(3, 0.1).whileTrue(new TranslationAlignToTag(1,
+        m_joystick.axisGreaterThan(3, 0.1).whileTrue(new TranslationAlignToTag(2,
                                                                                    m_drivetrain));
 
         m_joystick.y().onTrue(new PrepClimb(m_elevator, m_windmill)).onFalse(new CGClimb(m_windmill, m_elevator));

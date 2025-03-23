@@ -5,6 +5,8 @@ import static edu.wpi.first.units.Units.RadiansPerSecond;
 import static edu.wpi.first.units.Units.RotationsPerSecond;
 
 import frc.robot.generated.TunerConstants;
+
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,36 +25,51 @@ public class Calibrations {
         // Encode the left branch as a 0 and the right branch as a 1
         // Red alliance reef tags: 6,7,8,9,10,11
         // Blue alliance reef tags: 17,18,19,20,21,22
-        public static final HashMap<Integer, HashMap<Integer, Double>> m_coralReefTargets = new HashMap<>() {
-            {
-                m_coralReefTargets.put(6, new HashMap<>(Map.of(0, -27.78)));
-                m_coralReefTargets.put(6, new HashMap<>(Map.of(1, 0.91)));
-                m_coralReefTargets.put(7, new HashMap<>(Map.of(0, -27.78)));
-                m_coralReefTargets.put(7, new HashMap<>(Map.of(1, 0.91)));
-                m_coralReefTargets.put(8, new HashMap<>(Map.of(0, -27.78)));
-                m_coralReefTargets.put(8, new HashMap<>(Map.of(1, 0.91)));
-                m_coralReefTargets.put(9, new HashMap<>(Map.of(0, -27.78)));
-                m_coralReefTargets.put(9, new HashMap<>(Map.of(1, 0.91)));
-                m_coralReefTargets.put(10, new HashMap<>(Map.of(0, -27.78)));
-                m_coralReefTargets.put(10, new HashMap<>(Map.of(1, 0.91)));
-                m_coralReefTargets.put(11, new HashMap<>(Map.of(0, -27.78)));
-                m_coralReefTargets.put(11, new HashMap<>(Map.of(1, 0.91)));
-                m_coralReefTargets.put(17, new HashMap<>(Map.of(0, -27.78)));
-                m_coralReefTargets.put(17, new HashMap<>(Map.of(1, 0.91)));
-                m_coralReefTargets.put(18, new HashMap<>(Map.of(0, -27.78)));
-                m_coralReefTargets.put(18, new HashMap<>(Map.of(1, 0.91)));
-                m_coralReefTargets.put(19, new HashMap<>(Map.of(0, -27.78)));
-                m_coralReefTargets.put(19, new HashMap<>(Map.of(1, 0.91)));
-                m_coralReefTargets.put(20, new HashMap<>(Map.of(0, -27.78)));
-                m_coralReefTargets.put(20, new HashMap<>(Map.of(1, 0.91)));
-                m_coralReefTargets.put(21, new HashMap<>(Map.of(0, -27.78)));
-                m_coralReefTargets.put(21, new HashMap<>(Map.of(1, 0.91)));
-                m_coralReefTargets.put(22, new HashMap<>(Map.of(0, -27.78)));
-                m_coralReefTargets.put(22, new HashMap<>(Map.of(1, 0.91)));
-            }
-        };
-        public static final List<Integer> m_validTagIds = List.of(6, 7, 8, 9, 10, 11, 17, 18, 19, 20, 21, 22);
+        
+        public static final Map<Integer, Map<Integer, Double>> m_coralReefTargets;
 
+        static {
+            Map<Integer, Map<Integer, Double>> tempMap = new HashMap<>();
+            tempMap.put(17, createImmutableMap(1, -27.78, 2, 0.91));
+            tempMap.put(18, createImmutableMap(1, -27.78, 2, 0.91));
+            m_coralReefTargets = Collections.unmodifiableMap(tempMap);
+        }
+        
+        private static <K, V> Map<K, V> createImmutableMap(K k1, V v1, K k2, V v2) {
+            Map<K, V> map = new HashMap<>();
+            map.put(k1, v1);
+            map.put(k2, v2);
+            return Collections.unmodifiableMap(map);
+        }
+        //public static final HashMap<Integer, HashMap<Integer, Double>> m_coralReefTargets = new HashMap<>();
+
+        // static {
+        //     m_coralReefTargets.put(6, new HashMap<>(Map.of(0, -27.78)));
+        //     m_coralReefTargets.put(6, new HashMap<>(Map.of(1, 0.91)));
+        //     m_coralReefTargets.put(7, new HashMap<>(Map.of(0, -27.78)));
+        //     m_coralReefTargets.put(7, new HashMap<>(Map.of(1, 0.91)));
+        //     m_coralReefTargets.put(8, new HashMap<>(Map.of(0, -27.78)));
+        //     m_coralReefTargets.put(8, new HashMap<>(Map.of(1, 0.91)));
+        //     m_coralReefTargets.put(9, new HashMap<>(Map.of(0, -27.78)));
+        //     m_coralReefTargets.put(9, new HashMap<>(Map.of(1, 0.91)));
+        //     m_coralReefTargets.put(10, new HashMap<>(Map.of(0, -27.78)));
+        //     m_coralReefTargets.put(10, new HashMap<>(Map.of(1, 0.91)));
+        //     m_coralReefTargets.put(11, new HashMap<>(Map.of(0, -27.78)));
+        //     m_coralReefTargets.put(11, new HashMap<>(Map.of(1, 0.91)));
+        //     m_coralReefTargets.put(17, new HashMap<>(Map.of(0, -27.78)));
+        //     m_coralReefTargets.put(17, new HashMap<>(Map.of(1, 0.91)));
+        //     m_coralReefTargets.put(18, new HashMap<>(Map.of(0, -27.78)));
+        //     m_coralReefTargets.put(18, new HashMap<>(Map.of(1, 0.91)));
+        //     m_coralReefTargets.put(19, new HashMap<>(Map.of(0, -27.78)));
+        //     m_coralReefTargets.put(19, new HashMap<>(Map.of(1, 0.91)));
+        //     m_coralReefTargets.put(20, new HashMap<>(Map.of(0, -27.78)));
+        //     m_coralReefTargets.put(20, new HashMap<>(Map.of(1, 0.91)));
+        //     m_coralReefTargets.put(21, new HashMap<>(Map.of(0, -27.78)));
+        //     m_coralReefTargets.put(21, new HashMap<>(Map.of(1, 0.91)));
+        //     m_coralReefTargets.put(22, new HashMap<>(Map.of(0, -27.78)));
+        //     m_coralReefTargets.put(22, new HashMap<>(Map.of(1, 0.91)));
+        // };
+        public static final List<Integer> m_validTagIds = List.of(6, 7, 8, 9, 10, 11, 17, 18, 19, 20, 21, 22);
     }
 
     /**
@@ -79,7 +96,7 @@ public class Calibrations {
         public static final double kAprilTagTranslationXAlignmentKD = 0.005;
 
         /* Profiled PID controller on-target threshold in degrees*/
-        public static final double kAprilTagTranslationXOnTarget = 1.0;        
+        public static final double kAprilTagTranslationXOnTarget = 1.75;        
         
         /* Robot-centric X-translational controller - add a little Y-translation to stay flush to the coral reef */
         public static final double kAprilTagTranslationYRate = -0.1;
@@ -130,7 +147,7 @@ public class Calibrations {
         public static final double kBottomPosition = 2.0; //-0.2;
 
         /* Bottom position in inches for auto*/
-        public static final double kBottomPositionForAuto = 15.0;
+        public static final double kBottomPositionForAuto = 25.0;
 
         /* Pendulum position in inches */
         public static final double kPendulumPosition = 24;
