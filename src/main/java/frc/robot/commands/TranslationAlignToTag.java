@@ -10,6 +10,7 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Calibrations.DriverCalibrations;
+import frc.robot.Calibrations.FieldCalibrations;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.LEDSubsystem;
 
@@ -20,58 +21,76 @@ import frc.robot.subsystems.LEDSubsystem;
 public class TranslationAlignToTag extends Command {
 
     private CommandSwerveDrivetrain m_drivetrain;
+    private int m_branch;
     private double m_xspeed;
-    private int m_pipeline;
-    private double m_txValue;
-
-    private final ProfiledPIDController m_profiledPid = 
-        new ProfiledPIDController(DriverCalibrations.kAprilTagTranslationXAlignmentKP,
-                                0.0, 
-                                DriverCalibrations.kAprilTagTranslationXAlignmentKD,
-                                new TrapezoidProfile.Constraints(1, .05));
-
+    private double m_yspeed;
+    private double m_targetTx;
+    private double m_currentTx;
+    private int m_tagId;
+    private int m_lockedTagId;
+    private boolean m_validTagId;
     private RobotCentric m_swerveRequest = new RobotCentric().withRotationalDeadband(DriverCalibrations.kmaxSpeed * 0.1);
+    private final ProfiledPIDController m_profiledPid = new ProfiledPIDController(
+        DriverCalibrations.kAprilTagTranslationXAlignmentKP,
+        0.0, 
+        DriverCalibrations.kAprilTagTranslationXAlignmentKD,
+        // TODO: Tune the max velocity/acceleration
+        new TrapezoidProfile.Constraints(1, .05));
 
     /**
      * AlignToTag Constructor.
      *
      * @param drivetrain The drivetrain
      */
-    public TranslationAlignToTag(int pipeline, CommandSwerveDrivetrain drivetrain) {
-        m_pipeline = pipeline;
+    public TranslationAlignToTag(int branch, CommandSwerveDrivetrain drivetrain) {
+        m_branch = branch;
         m_drivetrain = drivetrain;
         addRequirements(drivetrain);
     }
 
     @Override
     public void initialize() {
-        NetworkTableInstance.getDefault().getTable("limelight-one").getEntry("pipeline").setDouble(m_pipeline);
+        m_targetTx = 0.0;  // Once a valid target is found, use the hashmap to set this target
+        m_lockedTagId = 0;  // Init with an invalid AprilTag ID
     }
 
     @Override
     public void execute() {
-        //Check if there is a target
-        double isTarget = NetworkTableInstance.getDefault().getTable("limelight-one").getEntry("tv").getDouble(0);
-        //Get the Error
-        m_txValue = NetworkTableInstance.getDefault().getTable("limelight-one").getEntry("tx")
-                                             .getDouble(DriverCalibrations.kLimelightDefaultKTx);
-        //Invert the error and calculate PID
-        m_xspeed = m_profiledPid.calculate(-m_txValue);
-        
-        m_drivetrain.setControl(m_swerveRequest
-            .withVelocityX(m_xspeed)
-            .withVelocityY(DriverCalibrations.kAprilTagTranslationYRate));
+        m_tagId = (int) NetworkTableInstance.getDefault().getTable("limelight-one").getEntry("tid")
+                                            .getInteger(0);  // Get the current AprilTag ID
+        m_validTagId = FieldCalibrations.m_validTagIds.contains(m_tagId);  // Make sure it's a coral reef AprilTag ID
 
-        if (isTarget > 0) {
-            if (Math.abs(m_txValue) < 1.75) {
-                LEDSubsystem.setCoralOnTarget();
-            } else {
-                LEDSubsystem.setCoralTargeting();
+        // Default to doing nothing
+        m_xspeed = 0.0;
+        m_yspeed = 0.0;
+
+        // Have a valid AprilTag ID
+        if (m_validTagId) {
+            
+            // Lock onto the first valid AprilTag ID by setting the profiled PID goal
+            if (m_lockedTagId == 0) {
+                m_lockedTagId = m_tagId;
+                m_targetTx = FieldCalibrations.m_coralReefTargets.get(m_lockedTagId).get(m_branch);
+                m_profiledPid.setGoal(m_targetTx);
             }
-        } else {
-            LEDSubsystem.setNeutral();
+            
+            // Only servo to the locked AprilTag ID
+            if (m_lockedTagId == m_tagId) {
+                LEDSubsystem.setCoralTargeting();
+                m_currentTx = NetworkTableInstance.getDefault().getTable("limelight-one").getEntry("tx")
+                                                  .getDouble(DriverCalibrations.kLimelightDefaultKTx);
+                // TODO: Verify the sign on the x-velocity
+                m_xspeed = -m_profiledPid.calculate(m_currentTx);
+                m_yspeed = DriverCalibrations.kAprilTagTranslationYRate;
+                if (Math.abs(m_currentTx) < 1.0) {
+                    LEDSubsystem.setCoralOnTarget(); 
+                }
+            }
         }
-        
+
+        // Apply the robot-centric translation speeds
+        m_drivetrain.setControl(m_swerveRequest.withVelocityX(m_xspeed).withVelocityY(m_yspeed));
+
     }
     
     @Override

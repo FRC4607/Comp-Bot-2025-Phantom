@@ -5,11 +5,55 @@ import static edu.wpi.first.units.Units.RadiansPerSecond;
 import static edu.wpi.first.units.Units.RotationsPerSecond;
 
 import frc.robot.generated.TunerConstants;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Robot calibrations.
  */
 public class Calibrations {
+
+    /**
+     * Field calibrations.
+     */
+    public static class FieldCalibrations {
+
+        // The LL AprilTag ID is an integer
+        // Encode the left branch as a 0 and the right branch as a 1
+        // Red alliance reef tags: 6,7,8,9,10,11
+        // Blue alliance reef tags: 17,18,19,20,21,22
+        public static final HashMap<Integer, HashMap<Integer, Double>> m_coralReefTargets = new HashMap<>() {
+            {
+                m_coralReefTargets.put(6, new HashMap<>(Map.of(0, -27.78)));
+                m_coralReefTargets.put(6, new HashMap<>(Map.of(1, 0.91)));
+                m_coralReefTargets.put(7, new HashMap<>(Map.of(0, -27.78)));
+                m_coralReefTargets.put(7, new HashMap<>(Map.of(1, 0.91)));
+                m_coralReefTargets.put(8, new HashMap<>(Map.of(0, -27.78)));
+                m_coralReefTargets.put(8, new HashMap<>(Map.of(1, 0.91)));
+                m_coralReefTargets.put(9, new HashMap<>(Map.of(0, -27.78)));
+                m_coralReefTargets.put(9, new HashMap<>(Map.of(1, 0.91)));
+                m_coralReefTargets.put(10, new HashMap<>(Map.of(0, -27.78)));
+                m_coralReefTargets.put(10, new HashMap<>(Map.of(1, 0.91)));
+                m_coralReefTargets.put(11, new HashMap<>(Map.of(0, -27.78)));
+                m_coralReefTargets.put(11, new HashMap<>(Map.of(1, 0.91)));
+                m_coralReefTargets.put(17, new HashMap<>(Map.of(0, -27.78)));
+                m_coralReefTargets.put(17, new HashMap<>(Map.of(1, 0.91)));
+                m_coralReefTargets.put(18, new HashMap<>(Map.of(0, -27.78)));
+                m_coralReefTargets.put(18, new HashMap<>(Map.of(1, 0.91)));
+                m_coralReefTargets.put(19, new HashMap<>(Map.of(0, -27.78)));
+                m_coralReefTargets.put(19, new HashMap<>(Map.of(1, 0.91)));
+                m_coralReefTargets.put(20, new HashMap<>(Map.of(0, -27.78)));
+                m_coralReefTargets.put(20, new HashMap<>(Map.of(1, 0.91)));
+                m_coralReefTargets.put(21, new HashMap<>(Map.of(0, -27.78)));
+                m_coralReefTargets.put(21, new HashMap<>(Map.of(1, 0.91)));
+                m_coralReefTargets.put(22, new HashMap<>(Map.of(0, -27.78)));
+                m_coralReefTargets.put(22, new HashMap<>(Map.of(1, 0.91)));
+            }
+        };
+        public static final List<Integer> m_validTagIds = List.of(6, 7, 8, 9, 10, 11, 17, 18, 19, 20, 21, 22);
+
+    }
 
     /**
      * Driver calibrations.

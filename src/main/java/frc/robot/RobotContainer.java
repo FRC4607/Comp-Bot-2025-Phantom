@@ -8,6 +8,7 @@ import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -71,9 +72,12 @@ public class RobotContainer {
      * The robot container constructor.
      */
     public RobotContainer() {
-        
+
         configureBindings();
         
+        // TODO: Where should this go?
+        NetworkTableInstance.getDefault().getTable("limelight-one").getEntry("pipeline").setDouble(1);
+
         //new EventTrigger("GoTo L1").onTrue(new L1(m_elevator, m_windmill));
         //new EventTrigger("ET GoTo L2").onTrue(new L2(m_elevator, m_windmill));
         //new EventTrigger("ET GoTo L3").onTrue(new L3(m_elevator, m_windmill));
@@ -97,8 +101,8 @@ public class RobotContainer {
                                         ManipulatorCalibrations.kCoralAcceleration, m_manipulator)
                                         .withTimeout(ManipulatorCalibrations.kL4OuttakeTime));
 
-        NamedCommands.registerCommand("CMD Align Right", new TranslationAlignToTag(0, m_drivetrain));
-        NamedCommands.registerCommand("CMD Align Left", new TranslationAlignToTag(1, m_drivetrain));
+        NamedCommands.registerCommand("CMD Align Right", new TranslationAlignToTag(1, m_drivetrain));
+        NamedCommands.registerCommand("CMD Align Left", new TranslationAlignToTag(0, m_drivetrain));
         
         m_autoChooser = AutoBuilder.buildAutoChooser("Do Nothing");
         
@@ -173,10 +177,10 @@ public class RobotContainer {
                     m_elevator, m_windmill, m_manipulator));
 
         /* Target the left coral reef stick */
-        m_joystick.axisGreaterThan(2, 0.1).whileTrue(new TranslationAlignToTag(1, 
+        m_joystick.axisGreaterThan(2, 0.1).whileTrue(new TranslationAlignToTag(0, 
                                                                                    m_drivetrain));
         /* Target the right coral reef stick */
-        m_joystick.axisGreaterThan(3, 0.1).whileTrue(new TranslationAlignToTag(0,
+        m_joystick.axisGreaterThan(3, 0.1).whileTrue(new TranslationAlignToTag(1,
                                                                                    m_drivetrain));
 
         m_joystick.y().onTrue(new PrepClimb(m_elevator, m_windmill)).onFalse(new CGClimb(m_windmill, m_elevator));
