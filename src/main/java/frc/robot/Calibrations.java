@@ -72,11 +72,14 @@ public class Calibrations {
         /* When the LL doesn't see a tag, use this value...which essentially sets the error to 0 */
         public static final double kLimelightDefaultKTx = 0;
 
-        /* P-gain for robot-centric X-translational controller using LL tx as feedback */
+        /* P-gain for robot-centric X-translational profiled PID controller */
         public static final double kAprilTagTranslationXAlignmentKP = 0.1;
 
-        /* D-gain for robot-centric X-translational controller using LL tx as feedback */
+        /* D-gain for robot-centric X-translational profiled PID controller */
         public static final double kAprilTagTranslationXAlignmentKD = 0.005;
+
+        /* Profiled PID controller on-target threshold in degrees*/
+        public static final double kAprilTagTranslationXOnTarget = 1.0;        
         
         /* Robot-centric X-translational controller - add a little Y-translation to stay flush to the coral reef */
         public static final double kAprilTagTranslationYRate = -0.1;

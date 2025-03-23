@@ -29,13 +29,14 @@ public class TranslationAlignToTag extends Command {
     private int m_tagId;
     private int m_lockedTagId;
     private boolean m_validTagId;
+    private boolean m_onTarget;
     private RobotCentric m_swerveRequest = new RobotCentric().withRotationalDeadband(DriverCalibrations.kmaxSpeed * 0.1);
     private final ProfiledPIDController m_profiledPid = new ProfiledPIDController(
         DriverCalibrations.kAprilTagTranslationXAlignmentKP,
         0.0, 
         DriverCalibrations.kAprilTagTranslationXAlignmentKD,
         // TODO: Tune the max velocity/acceleration
-        new TrapezoidProfile.Constraints(1, .05));
+        new TrapezoidProfile.Constraints(DriverCalibrations.kmaxSpeed, 2.0 * DriverCalibrations.kmaxSpeed));
 
     /**
      * AlignToTag Constructor.
@@ -50,6 +51,7 @@ public class TranslationAlignToTag extends Command {
 
     @Override
     public void initialize() {
+        m_onTarget = false;
         m_targetTx = 0.0;  // Once a valid target is found, use the hashmap to set this target
         m_lockedTagId = 0;  // Init with an invalid AprilTag ID
     }
@@ -82,8 +84,9 @@ public class TranslationAlignToTag extends Command {
                 // TODO: Verify the sign on the x-velocity
                 m_xspeed = -m_profiledPid.calculate(m_currentTx);
                 m_yspeed = DriverCalibrations.kAprilTagTranslationYRate;
-                if (Math.abs(m_currentTx) < 1.0) {
-                    LEDSubsystem.setCoralOnTarget(); 
+                if (Math.abs(m_currentTx) < DriverCalibrations.kAprilTagTranslationXOnTarget) {
+                    LEDSubsystem.setCoralOnTarget();
+                    m_onTarget = true;
                 }
             }
         }
@@ -95,11 +98,13 @@ public class TranslationAlignToTag extends Command {
     
     @Override
     public void end(boolean interrupted) {
+        // m_drivetrain.setControl(m_swerveRequest.withVelocityX(0.0).withVelocityY(0.0));
         LEDSubsystem.setNeutral();
     }
 
     @Override
     public boolean isFinished() {
+        // return m_onTarget;
         return false;
     }
 }
