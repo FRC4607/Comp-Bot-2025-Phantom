@@ -37,8 +37,6 @@ public class TranslationAlignToTag extends Command {
         DriverCalibrations.kAprilTagTranslationXAlignmentKP,
         0.0, 
         DriverCalibrations.kAprilTagTranslationXAlignmentKD,
-        // TODO: Tune the max velocity/acceleration
-        //new TrapezoidProfile.Constraints(DriverCalibrations.kmaxSpeed, 2.0 * DriverCalibrations.kmaxSpeed));
         new TrapezoidProfile.Constraints(1.0, 0.05));
 
     /**
@@ -47,13 +45,14 @@ public class TranslationAlignToTag extends Command {
      * @param drivetrain The drivetrain
      */
     public TranslationAlignToTag(int branch, CommandSwerveDrivetrain drivetrain) {
-        m_branch = branch;
+        m_branch = branch;  // This also matches the pipeline number
         m_drivetrain = drivetrain;
         addRequirements(drivetrain);
     }
 
     @Override
     public void initialize() {
+        NetworkTableInstance.getDefault().getTable("limelight-one").getEntry("pipeline").setDouble(m_branch);
         m_onTarget = false;
         m_targetTx = 0.0;  // Once a valid target is found, use the hashmap to set this target
         m_lockedTagId = 0;  // Init with an invalid AprilTag ID
@@ -84,10 +83,9 @@ public class TranslationAlignToTag extends Command {
                 m_currentTx = NetworkTableInstance.getDefault().getTable("limelight-one").getEntry("tx")
                                                   .getDouble(DriverCalibrations.kLimelightDefaultKTx);
                 m_errorTx = m_currentTx - m_targetTx;
-                // TODO: Verify the sign on the x-velocity
-                m_xspeed = m_profiledPid.calculate(m_errorTx);
+                m_xspeed = m_profiledPid.calculate(-m_errorTx);
                 m_yspeed = DriverCalibrations.kAprilTagTranslationYRate;
-                if (Math.abs(m_currentTx) < DriverCalibrations.kAprilTagTranslationXOnTarget) {
+                if (Math.abs(m_errorTx) < DriverCalibrations.kAprilTagTranslationXOnTarget) {
                     LEDSubsystem.setCoralOnTarget();
                     m_onTarget = true;
                 }
@@ -95,7 +93,7 @@ public class TranslationAlignToTag extends Command {
         }
 
         // Apply the robot-centric translation speeds
-        m_drivetrain.setControl(m_swerveRequest.withVelocityX(-m_xspeed).withVelocityY(m_yspeed));
+        m_drivetrain.setControl(m_swerveRequest.withVelocityX(m_xspeed).withVelocityY(m_yspeed));
 
     }
     

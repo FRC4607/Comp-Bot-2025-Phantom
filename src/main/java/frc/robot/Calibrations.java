@@ -22,7 +22,7 @@ public class Calibrations {
     public static class FieldCalibrations {
 
         // The LL AprilTag ID is an integer
-        // Encode the left branch as a 0 and the right branch as a 1
+        // Encode the left branch as a 0 and the right branch as a 1 to match LL
         // Red alliance reef tags: 6,7,8,9,10,11
         // Blue alliance reef tags: 17,18,19,20,21,22
         
@@ -30,8 +30,19 @@ public class Calibrations {
 
         static {
             Map<Integer, Map<Integer, Double>> tempMap = new HashMap<>();
-            tempMap.put(17, createImmutableMap(1, -27.78, 2, 0.91));
-            tempMap.put(18, createImmutableMap(1, -27.78, 2, 0.91));
+            tempMap.put(6, createImmutableMap(0, -27.78, 1, 0.91));
+            tempMap.put(7, createImmutableMap(0, -27.78, 1, 0.91));
+            tempMap.put(8, createImmutableMap(0, -27.78, 1, 0.91));
+            tempMap.put(9, createImmutableMap(0, -27.78, 1, 0.91));
+            tempMap.put(10, createImmutableMap(0, -27.78, 1, 0.91));
+            tempMap.put(11, createImmutableMap(0, -27.78, 1, 0.91));
+            tempMap.put(17, createImmutableMap(0, -27.78, 1, 0.91));
+            tempMap.put(18, createImmutableMap(0, -27.78, 1, 0.91));
+            tempMap.put(19, createImmutableMap(0, -27.78, 1, 0.91));
+            tempMap.put(20, createImmutableMap(0, -27.78, 1, 0.91));
+            tempMap.put(21, createImmutableMap(0, -27.78, 1, 0.91));
+            tempMap.put(22, createImmutableMap(0, -27.78, 1, 0.91));
+
             m_coralReefTargets = Collections.unmodifiableMap(tempMap);
         }
         
@@ -41,34 +52,7 @@ public class Calibrations {
             map.put(k2, v2);
             return Collections.unmodifiableMap(map);
         }
-        //public static final HashMap<Integer, HashMap<Integer, Double>> m_coralReefTargets = new HashMap<>();
 
-        // static {
-        //     m_coralReefTargets.put(6, new HashMap<>(Map.of(0, -27.78)));
-        //     m_coralReefTargets.put(6, new HashMap<>(Map.of(1, 0.91)));
-        //     m_coralReefTargets.put(7, new HashMap<>(Map.of(0, -27.78)));
-        //     m_coralReefTargets.put(7, new HashMap<>(Map.of(1, 0.91)));
-        //     m_coralReefTargets.put(8, new HashMap<>(Map.of(0, -27.78)));
-        //     m_coralReefTargets.put(8, new HashMap<>(Map.of(1, 0.91)));
-        //     m_coralReefTargets.put(9, new HashMap<>(Map.of(0, -27.78)));
-        //     m_coralReefTargets.put(9, new HashMap<>(Map.of(1, 0.91)));
-        //     m_coralReefTargets.put(10, new HashMap<>(Map.of(0, -27.78)));
-        //     m_coralReefTargets.put(10, new HashMap<>(Map.of(1, 0.91)));
-        //     m_coralReefTargets.put(11, new HashMap<>(Map.of(0, -27.78)));
-        //     m_coralReefTargets.put(11, new HashMap<>(Map.of(1, 0.91)));
-        //     m_coralReefTargets.put(17, new HashMap<>(Map.of(0, -27.78)));
-        //     m_coralReefTargets.put(17, new HashMap<>(Map.of(1, 0.91)));
-        //     m_coralReefTargets.put(18, new HashMap<>(Map.of(0, -27.78)));
-        //     m_coralReefTargets.put(18, new HashMap<>(Map.of(1, 0.91)));
-        //     m_coralReefTargets.put(19, new HashMap<>(Map.of(0, -27.78)));
-        //     m_coralReefTargets.put(19, new HashMap<>(Map.of(1, 0.91)));
-        //     m_coralReefTargets.put(20, new HashMap<>(Map.of(0, -27.78)));
-        //     m_coralReefTargets.put(20, new HashMap<>(Map.of(1, 0.91)));
-        //     m_coralReefTargets.put(21, new HashMap<>(Map.of(0, -27.78)));
-        //     m_coralReefTargets.put(21, new HashMap<>(Map.of(1, 0.91)));
-        //     m_coralReefTargets.put(22, new HashMap<>(Map.of(0, -27.78)));
-        //     m_coralReefTargets.put(22, new HashMap<>(Map.of(1, 0.91)));
-        // };
         public static final List<Integer> m_validTagIds = List.of(6, 7, 8, 9, 10, 11, 17, 18, 19, 20, 21, 22);
     }
 
