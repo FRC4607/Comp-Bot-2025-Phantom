@@ -181,7 +181,7 @@ public class ElevatorSubsystem extends SubsystemBase {
      *
      * @param angle servo angle in degrees
      */
-    public void setAngle(double angle) {
+    public void setServoAngle(double angle) {
         m_lockServo.setAngle(angle);
     }
   

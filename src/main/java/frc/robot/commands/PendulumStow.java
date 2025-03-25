@@ -22,7 +22,7 @@ public class PendulumStow extends SequentialCommandGroup {
      */
     public PendulumStow(ElevatorSubsystem elevator, WindmillSubsystem windmill) {
         super(
-            new InstantCommand(() -> elevator.setAngle(ElevatorCalibrations.kservoUnlockAngle)),
+            new InstantCommand(() -> elevator.setServoAngle(ElevatorCalibrations.kservoUnlockAngle)),
             new ParallelCommandGroup(
                 new MoveElevatorToPosition(
                     ElevatorCalibrations.kPendulumPosition, ElevatorCalibrations.kPendulumTolerance, false, elevator),

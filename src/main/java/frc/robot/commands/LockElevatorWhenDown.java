@@ -29,7 +29,7 @@ public class LockElevatorWhenDown extends Command {
 
     @Override
     public void end(boolean interrupted) {
-        m_elevator.setAngle(ElevatorCalibrations.kservoLockAngle);
+        m_elevator.setServoAngle(ElevatorCalibrations.kservoLockAngle);
         LEDSubsystem.setClimb_Complete();
         NetworkTableInstance.getDefault().getTable("limelight-two").getEntry("pipeline").setDouble(0);
     }

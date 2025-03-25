@@ -112,11 +112,11 @@ public class RobotContainer {
         
         SmartDashboard.putData("Auto Mode", m_autoChooser);
         SmartDashboard.putData("Unlock", new InstantCommand(
-            () -> m_elevator.setAngle(ElevatorCalibrations.kservoUnlockAngle))
+            () -> m_elevator.setServoAngle(ElevatorCalibrations.kservoUnlockAngle))
             .alongWith(new InstantCommand(LEDSubsystem::setNeutral)));
     
         SmartDashboard.putData("Lock", new InstantCommand(
-            () -> m_elevator.setAngle(ElevatorCalibrations.kservoLockAngle))
+            () -> m_elevator.setServoAngle(ElevatorCalibrations.kservoLockAngle))
             .alongWith(new InstantCommand(LEDSubsystem::setClimb_Complete))); 
 
         SmartDashboard.putData("Zero Elevator", new ZeroElevator(m_elevator));
@@ -142,10 +142,12 @@ public class RobotContainer {
         m_joystick.start().onTrue(m_drivetrain.runOnce(() -> m_drivetrain.seedFieldCentric()));
 
         m_joystick.b().onTrue(new LollipopStow(m_elevator, m_windmill)
-                      .alongWith(new InstantCommand(() -> m_elevator.setAngle(ElevatorCalibrations.kservoUnlockAngle))));
+                      .alongWith(new InstantCommand(() -> m_elevator.setServoAngle(
+                        ElevatorCalibrations.kservoUnlockAngle))));
 
         m_joystick.x().onTrue(new PendulumStow(m_elevator, m_windmill)
-                      .alongWith(new InstantCommand(() -> m_elevator.setAngle(ElevatorCalibrations.kservoUnlockAngle))));
+                      .alongWith(new InstantCommand(() -> m_elevator.setServoAngle(
+                        ElevatorCalibrations.kservoUnlockAngle))));
     
         /* Coral station pickup sequence */
         m_joystick.rightBumper().onTrue(new CoralStation(m_elevator, m_windmill)
@@ -216,17 +218,17 @@ public class RobotContainer {
                 m_manipulator)
             .withTimeout(1));
 
-        // *********************      Configure the co-pilot controller     **************************************************
+        // *********************      Configure the co-pilot controller     ***********************************************
         // Zero Elevator
-        Trigger coPilot_Red1 = new Trigger(() -> m_coPilot.getRawButton(1));
-        Trigger coPilot_Toggle1 = new Trigger(() -> m_coPilot.getRawButton(14));
-        coPilot_Red1.and(coPilot_Toggle1).onTrue(new ZeroElevator(m_elevator));
+        Trigger coPilotRed1 = new Trigger(() -> m_coPilot.getRawButton(1));
+        Trigger coPilotToggle1 = new Trigger(() -> m_coPilot.getRawButton(14));
+        coPilotRed1.and(coPilotToggle1).onTrue(new ZeroElevator(m_elevator));
 
-        Trigger coPilot_Orange1 = new Trigger(() -> m_coPilot.getRawButton(3));
-        coPilot_Orange1.whileTrue(new RunManipulator(ManipulatorCalibrations.kL1Velocity, 
+        Trigger coPilotOrange1 = new Trigger(() -> m_coPilot.getRawButton(3));
+        coPilotOrange1.whileTrue(new RunManipulator(ManipulatorCalibrations.kL1Velocity, 
                                                                ManipulatorCalibrations.kCoralAcceleration, m_manipulator));
-        Trigger coPilot_Orange2 = new Trigger(() -> m_coPilot.getRawButton(4));
-        coPilot_Orange2.whileTrue(new RunManipulator(-ManipulatorCalibrations.kL1Velocity, 
+        Trigger coPilotOrange2 = new Trigger(() -> m_coPilot.getRawButton(4));
+        coPilotOrange2.whileTrue(new RunManipulator(-ManipulatorCalibrations.kL1Velocity, 
                                                                ManipulatorCalibrations.kCoralAcceleration, m_manipulator));
     }
 

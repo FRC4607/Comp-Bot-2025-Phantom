@@ -44,7 +44,7 @@ public class PrepClimb extends Command {
             m_elevator.updateSetpoint(ElevatorCalibrations.kPrepClimbPosition, false);
         }
 
-        new InstantCommand(() -> m_elevator.setAngle(ElevatorCalibrations.kservoUnlockAngle));
+        new InstantCommand(() -> m_elevator.setServoAngle(ElevatorCalibrations.kservoUnlockAngle));
     }
   
     @Override

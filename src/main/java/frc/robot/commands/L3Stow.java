@@ -42,7 +42,7 @@ public class L3Stow extends Command {
             m_elevator.updateSetpoint(ElevatorCalibrations.kRaisedStowPosition, false);
         }
 
-        new InstantCommand(() -> m_elevator.setAngle(ElevatorCalibrations.kservoUnlockAngle));
+        new InstantCommand(() -> m_elevator.setServoAngle(ElevatorCalibrations.kservoUnlockAngle));
     }
   
     @Override
