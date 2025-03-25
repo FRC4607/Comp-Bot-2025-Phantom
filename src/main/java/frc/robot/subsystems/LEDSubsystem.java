@@ -32,7 +32,8 @@ public class LEDSubsystem extends SubsystemBase {
         INTAKE,
         MANIPULATOR_NOT_READY,
         MANIPULATOR_READY,
-        CLIMB,
+        CLIMB_COMPLETE,
+        CLIMB_ENABLED,
         CLIMB_HOOKED,
         CORAL_TARGETING,
         CORAL_ON_TARGET,
@@ -52,6 +53,7 @@ public class LEDSubsystem extends SubsystemBase {
     private final StrobeAnimation m_error;
     private final TwinkleOffAnimation m_manipulatorNotReady;
     private final StrobeAnimation m_manipulatorReady;
+    private final StrobeAnimation m_climb_Enabled;
     private final LarsonAnimation m_climbLEFT;
     private final LarsonAnimation m_climbTOP;
     private final LarsonAnimation m_climbRIGHT;
@@ -93,10 +95,11 @@ public class LEDSubsystem extends SubsystemBase {
         // Constants.LEDConstants.kRGBCount, LarsonAnimation.BounceMode.Back, 3);
         m_error = new StrobeAnimation(255, 0, 0, 0, 0.5, Constants.LEDConstants.kRGBCount);
         m_manipulatorNotReady = new TwinkleOffAnimation(0, 255, 0, 0, 1, Constants.LEDConstants.kRGBCount,
-                TwinkleOffAnimation.TwinkleOffPercent.Percent64);
+        TwinkleOffAnimation.TwinkleOffPercent.Percent64);
         m_manipulatorReady = new StrobeAnimation(0, 255, 0, 0, 1, Constants.LEDConstants.kRGBCount);
         m_climbLEFT = new LarsonAnimation(255, 0, 255, 0, .1, Constants.LEDConstants.kRGBSection1.m_length,
-                LarsonAnimation.BounceMode.Back, 4, Constants.LEDConstants.kRGBSection1.m_start);
+        LarsonAnimation.BounceMode.Back, 4, Constants.LEDConstants.kRGBSection1.m_start);
+        m_climb_Enabled = new StrobeAnimation(255, 0, 255, 0, 0.5, Constants.LEDConstants.kRGBCount);
         m_climbTOP = new LarsonAnimation(255, 0, 255, 0, .5, Constants.LEDConstants.kRGBSection2.m_length,
                 LarsonAnimation.BounceMode.Center, 4, Constants.LEDConstants.kRGBSection2.m_start);
         m_climbRIGHT = new LarsonAnimation(255, 0, 255, 0, .1, Constants.LEDConstants.kRGBSection3.m_length,
@@ -168,7 +171,19 @@ public class LEDSubsystem extends SubsystemBase {
                     m_candle.clearAnimation(1);
                     m_candle.animate(m_manipulatorReady, 0);
                     break;
-                case CLIMB:
+                case CLIMB_ENABLED:
+                    m_candle.clearAnimation(2);
+                    m_candle.clearAnimation(1);
+                    m_candle.clearAnimation(0);
+                    m_candle.setLEDs(255, 0, 255, 0, 0, Constants.LEDConstants.kRGBCount);
+                    break;
+                case CLIMB_HOOKED:
+                    m_candle.clearAnimation(2);
+                    m_candle.clearAnimation(1);
+                    m_candle.clearAnimation(0);
+                    m_candle.setLEDs(255, 0, 255, 0, 0, Constants.LEDConstants.kRGBCount);
+                    break;
+                case CLIMB_COMPLETE:
                     m_candle.animate(m_climbRIGHT, 2);
                     m_candle.animate(m_climbTOP, 1);
                     m_candle.animate(m_climbLEFT, 0);
@@ -215,8 +230,16 @@ public class LEDSubsystem extends SubsystemBase {
         m_currentState = LEDSubsystemState.INTAKE;
     }
 
-    public static void setClimb() {
-        m_currentState = LEDSubsystemState.CLIMB;
+    public static void setClimb_Complete() {
+        m_currentState = LEDSubsystemState.CLIMB_COMPLETE;
+    }
+
+    public static void setClimb_Enabled() {
+        m_currentState = LEDSubsystemState.CLIMB_ENABLED;
+    }
+
+    public static void setClimb_Hooked() {
+        m_currentState = LEDSubsystemState.CLIMB_HOOKED;
     }
 
     public static void setManipulatorNotReady() {

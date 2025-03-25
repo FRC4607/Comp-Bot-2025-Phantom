@@ -15,8 +15,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.PrintCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Calibrations.DriverCalibrations;
 import frc.robot.Calibrations.ElevatorCalibrations;
 import frc.robot.Calibrations.ManipulatorCalibrations;
@@ -114,7 +117,7 @@ public class RobotContainer {
     
         SmartDashboard.putData("Lock", new InstantCommand(
             () -> m_elevator.setAngle(ElevatorCalibrations.kservoLockAngle))
-            .alongWith(new InstantCommand(LEDSubsystem::setClimb))); 
+            .alongWith(new InstantCommand(LEDSubsystem::setClimb_Complete))); 
 
         SmartDashboard.putData("Zero Elevator", new ZeroElevator(m_elevator));
 
@@ -184,12 +187,15 @@ public class RobotContainer {
                                                                                    m_drivetrain));
         /* Target the right coral reef stick */
         m_joystick.axisGreaterThan(3, 0.1).whileTrue(new TranslationAlignToTag(1,
-                                                                                   m_drivetrain));
-
+        m_drivetrain));
+        
+        /* Prep Climb and finish Climb when released */
         m_joystick.y().onTrue(new PrepClimb(m_elevator, m_windmill)).onFalse(new CGClimb(m_windmill, m_elevator));
 
+        /* Algae Floor Pickup */
         m_joystick.a().onTrue(new AlgaeFloorPickup(m_elevator, m_windmill, m_manipulator));
 
+        /* Algae on Coral Pickup */
         m_joystick.povDown().and(m_joystick.leftBumper())
             .onTrue(new AlgaeStandingPickup(m_elevator, m_windmill, m_manipulator));
 
@@ -210,7 +216,18 @@ public class RobotContainer {
                 m_manipulator)
             .withTimeout(1));
 
-       // m_coPilot.getRawAxis(14).and(m_coPilot.getRawButton(1)).onTrue(new ZeroElevator(m_elevator));
+        // *********************      Configure the co-pilot controller     **************************************************
+        // Zero Elevator
+        Trigger coPilot_Red1 = new Trigger(() -> m_coPilot.getRawButton(1));
+        Trigger coPilot_Toggle1 = new Trigger(() -> m_coPilot.getRawButton(14));
+        coPilot_Red1.and(coPilot_Toggle1).onTrue(new ZeroElevator(m_elevator));
+
+        Trigger coPilot_Orange1 = new Trigger(() -> m_coPilot.getRawButton(3));
+        coPilot_Orange1.whileTrue(new RunManipulator(ManipulatorCalibrations.kL1Velocity, 
+                                                               ManipulatorCalibrations.kCoralAcceleration, m_manipulator));
+        Trigger coPilot_Orange2 = new Trigger(() -> m_coPilot.getRawButton(4));
+        coPilot_Orange2.whileTrue(new RunManipulator(-ManipulatorCalibrations.kL1Velocity, 
+                                                               ManipulatorCalibrations.kCoralAcceleration, m_manipulator));
     }
 
 
