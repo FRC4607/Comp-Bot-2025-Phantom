@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Calibrations.ElevatorCalibrations;
 import frc.robot.Calibrations.WindmillCalibrations;
@@ -22,10 +23,23 @@ public class AlgaeL2Pickup extends SequentialCommandGroup {
     public AlgaeL2Pickup(ElevatorSubsystem elevator, WindmillSubsystem windmill, ManipulatorSubsystem manipulator) {
         super(
             // TODO: Add tolerances
-            new MoveElevatorToPosition(
-                ElevatorCalibrations.kAlgaeOverL2Position, ElevatorCalibrations.kDefaultTolerance, false, elevator),
-            new MoveWindmillToPosition(
-                WindmillCalibrations.kAlgaeOverL2Position, ElevatorCalibrations.kDefaultTolerance, false, windmill),
+            new ConditionalCommand(
+                new SequentialCommandGroup(
+                    new MoveElevatorToPosition(
+                        ElevatorCalibrations.kAlgaeUnderL2Position, 
+                        ElevatorCalibrations.kDefaultTolerance, 
+                        false, elevator),
+                    new MoveWindmillToPosition(
+                        WindmillCalibrations.kAlgaeUnderL2Position, 
+                        ElevatorCalibrations.kDefaultTolerance, 
+                        false, windmill)),
+                new SequentialCommandGroup(
+                    new MoveElevatorToPosition(
+                        ElevatorCalibrations.kAlgaeOverL2Position, ElevatorCalibrations.kDefaultTolerance, false, elevator),
+                    new MoveWindmillToPosition(
+                        WindmillCalibrations.kAlgaeOverL2Position, ElevatorCalibrations.kDefaultTolerance, false, windmill)),
+                    () -> Math.abs(windmill.getPosition() - WindmillCalibrations.kPendulumPosition) < 90),
+
             new RunAlgaeIntake(manipulator)
         );
     }

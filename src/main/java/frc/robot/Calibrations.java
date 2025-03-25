@@ -186,12 +186,16 @@ public class Calibrations {
         /* Floor pickup position for Algae */
         public static final double kAlgaePickupPosition = 3;
 
-        /* L2 pickup position for Algae */
+        /* L2 OVER pickup position for Algae */
         public static final double kAlgaeOverL2Position = 13;
+        
+        /* L2 UNDER pickup position for Algae */
+        public static final double kAlgaeUnderL2Position = 22.0;
 
-        /* L3 pickup position for Algae */
+        /* L3 OVER pickup position for Algae */
         public static final double kAlgaeOverL3Position = 28.5;
-
+        
+        /* L3 UNDER pickup position for Algae */
         public static final double kAlgaeUnderL3Position = 30;
 
         /* Position for algae pickup when the algae is on top of a coral */
@@ -308,12 +312,16 @@ public class Calibrations {
         /* Floor Pickup Position for Algae */
         public static final double kAlgaePickupPosition = 345;
         
-        /* L2 pickup position for Algae */
+        /* L2 OVER pickup position for Algae */
         public static final double kAlgaeOverL2Position = 26;
         
-        /* L3 pickup position for Algae */
-        public static final double kAlgaeOverL3Position = 26;
+        /* L2 UNDERpickup position for Algae */
+        public static final double kAlgaeUnderL2Position = 195;
 
+        /* L3 OVER pickup position for Algae */
+        public static final double kAlgaeOverL3Position = 26;
+        
+        /* L3 UNDER pickup position for Algae */
         public static final double kAlgaeUnderL3Position = 175;
 
         /* Position for algae pickup when the algae is on top of a coral */
