@@ -8,6 +8,8 @@ import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -38,6 +40,7 @@ import frc.robot.commands.ProcessAlgae;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.RunManipulator;
 import frc.robot.commands.TranslationAlignToTag;
+import frc.robot.commands.ZeroElevator;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -57,6 +60,7 @@ public class RobotContainer {
     public final ManipulatorSubsystem m_manipulator = new ManipulatorSubsystem();
     public final LEDSubsystem m_leds = new LEDSubsystem();
     public final CommandXboxController m_joystick = new CommandXboxController(0);
+    public final Joystick m_coPilot = new Joystick(1);
 
     /* Drive request for default drivetrain command */
     private final SwerveRequest.FieldCentric m_drive = new SwerveRequest.FieldCentric()
@@ -111,6 +115,8 @@ public class RobotContainer {
         SmartDashboard.putData("Lock", new InstantCommand(
             () -> m_elevator.setAngle(ElevatorCalibrations.kservoLockAngle))
             .alongWith(new InstantCommand(LEDSubsystem::setClimb))); 
+
+        SmartDashboard.putData("Zero Elevator", new ZeroElevator(m_elevator));
 
         SmartDashboard.putData(m_elevator);
         SmartDashboard.putData(m_windmill);
@@ -203,6 +209,7 @@ public class RobotContainer {
                 ManipulatorCalibrations.kMaxAcceleration, 
                 m_manipulator)
             .withTimeout(1));
+
 
     }
 

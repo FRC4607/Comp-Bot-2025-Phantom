@@ -208,8 +208,15 @@ public class ElevatorSubsystem extends SubsystemBase {
         SmartDashboard.putBoolean("CANdi State", getCANdiState());
     }
 
-    public void setElevatorZero() {
+    public void setElevatorZeroDutyCycle() {
         m_motor1.set(0);
     }
- 
+
+    public void setElevatorOpenLoopDutyCycle(double dutyCycle) {
+        m_motor1.set(dutyCycle);
+    }
+
+    public void setZeroPosition() {
+        m_motor1.setPosition(0);
+    }
 }

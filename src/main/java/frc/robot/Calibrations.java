@@ -127,6 +127,8 @@ public class Calibrations {
         /* Limit to apply to the CANdi limit switch resetting the elevator 0 point */
         public static final double kResetPositionTolerance = 1.0;
 
+        public static final double kResetPositionVelocity = -0.15;
+
         /* Bottom position in inches */
         public static final double kBottomPosition = 2.0; //-0.2;
 
@@ -185,10 +187,12 @@ public class Calibrations {
         public static final double kAlgaePickupPosition = 3;
 
         /* L2 pickup position for Algae */
-        public static final double kAlgaeL2Position = 13;
+        public static final double kAlgaeOverL2Position = 13;
 
         /* L3 pickup position for Algae */
-        public static final double kAlgaeL3Position = 28.5;
+        public static final double kAlgaeOverL3Position = 28.5;
+
+        public static final double kAlgaeUnderL3Position = 30;
 
         /* Position for algae pickup when the algae is on top of a coral */
         public static final double kAlgaeStandingPosition = 10;
@@ -305,10 +309,12 @@ public class Calibrations {
         public static final double kAlgaePickupPosition = 345;
         
         /* L2 pickup position for Algae */
-        public static final double kAlgaeL2Position = 26;
+        public static final double kAlgaeOverL2Position = 26;
         
         /* L3 pickup position for Algae */
-        public static final double kAlgaeL3Position = 26;
+        public static final double kAlgaeOverL3Position = 26;
+
+        public static final double kAlgaeUnderL3Position = 175;
 
         /* Position for algae pickup when the algae is on top of a coral */
         public static final double kAlgaeStandingPosition = 0;

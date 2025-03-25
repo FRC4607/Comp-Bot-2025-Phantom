@@ -35,7 +35,7 @@ public class CGClimb extends SequentialCommandGroup {
                 new LockElevatorWhenDown(elevator)
             ),
             new WaitCommand(3),
-            new InstantCommand(elevator::setElevatorZero)
+            new InstantCommand(elevator::setElevatorZeroDutyCycle)
 
         );
     }
