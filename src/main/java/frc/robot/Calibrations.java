@@ -190,7 +190,7 @@ public class Calibrations {
         public static final double kAlgaeOverL2Position = 13;
         
         /* L2 UNDER pickup position for Algae */
-        public static final double kAlgaeUnderL2Position = 24.0;
+        public static final double kAlgaeUnderL2Position = 22.0;
 
         /* L3 OVER pickup position for Algae */
         public static final double kAlgaeOverL3Position = 28.5;
@@ -316,7 +316,7 @@ public class Calibrations {
         public static final double kAlgaeOverL2Position = 26;
         
         /* L2 UNDERpickup position for Algae */
-        public static final double kAlgaeUnderL2Position = 190;
+        public static final double kAlgaeUnderL2Position = 195;
 
         /* L3 OVER pickup position for Algae */
         public static final double kAlgaeOverL3Position = 26;
@@ -399,7 +399,7 @@ public class Calibrations {
         public static final double kAlgaeIntakeThreshold = 25;
 
         /* Algae barge outtake speed, in rotations per second */
-        public static final double kL1Velocity = -15;
+        public static final double kL1Velocity = -35;
 
     }
 }

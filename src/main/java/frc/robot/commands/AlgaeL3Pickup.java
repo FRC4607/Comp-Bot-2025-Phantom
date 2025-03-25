@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Calibrations.ElevatorCalibrations;
 import frc.robot.Calibrations.WindmillCalibrations;
@@ -25,6 +26,17 @@ public class AlgaeL3Pickup extends SequentialCommandGroup {
             // TODO: Add tolerances
             new ConditionalCommand(
                 new SequentialCommandGroup(
+                    //Under L3
+                    //First go to the stow position if not already there
+                    new ConditionalCommand(
+                        //If the elevator is not already at the stow position go to the stow position
+                        new PendulumStow(elevator, windmill),
+                        //If the elevator is already at the stow position Do Nothing
+                        new InstantCommand(),
+                        //If the elevator is above the stow position - Tolerance
+                        () -> (elevator.getPosition()
+                                < ElevatorCalibrations.kPendulumPosition - ElevatorCalibrations.kPendulumTolerance)
+                    ),
                     new MoveElevatorToPosition(
                         ElevatorCalibrations.kAlgaeUnderL3Position, 
                         ElevatorCalibrations.kDefaultTolerance, 
@@ -34,6 +46,7 @@ public class AlgaeL3Pickup extends SequentialCommandGroup {
                         ElevatorCalibrations.kDefaultTolerance, 
                         false, windmill)),
                 new SequentialCommandGroup(
+                    //Over L3
                     new MoveElevatorToPosition(
                         ElevatorCalibrations.kAlgaeOverL3Position, ElevatorCalibrations.kDefaultTolerance, false, elevator),
                     new MoveWindmillToPosition(
