@@ -30,6 +30,7 @@ import frc.robot.commands.AlgaeStandingPickup;
 import frc.robot.commands.BargeAlgae;
 import frc.robot.commands.CGClimb;
 import frc.robot.commands.CGOuttakeThenStow;
+import frc.robot.commands.CGZeroElevator;
 import frc.robot.commands.CoralStation;
 import frc.robot.commands.L2;
 import frc.robot.commands.L3;
@@ -189,7 +190,7 @@ public class RobotContainer {
                                                                                    m_drivetrain));
         /* Target the right coral reef stick */
         m_joystick.axisGreaterThan(3, 0.1).whileTrue(new TranslationAlignToTag(1,
-        m_drivetrain));
+            m_drivetrain));
         
         /* Prep Climb and finish Climb when released */
         m_joystick.y().onTrue(new PrepClimb(m_elevator, m_windmill)).onFalse(new CGClimb(m_windmill, m_elevator));
@@ -222,7 +223,7 @@ public class RobotContainer {
         // Zero Elevator
         Trigger coPilotRed1 = new Trigger(() -> m_coPilot.getRawButton(1));
         Trigger coPilotToggle1 = new Trigger(() -> m_coPilot.getRawButton(14));
-        coPilotRed1.and(coPilotToggle1).onTrue(new ZeroElevator(m_elevator));
+        coPilotRed1.and(coPilotToggle1).onTrue(new CGZeroElevator(m_elevator, m_windmill));
 
         Trigger coPilotOrange1 = new Trigger(() -> m_coPilot.getRawButton(3));
         coPilotOrange1.whileTrue(new RunManipulator(ManipulatorCalibrations.kL1Velocity, 
