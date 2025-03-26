@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Calibrations.WindmillCalibrations;
@@ -21,7 +22,7 @@ public class CGZeroElevator extends SequentialCommandGroup {
     public CGZeroElevator(ElevatorSubsystem elevator, WindmillSubsystem windmill) {
         super(
             //Force the Arm to the Lollipop Position
-            new RunCommand(() -> windmill.updateSetpoint(WindmillCalibrations.kLollipopPosition, false)),
+            new InstantCommand(() -> windmill.updateSetpoint(WindmillCalibrations.kLollipopPosition, false)),
             //now zero the elevator
             new ZeroElevator(elevator)
         );
