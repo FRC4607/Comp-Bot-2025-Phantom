@@ -39,7 +39,9 @@ public class ZeroElevator extends Command {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        m_elevator.setZeroPosition();
+        if (!interrupted) {
+            m_elevator.setZeroPosition();
+        }
         m_elevator.setElevatorZeroDutyCycle();
         LEDSubsystem.setNeutral();
     }
