@@ -25,16 +25,24 @@ public class CGClimb extends SequentialCommandGroup {
      */
     public CGClimb(WindmillSubsystem windmill, ElevatorSubsystem elevator) {
         super(
+            // Make sure the servo is unlocked
+            new InstantCommand(() -> elevator.setServoAngle(ElevatorCalibrations.kservoUnlockAngle)),
+            // Lift to the climb position
             new MoveElevatorToPosition(
                 ElevatorCalibrations.kClimbUpSetpoint, ElevatorCalibrations.kClimbUpTolerance, true, elevator),
             new MoveWindmillToPosition(
                 WindmillCalibrations.kClimbPosition, WindmillCalibrations.kClimbTolerance, true, windmill),
+            // Make sure the servo is unlocked
+            new InstantCommand(() -> elevator.setServoAngle(ElevatorCalibrations.kservoUnlockAngle)),
+            // Finish the climb
             new ParallelRaceGroup(
                 new MoveElevatorToPosition(
                     ElevatorCalibrations.kClimbDownSetpoint, ElevatorCalibrations.kClimbDownTolerance, true, elevator),
                 new LockElevatorWhenDown(elevator)
             ),
+            // Hold the climb position for a few seconds
             new WaitCommand(3),
+            // turn off the motors
             new InstantCommand(elevator::setElevatorZeroDutyCycle)
 
         );
