@@ -299,7 +299,7 @@ public class Calibrations {
         public static final double kCoralStationStowTolerance = 5;
 
         /* Climb position in degrees */
-        public static final double kPrepClimbPosition = 110;
+        public static final double kPrepClimbPosition = 113;
 
         /* Climb tolerance in degrees before any elevator movement */
         public static final double kPrepClimbTolerance = 5;
