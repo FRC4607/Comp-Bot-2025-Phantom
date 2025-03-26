@@ -80,6 +80,7 @@ public class Calibrations {
         public static final double kAprilTagTranslationXAlignmentKD = 0.005;
 
         /* Profiled PID controller on-target threshold in degrees*/
+        public static final double kAprilTagTranslationXClose = 2.0;        
         public static final double kAprilTagTranslationXOnTarget = 1.75;        
         
         /* Robot-centric X-translational controller - add a little Y-translation to stay flush to the coral reef */

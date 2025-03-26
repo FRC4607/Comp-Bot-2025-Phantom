@@ -31,6 +31,7 @@ public class TranslationAlignToTag extends Command {
     private int m_tagId;
     private int m_lockedTagId;
     private boolean m_validTagId;
+    private int m_activePipeline;
     private boolean m_onTarget;
     private RobotCentric m_swerveRequest = new RobotCentric().withRotationalDeadband(DriverCalibrations.kmaxSpeed * 0.1);
     private final ProfiledPIDController m_profiledPid = new ProfiledPIDController(
@@ -63,13 +64,15 @@ public class TranslationAlignToTag extends Command {
         m_tagId = (int) NetworkTableInstance.getDefault().getTable("limelight-one").getEntry("tid")
                                             .getInteger(0);  // Get the current AprilTag ID
         m_validTagId = FieldCalibrations.m_validTagIds.contains(m_tagId);  // Make sure it's a coral reef AprilTag ID
+        m_activePipeline = (int) NetworkTableInstance.getDefault().getTable("limelight-one").getEntry("pipeline")
+                                            .getDouble(0);  // Get the current pipeline number
 
         // Default to doing nothing
         m_xspeed = 0.0;
         m_yspeed = 0.0;
 
-        // Have a valid AprilTag ID
-        if (m_validTagId) {
+        // Have a valid AprilTag ID and the active pipeline is the coral reef pipeline
+        if (m_validTagId && m_activePipeline == m_branch) {
             
             // Lock onto the first valid AprilTag ID
             if (m_lockedTagId == 0) {
@@ -88,6 +91,8 @@ public class TranslationAlignToTag extends Command {
                 if (Math.abs(m_errorTx) < DriverCalibrations.kAprilTagTranslationXOnTarget) {
                     LEDSubsystem.setCoralOnTarget();
                     m_onTarget = true;
+                } else if (Math.abs(m_errorTx) < DriverCalibrations.kAprilTagTranslationXClose) {
+                    LEDSubsystem.setCoralCloseToTarget();   
                 }
             }
         }
