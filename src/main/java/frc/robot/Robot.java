@@ -38,8 +38,8 @@ public class Robot extends TimedRobot {
         DriverStation.reportError("m_robotContainer.m_leds.getState().toString(): ", false);
         DriverStation.reportError(m_robotContainer.m_leds.getState().toString(), false);
        
-        if (m_robotContainer.m_leds.getState() == LEDSubsystem.LEDSubsystemState.CLIMB) {
-            LEDSubsystem.setClimb();
+        if (m_robotContainer.m_leds.getState() == LEDSubsystem.LEDSubsystemState.CLIMB_COMPLETE) {
+            LEDSubsystem.setClimb_Complete();
         } else {
             LEDSubsystem.setDisabled();
         }
@@ -48,7 +48,7 @@ public class Robot extends TimedRobot {
     @Override
     public void disabledPeriodic() {
         Optional<Alliance> value = DriverStation.getAlliance();
-        if (m_robotContainer.m_leds.getState() == LEDSubsystem.LEDSubsystemState.CLIMB) {
+        if (m_robotContainer.m_leds.getState() == LEDSubsystem.LEDSubsystemState.CLIMB_COMPLETE) {
             // TODO: What was supposed to be here?  It was left empty.
         } else {
             if (value.isPresent()) {

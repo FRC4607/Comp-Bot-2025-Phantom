@@ -80,6 +80,7 @@ public class Calibrations {
         public static final double kAprilTagTranslationXAlignmentKD = 0.005;
 
         /* Profiled PID controller on-target threshold in degrees*/
+        public static final double kAprilTagTranslationXClose = 2.0;        
         public static final double kAprilTagTranslationXOnTarget = 1.75;        
         
         /* Robot-centric X-translational controller - add a little Y-translation to stay flush to the coral reef */
@@ -126,6 +127,8 @@ public class Calibrations {
 
         /* Limit to apply to the CANdi limit switch resetting the elevator 0 point */
         public static final double kResetPositionTolerance = 1.0;
+
+        public static final double kResetPositionVelocity = -0.15;
 
         /* Bottom position in inches */
         public static final double kBottomPosition = 2.0; //-0.2;
@@ -184,11 +187,17 @@ public class Calibrations {
         /* Floor pickup position for Algae */
         public static final double kAlgaePickupPosition = 3;
 
-        /* L2 pickup position for Algae */
-        public static final double kAlgaeL2Position = 13;
+        /* L2 OVER pickup position for Algae */
+        public static final double kAlgaeOverL2Position = 13;
+        
+        /* L2 UNDER pickup position for Algae */
+        public static final double kAlgaeUnderL2Position = 22.0;
 
-        /* L3 pickup position for Algae */
-        public static final double kAlgaeL3Position = 28.5;
+        /* L3 OVER pickup position for Algae */
+        public static final double kAlgaeOverL3Position = 28.5;
+        
+        /* L3 UNDER pickup position for Algae */
+        public static final double kAlgaeUnderL3Position = 30;
 
         /* Position for algae pickup when the algae is on top of a coral */
         public static final double kAlgaeStandingPosition = 10;
@@ -290,7 +299,7 @@ public class Calibrations {
         public static final double kCoralStationStowTolerance = 5;
 
         /* Climb position in degrees */
-        public static final double kPrepClimbPosition = 110;
+        public static final double kPrepClimbPosition = 113;
 
         /* Climb tolerance in degrees before any elevator movement */
         public static final double kPrepClimbTolerance = 5;
@@ -304,11 +313,17 @@ public class Calibrations {
         /* Floor Pickup Position for Algae */
         public static final double kAlgaePickupPosition = 345;
         
-        /* L2 pickup position for Algae */
-        public static final double kAlgaeL2Position = 26;
+        /* L2 OVER pickup position for Algae */
+        public static final double kAlgaeOverL2Position = 26;
         
-        /* L3 pickup position for Algae */
-        public static final double kAlgaeL3Position = 26;
+        /* L2 UNDERpickup position for Algae */
+        public static final double kAlgaeUnderL2Position = 195;
+
+        /* L3 OVER pickup position for Algae */
+        public static final double kAlgaeOverL3Position = 26;
+        
+        /* L3 UNDER pickup position for Algae */
+        public static final double kAlgaeUnderL3Position = 175;
 
         /* Position for algae pickup when the algae is on top of a coral */
         public static final double kAlgaeStandingPosition = 0;
@@ -377,12 +392,15 @@ public class Calibrations {
 
         /* Algae barge outtake speed, in rotations per second */
         public static final double kAlgaeBargingVelocity = 300;
-
+        
         /* Velocity to intake Algae in the floor position at */
         public static final double kAlgaeIntakeVelocity = -75;
-
+        
         /* Current threshold for deciding when we have an algae */
         public static final double kAlgaeIntakeThreshold = 25;
+
+        /* Algae barge outtake speed, in rotations per second */
+        public static final double kL1Velocity = -35;
 
     }
 }

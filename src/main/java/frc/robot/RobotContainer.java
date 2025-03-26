@@ -8,13 +8,18 @@ import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.PrintCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Calibrations.DriverCalibrations;
 import frc.robot.Calibrations.ElevatorCalibrations;
 import frc.robot.Calibrations.ManipulatorCalibrations;
@@ -25,6 +30,7 @@ import frc.robot.commands.AlgaeStandingPickup;
 import frc.robot.commands.BargeAlgae;
 import frc.robot.commands.CGClimb;
 import frc.robot.commands.CGOuttakeThenStow;
+import frc.robot.commands.CGZeroElevator;
 import frc.robot.commands.CoralStation;
 import frc.robot.commands.L2;
 import frc.robot.commands.L3;
@@ -38,6 +44,7 @@ import frc.robot.commands.ProcessAlgae;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.RunManipulator;
 import frc.robot.commands.TranslationAlignToTag;
+import frc.robot.commands.ZeroElevator;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -57,6 +64,7 @@ public class RobotContainer {
     public final ManipulatorSubsystem m_manipulator = new ManipulatorSubsystem();
     public final LEDSubsystem m_leds = new LEDSubsystem();
     public final CommandXboxController m_joystick = new CommandXboxController(0);
+    public final Joystick m_coPilot = new Joystick(1);
 
     /* Drive request for default drivetrain command */
     private final SwerveRequest.FieldCentric m_drive = new SwerveRequest.FieldCentric()
@@ -105,12 +113,14 @@ public class RobotContainer {
         
         SmartDashboard.putData("Auto Mode", m_autoChooser);
         SmartDashboard.putData("Unlock", new InstantCommand(
-            () -> m_elevator.setAngle(ElevatorCalibrations.kservoUnlockAngle))
+            () -> m_elevator.setServoAngle(ElevatorCalibrations.kservoUnlockAngle))
             .alongWith(new InstantCommand(LEDSubsystem::setNeutral)));
     
         SmartDashboard.putData("Lock", new InstantCommand(
-            () -> m_elevator.setAngle(ElevatorCalibrations.kservoLockAngle))
-            .alongWith(new InstantCommand(LEDSubsystem::setClimb))); 
+            () -> m_elevator.setServoAngle(ElevatorCalibrations.kservoLockAngle))
+            .alongWith(new InstantCommand(LEDSubsystem::setClimb_Complete))); 
+
+        SmartDashboard.putData("Zero Elevator", new ZeroElevator(m_elevator));
 
         SmartDashboard.putData(m_elevator);
         SmartDashboard.putData(m_windmill);
@@ -133,10 +143,12 @@ public class RobotContainer {
         m_joystick.start().onTrue(m_drivetrain.runOnce(() -> m_drivetrain.seedFieldCentric()));
 
         m_joystick.b().onTrue(new LollipopStow(m_elevator, m_windmill)
-                      .alongWith(new InstantCommand(() -> m_elevator.setAngle(ElevatorCalibrations.kservoUnlockAngle))));
+                      .alongWith(new InstantCommand(() -> m_elevator.setServoAngle(
+                        ElevatorCalibrations.kservoUnlockAngle))));
 
         m_joystick.x().onTrue(new PendulumStow(m_elevator, m_windmill)
-                      .alongWith(new InstantCommand(() -> m_elevator.setAngle(ElevatorCalibrations.kservoUnlockAngle))));
+                      .alongWith(new InstantCommand(() -> m_elevator.setServoAngle(
+                        ElevatorCalibrations.kservoUnlockAngle))));
     
         /* Coral station pickup sequence */
         m_joystick.rightBumper().onTrue(new CoralStation(m_elevator, m_windmill)
@@ -178,12 +190,15 @@ public class RobotContainer {
                                                                                    m_drivetrain));
         /* Target the right coral reef stick */
         m_joystick.axisGreaterThan(3, 0.1).whileTrue(new TranslationAlignToTag(1,
-                                                                                   m_drivetrain));
-
+            m_drivetrain));
+        
+        /* Prep Climb and finish Climb when released */
         m_joystick.y().onTrue(new PrepClimb(m_elevator, m_windmill)).onFalse(new CGClimb(m_windmill, m_elevator));
 
+        /* Algae Floor Pickup */
         m_joystick.a().onTrue(new AlgaeFloorPickup(m_elevator, m_windmill, m_manipulator));
 
+        /* Algae on Coral Pickup */
         m_joystick.povDown().and(m_joystick.leftBumper())
             .onTrue(new AlgaeStandingPickup(m_elevator, m_windmill, m_manipulator));
 
@@ -204,6 +219,18 @@ public class RobotContainer {
                 m_manipulator)
             .withTimeout(1));
 
+        // *********************      Configure the co-pilot controller     ***********************************************
+        // Zero Elevator
+        Trigger coPilotRed1 = new Trigger(() -> m_coPilot.getRawButton(1));
+        Trigger coPilotToggle1 = new Trigger(() -> m_coPilot.getRawButton(14));
+        coPilotRed1.and(coPilotToggle1).onTrue(new CGZeroElevator(m_elevator, m_windmill));
+
+        Trigger coPilotOrange1 = new Trigger(() -> m_coPilot.getRawButton(3));
+        coPilotOrange1.whileTrue(new RunManipulator(ManipulatorCalibrations.kL1Velocity, 
+                                                               ManipulatorCalibrations.kCoralAcceleration, m_manipulator));
+        Trigger coPilotOrange2 = new Trigger(() -> m_coPilot.getRawButton(4));
+        coPilotOrange2.whileTrue(new RunManipulator(-ManipulatorCalibrations.kL1Velocity, 
+                                                               ManipulatorCalibrations.kCoralAcceleration, m_manipulator));
     }
 
 

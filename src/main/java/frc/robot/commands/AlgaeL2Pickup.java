@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.ConditionalCommand;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Calibrations.ElevatorCalibrations;
 import frc.robot.Calibrations.WindmillCalibrations;
@@ -22,10 +24,36 @@ public class AlgaeL2Pickup extends SequentialCommandGroup {
     public AlgaeL2Pickup(ElevatorSubsystem elevator, WindmillSubsystem windmill, ManipulatorSubsystem manipulator) {
         super(
             // TODO: Add tolerances
-            new MoveElevatorToPosition(
-                ElevatorCalibrations.kAlgaeL2Position, ElevatorCalibrations.kDefaultTolerance, false, elevator),
-            new MoveWindmillToPosition(
-                WindmillCalibrations.kAlgaeL2Position, ElevatorCalibrations.kDefaultTolerance, false, windmill),
+            new ConditionalCommand(
+                new SequentialCommandGroup(
+                    //Under L2
+                    //First go to the stow position if not already there
+                    new ConditionalCommand(
+                        //If the elevator is not already at the stow position go to the stow position
+                        new PendulumStow(elevator, windmill),
+                        //If the elevator is already at the stow position Do Nothing
+                        new InstantCommand(),
+                        //If the elevator is above the stow position - Tolerance
+                        () -> (elevator.getPosition()
+                                < ElevatorCalibrations.kPendulumPosition - ElevatorCalibrations.kPendulumTolerance)
+                    ),
+                    //Then go to the under L2 position
+                    new MoveElevatorToPosition(
+                        ElevatorCalibrations.kAlgaeUnderL2Position, 
+                        ElevatorCalibrations.kDefaultTolerance, 
+                        false, elevator),
+                    new MoveWindmillToPosition(
+                        WindmillCalibrations.kAlgaeUnderL2Position, 
+                        ElevatorCalibrations.kDefaultTolerance, 
+                        false, windmill)),
+                new SequentialCommandGroup(
+                    //Over L2
+                    new MoveElevatorToPosition(
+                        ElevatorCalibrations.kAlgaeOverL2Position, ElevatorCalibrations.kDefaultTolerance, false, elevator),
+                    new MoveWindmillToPosition(
+                        WindmillCalibrations.kAlgaeOverL2Position, ElevatorCalibrations.kDefaultTolerance, false, windmill)),
+                    () -> Math.abs(windmill.getPosition() - WindmillCalibrations.kPendulumPosition) < 90),
+
             new RunAlgaeIntake(manipulator)
         );
     }

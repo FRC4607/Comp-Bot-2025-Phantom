@@ -43,7 +43,7 @@ public class LollipopStowForAuto extends Command {
             m_elevator.updateSetpoint(ElevatorCalibrations.kBottomPositionForAuto, false);
         }
 
-        new InstantCommand(() -> m_elevator.setAngle(ElevatorCalibrations.kservoUnlockAngle));
+        new InstantCommand(() -> m_elevator.setServoAngle(ElevatorCalibrations.kservoUnlockAngle));
     }
   
     @Override
