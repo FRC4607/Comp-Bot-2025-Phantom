@@ -30,18 +30,18 @@ public class Calibrations {
 
         static {
             Map<Integer, Map<Integer, Double>> tempMap = new HashMap<>();
-            tempMap.put(6, createImmutableMap(0, -27.78, 1, 0.91));
-            tempMap.put(7, createImmutableMap(0, -27.78, 1, 0.91));
-            tempMap.put(8, createImmutableMap(0, -27.78, 1, 0.91));
-            tempMap.put(9, createImmutableMap(0, -27.78, 1, 0.91));
-            tempMap.put(10, createImmutableMap(0, -27.78, 1, 0.91));
-            tempMap.put(11, createImmutableMap(0, -27.78, 1, 0.91));
-            tempMap.put(17, createImmutableMap(0, -27.78, 1, 0.91));
-            tempMap.put(18, createImmutableMap(0, -27.78, 1, 0.91));
-            tempMap.put(19, createImmutableMap(0, -27.78, 1, 0.91));
-            tempMap.put(20, createImmutableMap(0, -27.78, 1, 0.91));
-            tempMap.put(21, createImmutableMap(0, -27.78, 1, 0.91));
-            tempMap.put(22, createImmutableMap(0, -27.78, 1, 0.91));
+            tempMap.put(6, createImmutableMap(0, -29.48, 1, 2.20));
+            tempMap.put(7, createImmutableMap(0, -28.18, 1, 0.51));
+            tempMap.put(8, createImmutableMap(0, -28.72, 1, -0.8));
+            tempMap.put(9, createImmutableMap(0, -29.32, 1, -0.09));
+            tempMap.put(10, createImmutableMap(0, -27.54, 1, 1.97));
+            tempMap.put(11, createImmutableMap(0, -29.03, 1, 2.13));
+            tempMap.put(17, createImmutableMap(0, -28.17, 1, 2.07));
+            tempMap.put(18, createImmutableMap(0, -29.15, 1, 1.66));
+            tempMap.put(19, createImmutableMap(0, -29.3, 1, 3.8));
+            tempMap.put(20, createImmutableMap(0, -29.33, 1, 3.95));
+            tempMap.put(21, createImmutableMap(0, -29.27, 1, 1.99));
+            tempMap.put(22, createImmutableMap(0, -28.80, 1, 1.71));
 
             m_coralReefTargets = Collections.unmodifiableMap(tempMap);
         }
