@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.41375,
-        "y": 0.66125
+        "x": 1.2587090163934425,
+        "y": 0.49462090163934364
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.0274057178242915,
-        "y": 1.195814411275816
+        "x": 1.8723647342177339,
+        "y": 1.0291853129151596
       },
       "isLocked": false,
       "linkedName": "Blue_Proc_CStation"
