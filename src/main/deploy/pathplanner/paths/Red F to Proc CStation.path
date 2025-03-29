@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.194,
-        "y": 3.049
+        "x": 5.144,
+        "y": 3.009
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.307,
-        "y": 2.141999999999999
+        "x": 4.257000000000001,
+        "y": 2.101999999999999
       },
       "isLocked": false,
       "linkedName": "Red_Reef_F"
