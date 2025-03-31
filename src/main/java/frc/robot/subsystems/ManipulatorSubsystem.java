@@ -58,6 +58,10 @@ public class ManipulatorSubsystem extends SubsystemBase {
         m_motor.setControl(m_request.withVelocity(newSetpoint).withAcceleration(acceleration));
     }
 
+    public void setOpenLoopDutyCycle(double dutyCycle) {
+        m_motor.set(dutyCycle);
+    }
+
     /**
      * Returns the velocity of the Manipulator (rps).
      *

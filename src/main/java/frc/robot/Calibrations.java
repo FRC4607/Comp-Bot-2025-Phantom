@@ -354,11 +354,12 @@ public class Calibrations {
         public static final double kD = 0;
 
         /* MotionMagic constraints for velocity controller */
-        public static final double kMaxAcceleration = 1000;
+        public static final double kMaxAcceleration = 4000;
         public static final double kCoralAcceleration = 1000;
+        public static final double kBargeAlgaeAcceleration = 4000;
         public static final double kMaxSpeed = 50;
         //TODO: Add Calibration value for max coral speed
-        public static final double kMaxStatorCurrent = 40;
+        public static final double kMaxStatorCurrent = 800;
  
         /* Stator current delta threshold to stop motors */
         public static final double kCurrentThreshold = 15;
@@ -391,7 +392,7 @@ public class Calibrations {
         public static final double kAlgaeHoldingVelocity = -15;
 
         /* Algae barge outtake speed, in rotations per second */
-        public static final double kAlgaeBargingVelocity = 300;
+        public static final double kAlgaeBargingVelocity = 600;
         
         /* Velocity to intake Algae in the floor position at */
         public static final double kAlgaeIntakeVelocity = -75;

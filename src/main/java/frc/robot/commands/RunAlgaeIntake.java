@@ -31,7 +31,7 @@ public class RunAlgaeIntake extends Command {
     @Override
     public void initialize() {
         m_manipulator.updateSetpoint(
-            ManipulatorCalibrations.kAlgaeIntakeVelocity, ManipulatorCalibrations.kMaxAcceleration);
+            ManipulatorCalibrations.kAlgaeIntakeVelocity, ManipulatorCalibrations.kCoralAcceleration);
         m_filter.reset(m_inputBuffer, m_outputBuffer);
     }
 
@@ -41,8 +41,9 @@ public class RunAlgaeIntake extends Command {
 
     @Override
     public void end(boolean interrupted) {
-        m_manipulator.updateSetpoint(
-            ManipulatorCalibrations.kAlgaeHoldingVelocity, ManipulatorCalibrations.kMaxAcceleration);
+        m_manipulator.setOpenLoopDutyCycle(-.03);
+        //m_manipulator.updateSetpoint(
+        //    ManipulatorCalibrations.kAlgaeHoldingVelocity, ManipulatorCalibrations.kCoralAcceleration);
     }
 
     // Returns true when the command should end.
@@ -51,7 +52,8 @@ public class RunAlgaeIntake extends Command {
         var deltaCurrent = m_manipulator.getStatorCurrent() - m_filter.lastValue();
         m_filter.calculate(m_manipulator.getStatorCurrent());
         
-        return deltaCurrent > ManipulatorCalibrations.kAlgaeIntakeThreshold;
+        return false; //deltaCurrent > ManipulatorCalibrations.kAlgaeIntakeThreshold;
+        
     }
 
 }

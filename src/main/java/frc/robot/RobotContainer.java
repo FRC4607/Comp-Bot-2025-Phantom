@@ -209,13 +209,13 @@ public class RobotContainer {
         m_joystick.povUp().and(m_joystick.leftBumper()).onTrue(new ProcessAlgae(m_elevator, m_windmill));
         m_joystick.povUp().and(m_joystick.leftBumper()).onFalse(new RunManipulator(
             ManipulatorCalibrations.kAlgaeBargingVelocity, 
-            ManipulatorCalibrations.kMaxAcceleration, 
+            ManipulatorCalibrations.kCoralAcceleration, 
             m_manipulator).withTimeout(1));
 
         m_joystick.back().onTrue(new BargeAlgae(m_elevator, m_windmill))
             .onFalse(new RunManipulator(
                 ManipulatorCalibrations.kAlgaeBargingVelocity, 
-                ManipulatorCalibrations.kMaxAcceleration, 
+                ManipulatorCalibrations.kBargeAlgaeAcceleration, 
                 m_manipulator)
             .withTimeout(1));
 
