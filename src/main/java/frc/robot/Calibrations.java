@@ -359,7 +359,7 @@ public class Calibrations {
         public static final double kBargeAlgaeAcceleration = 4000;
         public static final double kMaxSpeed = 50;
         //TODO: Add Calibration value for max coral speed
-        public static final double kMaxStatorCurrent = 800;
+        public static final double kMaxStatorCurrent = 80;
  
         /* Stator current delta threshold to stop motors */
         public static final double kCurrentThreshold = 15;
