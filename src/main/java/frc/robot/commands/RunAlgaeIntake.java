@@ -41,9 +41,7 @@ public class RunAlgaeIntake extends Command {
 
     @Override
     public void end(boolean interrupted) {
-        m_manipulator.setOpenLoopDutyCycle(-.03);
-        //m_manipulator.updateSetpoint(
-        //    ManipulatorCalibrations.kAlgaeHoldingVelocity, ManipulatorCalibrations.kCoralAcceleration);
+        m_manipulator.setOpenLoopDutyCycle(ManipulatorCalibrations.kAlgaeHoldDutyCycle);
     }
 
     // Returns true when the command should end.

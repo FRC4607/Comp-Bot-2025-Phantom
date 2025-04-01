@@ -360,6 +360,12 @@ public class Calibrations {
         public static final double kMaxSpeed = 50;
         //TODO: Add Calibration value for max coral speed
         public static final double kMaxStatorCurrent = 80;
+
+        /* Duty cycle to hold the coral */
+        public static final double kCoralHoldDutyCycle = 0.03;
+
+        /* Duty cycle to hold the algae */
+        public static final double kAlgaeHoldDutyCycle = -0.03;
  
         /* Stator current delta threshold to stop motors */
         public static final double kCurrentThreshold = 15;
