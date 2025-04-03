@@ -5,7 +5,6 @@ import static edu.wpi.first.units.Units.RadiansPerSecond;
 import static edu.wpi.first.units.Units.RotationsPerSecond;
 
 import frc.robot.generated.TunerConstants;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -375,6 +374,9 @@ public class Calibrations {
 
         /* If the velocity goes from full tilt (50rps) to 25 assume coral has been fetched */
         public static final double kIntakeZeroTolerance = 25;
+
+        /* If the velocity goes from full tilt (50rps) to 25 assume algae has been fetched */
+        public static final double kIntakeAlgaeZeroTolerance = 25;
 
         /* Coral reef L4 outtake speed, in rotations per second */
         public static final double kL4OuttakeSpeed = -30;

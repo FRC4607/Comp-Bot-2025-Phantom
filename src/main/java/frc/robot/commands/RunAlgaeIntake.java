@@ -15,10 +15,7 @@ import frc.robot.subsystems.ManipulatorSubsystem;
 public class RunAlgaeIntake extends Command {
 
     private ManipulatorSubsystem m_manipulator;
-    private LinearFilter m_filter = LinearFilter.movingAverage(10);
-    // TODO: add calibration values for the linear filter input buffer
-    private double[] m_inputBuffer = {30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0};
-    private double[] m_outputBuffer = {};
+    private boolean m_isAtVelocity = false;
     
     /**
      * RunIntake command constructor.
@@ -30,13 +27,17 @@ public class RunAlgaeIntake extends Command {
 
     @Override
     public void initialize() {
+        m_isAtVelocity = false;
         m_manipulator.updateSetpoint(
             ManipulatorCalibrations.kAlgaeIntakeVelocity, ManipulatorCalibrations.kCoralAcceleration);
-        m_filter.reset(m_inputBuffer, m_outputBuffer);
     }
 
     @Override
     public void execute() {
+        if (Math.abs(m_manipulator.getVelocity() - ManipulatorCalibrations.kMaxSpeed) 
+            < ManipulatorCalibrations.kIntakeVelocityTolerance) {
+            m_isAtVelocity = true;
+        }
     }
 
     @Override
@@ -47,11 +48,8 @@ public class RunAlgaeIntake extends Command {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        var deltaCurrent = m_manipulator.getStatorCurrent() - m_filter.lastValue();
-        m_filter.calculate(m_manipulator.getStatorCurrent());
-        
-        return false; //deltaCurrent > ManipulatorCalibrations.kAlgaeIntakeThreshold;
-        
+        return (m_isAtVelocity 
+            && (Math.abs(m_manipulator.getVelocity()) < ManipulatorCalibrations.kIntakeAlgaeZeroTolerance));
     }
 
 }
