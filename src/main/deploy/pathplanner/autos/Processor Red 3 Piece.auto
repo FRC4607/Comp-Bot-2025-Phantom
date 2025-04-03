@@ -11,7 +11,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Red Proc Start to F"
+                  "pathName": "Red Proc Start to E"
                 }
               },
               {
@@ -68,7 +68,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Red F to Proc CStation"
+                  "pathName": "Red E to Proc CStation"
                 }
               },
               {
