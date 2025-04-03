@@ -54,12 +54,12 @@ public class LEDSubsystem extends SubsystemBase {
     private final StrobeAnimation m_error;
     private final TwinkleOffAnimation m_manipulatorNotReady;
     private final StrobeAnimation m_manipulatorReady;
-    private final StrobeAnimation m_climb_Enabled;
+    // private final StrobeAnimation m_climbEnabled;
     private final LarsonAnimation m_climbLEFT;
     private final LarsonAnimation m_climbTOP;
     private final LarsonAnimation m_climbRIGHT;
     private static boolean colorUpdate = false;
-    private final TwinkleOffAnimation m_CoralCloseToTarget;
+    private final TwinkleOffAnimation m_coralCloseToTarget;
     private final TwinkleOffAnimation m_coralTargeting;
     private final StrobeAnimation m_coralOnTarget;
 
@@ -101,14 +101,14 @@ public class LEDSubsystem extends SubsystemBase {
         m_manipulatorReady = new StrobeAnimation(0, 255, 0, 0, 1, Constants.LEDConstants.kRGBCount);
         m_climbLEFT = new LarsonAnimation(255, 0, 255, 0, .1, Constants.LEDConstants.kRGBSection1.m_length,
         LarsonAnimation.BounceMode.Back, 4, Constants.LEDConstants.kRGBSection1.m_start);
-        m_climb_Enabled = new StrobeAnimation(255, 0, 255, 0, 0.5, Constants.LEDConstants.kRGBCount);
+        // m_climbEnabled = new StrobeAnimation(255, 0, 255, 0, 0.5, Constants.LEDConstants.kRGBCount);
         m_climbTOP = new LarsonAnimation(255, 0, 255, 0, .5, Constants.LEDConstants.kRGBSection2.m_length,
                 LarsonAnimation.BounceMode.Center, 4, Constants.LEDConstants.kRGBSection2.m_start);
         m_climbRIGHT = new LarsonAnimation(255, 0, 255, 0, .1, Constants.LEDConstants.kRGBSection3.m_length,
                 LarsonAnimation.BounceMode.Back, 4, Constants.LEDConstants.kRGBSection3.m_start);
         m_coralTargeting = new TwinkleOffAnimation(0, 255, 0, 0, 1, Constants.LEDConstants.kRGBCount,
                 TwinkleOffAnimation.TwinkleOffPercent.Percent30);
-        m_CoralCloseToTarget = new TwinkleOffAnimation(255, 0, 255, 0, 1, Constants.LEDConstants.kRGBCount,
+        m_coralCloseToTarget = new TwinkleOffAnimation(255, 0, 255, 0, 1, Constants.LEDConstants.kRGBCount,
                 TwinkleOffAnimation.TwinkleOffPercent.Percent30);
         m_coralOnTarget = new StrobeAnimation(255, 0, 255, 0, 1, Constants.LEDConstants.kRGBCount);
 
@@ -210,7 +210,7 @@ public class LEDSubsystem extends SubsystemBase {
                 case CORAL_CLOSETOTARGET:
                     m_candle.clearAnimation(2);
                     m_candle.clearAnimation(1);
-                    m_candle.animate(m_CoralCloseToTarget, 0);
+                    m_candle.animate(m_coralCloseToTarget, 0);
                     break;
                 default:
                     m_candle.clearAnimation(2);
