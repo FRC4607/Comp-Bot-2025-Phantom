@@ -42,8 +42,8 @@ public class ManipulatorSubsystem extends SubsystemBase {
 
         m_talonFxConfig.MotionMagic.MotionMagicAcceleration = ManipulatorCalibrations.kMaxAcceleration;
 
-        m_talonFxConfig.TorqueCurrent.PeakForwardTorqueCurrent = ManipulatorCalibrations.kMaxStatorCurrent;
-        m_talonFxConfig.TorqueCurrent.PeakReverseTorqueCurrent = -ManipulatorCalibrations.kMaxStatorCurrent;
+        m_talonFxConfig.TorqueCurrent.PeakForwardTorqueCurrent = ManipulatorCalibrations.kMaxForwardStatorCurrent;
+        m_talonFxConfig.TorqueCurrent.PeakReverseTorqueCurrent = -ManipulatorCalibrations.kMaxReverseStatorCurrent;
 
         /* Apply hardware configurations */
         m_motor.getConfigurator().apply(m_talonFxConfig);
@@ -56,6 +56,10 @@ public class ManipulatorSubsystem extends SubsystemBase {
     */
     public void updateSetpoint(double newSetpoint, double acceleration) {
         m_motor.setControl(m_request.withVelocity(newSetpoint).withAcceleration(acceleration));
+    }
+
+    public void setOpenLoopDutyCycle(double dutyCycle) {
+        m_motor.set(dutyCycle);
     }
 
     /**

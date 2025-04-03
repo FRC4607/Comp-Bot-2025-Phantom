@@ -8,7 +8,6 @@ import com.ctre.phoenix6.swerve.SwerveRequest.RobotCentric;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Calibrations.DriverCalibrations;
 import frc.robot.Calibrations.FieldCalibrations;
@@ -32,7 +31,6 @@ public class TranslationAlignToTag extends Command {
     private int m_lockedTagId;
     private boolean m_validTagId;
     private int m_activePipeline;
-    private boolean m_onTarget;
     private RobotCentric m_swerveRequest = new RobotCentric().withRotationalDeadband(DriverCalibrations.kmaxSpeed * 0.1);
     private final ProfiledPIDController m_profiledPid = new ProfiledPIDController(
         DriverCalibrations.kAprilTagTranslationXAlignmentKP,
@@ -54,7 +52,6 @@ public class TranslationAlignToTag extends Command {
     @Override
     public void initialize() {
         NetworkTableInstance.getDefault().getTable("limelight-one").getEntry("pipeline").setDouble(m_branch);
-        m_onTarget = false;
         m_targetTx = 0.0;  // Once a valid target is found, use the hashmap to set this target
         m_lockedTagId = 0;  // Init with an invalid AprilTag ID
     }
@@ -90,7 +87,6 @@ public class TranslationAlignToTag extends Command {
                 m_yspeed = DriverCalibrations.kAprilTagTranslationYRate;
                 if (Math.abs(m_errorTx) < DriverCalibrations.kAprilTagTranslationXOnTarget) {
                     LEDSubsystem.setCoralOnTarget();
-                    m_onTarget = true;
                 } else if (Math.abs(m_errorTx) < DriverCalibrations.kAprilTagTranslationXClose) {
                     LEDSubsystem.setCoralCloseToTarget();   
                 }

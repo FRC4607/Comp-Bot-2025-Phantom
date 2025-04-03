@@ -69,7 +69,7 @@ public class Robot extends TimedRobot {
     public void autonomousInit() {
         m_robotContainer.m_windmill.updateSetpoint(m_robotContainer.m_windmill.getPosition(), false);
         m_robotContainer.m_elevator.updateSetpoint(m_robotContainer.m_elevator.getPosition(), false);
-        m_robotContainer.m_manipulator.updateSetpoint(0, ManipulatorCalibrations.kMaxAcceleration);
+        m_robotContainer.m_manipulator.updateSetpoint(0, ManipulatorCalibrations.kCoralAcceleration);
         m_autonomousCommand = m_robotContainer.getAutonomousCommand();
         if (m_autonomousCommand != null) {
             m_autonomousCommand.schedule();
@@ -88,7 +88,7 @@ public class Robot extends TimedRobot {
         Shuffleboard.selectTab("Teleoperated");
         m_robotContainer.m_windmill.updateSetpoint(m_robotContainer.m_windmill.getPosition(), false);
         m_robotContainer.m_elevator.updateSetpoint(m_robotContainer.m_elevator.getPosition(), false);
-        m_robotContainer.m_manipulator.updateSetpoint(0, ManipulatorCalibrations.kMaxAcceleration);
+        m_robotContainer.m_manipulator.updateSetpoint(0, ManipulatorCalibrations.kCoralAcceleration);
         if (m_autonomousCommand != null) {
             m_autonomousCommand.cancel();
         }

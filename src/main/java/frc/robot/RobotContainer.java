@@ -8,15 +8,12 @@ import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
-
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.PrintCommand;
-import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -209,13 +206,13 @@ public class RobotContainer {
         m_joystick.povUp().and(m_joystick.leftBumper()).onTrue(new ProcessAlgae(m_elevator, m_windmill));
         m_joystick.povUp().and(m_joystick.leftBumper()).onFalse(new RunManipulator(
             ManipulatorCalibrations.kAlgaeBargingVelocity, 
-            ManipulatorCalibrations.kMaxAcceleration, 
+            ManipulatorCalibrations.kCoralAcceleration, 
             m_manipulator).withTimeout(1));
 
         m_joystick.back().onTrue(new BargeAlgae(m_elevator, m_windmill))
             .onFalse(new RunManipulator(
                 ManipulatorCalibrations.kAlgaeBargingVelocity, 
-                ManipulatorCalibrations.kMaxAcceleration, 
+                ManipulatorCalibrations.kBargeAlgaeAcceleration, 
                 m_manipulator)
             .withTimeout(1));
 

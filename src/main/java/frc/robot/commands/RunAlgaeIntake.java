@@ -4,7 +4,6 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.math.filter.LinearFilter;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Calibrations.ManipulatorCalibrations;
 import frc.robot.subsystems.ManipulatorSubsystem;
@@ -15,10 +14,7 @@ import frc.robot.subsystems.ManipulatorSubsystem;
 public class RunAlgaeIntake extends Command {
 
     private ManipulatorSubsystem m_manipulator;
-    private LinearFilter m_filter = LinearFilter.movingAverage(10);
-    // TODO: add calibration values for the linear filter input buffer
-    private double[] m_inputBuffer = {30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0};
-    private double[] m_outputBuffer = {};
+    private boolean m_isAtVelocity = false;
     
     /**
      * RunIntake command constructor.
@@ -30,28 +26,29 @@ public class RunAlgaeIntake extends Command {
 
     @Override
     public void initialize() {
+        m_isAtVelocity = false;
         m_manipulator.updateSetpoint(
-            ManipulatorCalibrations.kAlgaeIntakeVelocity, ManipulatorCalibrations.kMaxAcceleration);
-        m_filter.reset(m_inputBuffer, m_outputBuffer);
+            ManipulatorCalibrations.kAlgaeIntakeVelocity, ManipulatorCalibrations.kCoralAcceleration);
     }
 
     @Override
     public void execute() {
+        if (Math.abs(m_manipulator.getVelocity() - ManipulatorCalibrations.kMaxSpeed) 
+            < ManipulatorCalibrations.kIntakeVelocityTolerance) {
+            m_isAtVelocity = true;
+        }
     }
 
     @Override
     public void end(boolean interrupted) {
-        m_manipulator.updateSetpoint(
-            ManipulatorCalibrations.kAlgaeHoldingVelocity, ManipulatorCalibrations.kMaxAcceleration);
+        m_manipulator.setOpenLoopDutyCycle(ManipulatorCalibrations.kAlgaeHoldDutyCycle);
     }
 
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        var deltaCurrent = m_manipulator.getStatorCurrent() - m_filter.lastValue();
-        m_filter.calculate(m_manipulator.getStatorCurrent());
-        
-        return deltaCurrent > ManipulatorCalibrations.kAlgaeIntakeThreshold;
+        return (m_isAtVelocity 
+            && (Math.abs(m_manipulator.getVelocity()) < ManipulatorCalibrations.kIntakeAlgaeZeroTolerance));
     }
 
 }
