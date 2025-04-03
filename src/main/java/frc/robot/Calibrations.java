@@ -358,7 +358,8 @@ public class Calibrations {
         public static final double kBargeAlgaeAcceleration = 4000;
         public static final double kMaxSpeed = 50;
         //TODO: Add Calibration value for max coral speed
-        public static final double kMaxStatorCurrent = 80;
+        public static final double kMaxForwardStatorCurrent = 40;
+        public static final double kMaxReverseStatorCurrent = 80;
 
         /* Duty cycle to hold the coral */
         public static final double kCoralHoldDutyCycle = 0.03;
