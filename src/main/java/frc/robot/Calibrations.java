@@ -358,7 +358,7 @@ public class Calibrations {
         public static final double kBargeAlgaeAcceleration = 4000;
         public static final double kMaxSpeed = 50;
         //TODO: Add Calibration value for max coral speed
-        public static final double kMaxForwardStatorCurrent = 120;
+        public static final double kMaxForwardStatorCurrent = 40;
         public static final double kMaxReverseStatorCurrent = 40;
 
         /* Duty cycle to hold the coral */
@@ -373,8 +373,22 @@ public class Calibrations {
         /* Used to track state of when the intake is running full tilt */
         public static final double kIntakeVelocityTolerance = 10;
 
-        /* If the velocity goes from full tilt (50rps) to 25 assume coral has been fetched */
-        public static final double kIntakeZeroTolerance = 25;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* If the velocity goes from full tilt (50rps) to 35 assume coral has been fetched */
+        public static final double kIntakeZeroTolerance = 35;
 
         /* If the velocity goes from full tilt (50rps) to 25 assume algae has been fetched */
         public static final double kIntakeAlgaeZeroTolerance = 25;

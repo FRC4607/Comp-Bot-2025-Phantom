@@ -9,7 +9,7 @@
       "prevControl": null,
       "nextControl": {
         "x": 1.7021967213114748,
-        "y": 0.9107868852459016
+        "y": 0.9107868852459013
       },
       "isLocked": false,
       "linkedName": "Red_Proc_CStation"
@@ -17,11 +17,11 @@
     {
       "anchor": {
         "x": 3.773,
-        "y": 2.776
+        "y": 2.726
       },
       "prevControl": {
         "x": 3.222459016393442,
-        "y": 1.9360102459016386
+        "y": 1.8860102459016388
       },
       "nextControl": null,
       "isLocked": false,

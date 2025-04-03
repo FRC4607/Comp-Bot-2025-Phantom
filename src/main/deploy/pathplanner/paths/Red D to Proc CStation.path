@@ -4,12 +4,12 @@
     {
       "anchor": {
         "x": 3.773,
-        "y": 2.776
+        "y": 2.726
       },
       "prevControl": null,
       "nextControl": {
         "x": 2.990961538461539,
-        "y": 2.0389487179487173
+        "y": 1.9889487179487175
       },
       "isLocked": false,
       "linkedName": "Red_Reef_D"

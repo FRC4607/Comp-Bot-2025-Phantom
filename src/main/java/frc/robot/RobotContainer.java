@@ -96,7 +96,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("CMD Pendulum Stow", new PendulumStow(m_elevator, m_windmill));
         
         NamedCommands.registerCommand("CMD Run Intake", new RunIntake(m_manipulator));
-        NamedCommands.registerCommand("CMD Intake Coral", new CoralStation(m_elevator, m_windmill)
+        NamedCommands.registerCommand("CMD Intake Coral", new CoralStation(m_elevator, m_windmill).withTimeout(3)
                                                             .alongWith(new RunIntake(m_manipulator)));
         NamedCommands.registerCommand("CMD Score Coral", 
                                         new RunManipulator(ManipulatorCalibrations.kL4OuttakeSpeed,

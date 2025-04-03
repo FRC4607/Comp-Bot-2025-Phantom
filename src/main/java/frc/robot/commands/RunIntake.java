@@ -5,9 +5,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Calibrations.ManipulatorCalibrations;
 import frc.robot.subsystems.LEDSubsystem;
 import frc.robot.subsystems.ManipulatorSubsystem;
@@ -50,7 +47,7 @@ public class RunIntake extends Command {
     @Override
     public void end(boolean interrupted) {
         LEDSubsystem.setManipulatorReady();
-        m_manipulator.setOpenLoopDutyCycle(0.1);
+        m_manipulator.setOpenLoopDutyCycle(ManipulatorCalibrations.kCoralHoldDutyCycle);
         m_manipulator.changeCoralState(true);
     }
 
