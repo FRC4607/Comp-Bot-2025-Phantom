@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.021875,
-        "y": 5.23733552631579
+        "x": 3.872,
+        "y": 5.187
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.7549398143866406,
-        "y": 6.269318412553369
+        "x": 2.605064814386641,
+        "y": 6.21898288623758
       },
       "isLocked": false,
       "linkedName": "Blue_Reef_K"

@@ -125,7 +125,7 @@ public class Calibrations {
         public static final double kDefaultTolerance = 5;
 
         /* Limit to apply to the CANdi limit switch resetting the elevator 0 point */
-        public static final double kResetPositionTolerance = 1.0;
+        public static final double kResetPositionTolerance = 4.0;
 
         public static final double kResetPositionVelocity = -0.15;
 
@@ -361,7 +361,7 @@ public class Calibrations {
         public static final double kMaxForwardStatorCurrent = 120;
         public static final double kMaxReverseStatorCurrent = 40;
 
-        public static final double kCoralIntakeAmps = 25;
+        public static final double kCoralIntakeAmps = 35;
 
         /* Duty cycle to hold the coral */
         public static final double kCoralHoldDutyCycle = 0.03;
