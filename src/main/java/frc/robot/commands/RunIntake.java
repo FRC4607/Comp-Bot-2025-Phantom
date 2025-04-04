@@ -32,7 +32,7 @@ public class RunIntake extends Command {
      
         m_manipulator.changeCoralState(false);
         m_isAtVelocity = false;
-        m_manipulator.updateSetpoint(ManipulatorCalibrations.kMaxSpeed, ManipulatorCalibrations.kCoralAcceleration);
+        m_manipulator.setOpenLoopAmps(ManipulatorCalibrations.kCoralIntakeAmps);
     }
 
     @Override
