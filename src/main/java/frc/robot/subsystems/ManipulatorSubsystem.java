@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.MotionMagicVelocityTorqueCurrentFOC;
+import com.ctre.phoenix6.controls.TorqueCurrentFOC;
 import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Calibrations.ManipulatorCalibrations;
@@ -19,6 +20,7 @@ public class ManipulatorSubsystem extends SubsystemBase {
     private final TalonFX m_motor;
     private final MotionMagicVelocityTorqueCurrentFOC m_request;
     private TalonFXConfiguration m_talonFxConfig;
+    private final TorqueCurrentFOC m_openLoopRequest;
 
     private boolean m_hasCoral = true;
 
@@ -31,6 +33,7 @@ public class ManipulatorSubsystem extends SubsystemBase {
         /* Create the hardware and configurators */
         m_motor = new TalonFX(ManipulatorConstants.kmotorCanId, "kachow");
         m_request = new MotionMagicVelocityTorqueCurrentFOC(0);
+        m_openLoopRequest = new TorqueCurrentFOC(0);
         m_talonFxConfig = new TalonFXConfiguration();
 
         /* Configure the motor */
@@ -60,6 +63,10 @@ public class ManipulatorSubsystem extends SubsystemBase {
 
     public void setOpenLoopDutyCycle(double dutyCycle) {
         m_motor.set(dutyCycle);
+    }
+
+    public void setOpenLoopAmps(double amps) {
+        m_motor.setControl(m_openLoopRequest.withOutput(amps));
     }
 
     /**

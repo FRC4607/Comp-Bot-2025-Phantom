@@ -29,18 +29,18 @@ public class Calibrations {
 
         static {
             Map<Integer, Map<Integer, Double>> tempMap = new HashMap<>();
-            tempMap.put(6, createImmutableMap(0, -29.48, 1, 2.20));
-            tempMap.put(7, createImmutableMap(0, -28.18, 1, 0.51));
-            tempMap.put(8, createImmutableMap(0, -28.72, 1, -0.8));
-            tempMap.put(9, createImmutableMap(0, -29.32, 1, -0.09));
-            tempMap.put(10, createImmutableMap(0, -27.54, 1, 1.97));
-            tempMap.put(11, createImmutableMap(0, -29.03, 1, 2.13));
-            tempMap.put(17, createImmutableMap(0, -28.17, 1, 2.07));
-            tempMap.put(18, createImmutableMap(0, -29.15, 1, 1.66));
-            tempMap.put(19, createImmutableMap(0, -29.3, 1, 3.8));
-            tempMap.put(20, createImmutableMap(0, -29.33, 1, 3.95));
-            tempMap.put(21, createImmutableMap(0, -29.27, 1, 1.99));
-            tempMap.put(22, createImmutableMap(0, -28.80, 1, 1.71));
+            tempMap.put(6, createImmutableMap(0, -28.54, 1, 2.70));
+            tempMap.put(7, createImmutableMap(0, -28.58, 1, 1.1));
+            tempMap.put(8, createImmutableMap(0, -29.89, 1, 1.44));
+            tempMap.put(9, createImmutableMap(0, -28.56, 1, 1.01));
+            tempMap.put(10, createImmutableMap(0, -29.62, 1, 0.44));
+            tempMap.put(11, createImmutableMap(0, -28.55, 1, 2.12));
+            tempMap.put(17, createImmutableMap(0, -28.75, 1, 0.7));
+            tempMap.put(18, createImmutableMap(0, -29.71, 1, 1.16));
+            tempMap.put(19, createImmutableMap(0, -28.74, 1, 1.74));
+            tempMap.put(20, createImmutableMap(0, -28.55, 1, 1.41));
+            tempMap.put(21, createImmutableMap(0, -28.88, 1, -0.1));
+            tempMap.put(22, createImmutableMap(0, -28.7, 1, 0.71));
 
             m_coralReefTargets = Collections.unmodifiableMap(tempMap);
         }
@@ -125,7 +125,7 @@ public class Calibrations {
         public static final double kDefaultTolerance = 5;
 
         /* Limit to apply to the CANdi limit switch resetting the elevator 0 point */
-        public static final double kResetPositionTolerance = 1.0;
+        public static final double kResetPositionTolerance = 4.0;
 
         public static final double kResetPositionVelocity = -0.15;
 
@@ -355,11 +355,13 @@ public class Calibrations {
         /* MotionMagic constraints for velocity controller */
         public static final double kMaxAcceleration = 4000;
         public static final double kCoralAcceleration = 1000;
-        public static final double kBargeAlgaeAcceleration = 4000;
+        public static final double kBargeAlgaeAcceleration = 8000;
         public static final double kMaxSpeed = 50;
         //TODO: Add Calibration value for max coral speed
-        public static final double kMaxForwardStatorCurrent = 40;
-        public static final double kMaxReverseStatorCurrent = 80;
+        public static final double kMaxForwardStatorCurrent = 120;
+        public static final double kMaxReverseStatorCurrent = 40;
+
+        public static final double kCoralIntakeAmps = 35;
 
         /* Duty cycle to hold the coral */
         public static final double kCoralHoldDutyCycle = 0.03;
@@ -373,8 +375,22 @@ public class Calibrations {
         /* Used to track state of when the intake is running full tilt */
         public static final double kIntakeVelocityTolerance = 10;
 
-        /* If the velocity goes from full tilt (50rps) to 25 assume coral has been fetched */
-        public static final double kIntakeZeroTolerance = 25;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* If the velocity goes from full tilt (50rps) to 35 assume coral has been fetched */
+        public static final double kIntakeZeroTolerance = 35;
 
         /* If the velocity goes from full tilt (50rps) to 25 assume algae has been fetched */
         public static final double kIntakeAlgaeZeroTolerance = 25;

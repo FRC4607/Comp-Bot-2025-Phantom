@@ -97,7 +97,7 @@ public class RobotContainer {
         
         NamedCommands.registerCommand("CMD Run Intake", new RunIntake(m_manipulator));
         NamedCommands.registerCommand("CMD Intake Coral", new CoralStation(m_elevator, m_windmill)
-                                                            .alongWith(new RunIntake(m_manipulator)));
+                                                            .alongWith(new RunIntake(m_manipulator).withTimeout(3)));
         NamedCommands.registerCommand("CMD Score Coral", 
                                         new RunManipulator(ManipulatorCalibrations.kL4OuttakeSpeed,
                                         ManipulatorCalibrations.kCoralAcceleration, m_manipulator)

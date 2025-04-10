@@ -32,22 +32,28 @@ public class RunIntake extends Command {
      
         m_manipulator.changeCoralState(false);
         m_isAtVelocity = false;
-        m_manipulator.updateSetpoint(ManipulatorCalibrations.kMaxSpeed, ManipulatorCalibrations.kCoralAcceleration);
+        m_manipulator.setOpenLoopAmps(ManipulatorCalibrations.kCoralIntakeAmps);
     }
 
     @Override
-    public void execute() {
-        if (Math.abs(m_manipulator.getVelocity() - ManipulatorCalibrations.kMaxSpeed) 
-            < ManipulatorCalibrations.kIntakeVelocityTolerance) {
-
+    public void execute() 
+    {
+        if (Math.abs(m_manipulator.getVelocity()) > 10.0) {
             m_isAtVelocity = true;
         }
     }
+    // {
+    //     if (Math.abs(m_manipulator.getVelocity() - ManipulatorCalibrations.kMaxSpeed) 
+    //         < ManipulatorCalibrations.kIntakeVelocityTolerance) {
+
+    //         m_isAtVelocity = true;
+    //     }
+    // }
 
     @Override
     public void end(boolean interrupted) {
         LEDSubsystem.setManipulatorReady();
-        m_manipulator.updateSetpoint(0, ManipulatorCalibrations.kCoralAcceleration);
+        m_manipulator.setOpenLoopDutyCycle(ManipulatorCalibrations.kCoralHoldDutyCycle);
         m_manipulator.changeCoralState(true);
     }
 
@@ -55,7 +61,8 @@ public class RunIntake extends Command {
     @Override
     public boolean isFinished() {
         return (m_isAtVelocity 
-            && (Math.abs(m_manipulator.getVelocity()) < ManipulatorCalibrations.kIntakeZeroTolerance));
+            && (Math.abs(m_manipulator.getVelocity()) < 3.0));
+        // && (Math.abs(m_manipulator.getVelocity()) < ManipulatorCalibrations.kIntakeZeroTolerance));
     } 
 
 }
