@@ -29,26 +29,27 @@ public class Calibrations {
 
         static {
             Map<Integer, Map<Integer, Double>> tempMap = new HashMap<>();
-            tempMap.put(6, createImmutableMap(0, -28.54, 1, 2.70));
-            tempMap.put(7, createImmutableMap(0, -28.58, 1, 1.1));
-            tempMap.put(8, createImmutableMap(0, -29.89, 1, 1.44));
-            tempMap.put(9, createImmutableMap(0, -28.56, 1, 1.01));
-            tempMap.put(10, createImmutableMap(0, -29.62, 1, 0.44));
-            tempMap.put(11, createImmutableMap(0, -28.55, 1, 2.12));
-            tempMap.put(17, createImmutableMap(0, -28.75, 1, 0.7));
-            tempMap.put(18, createImmutableMap(0, -29.71, 1, 1.16));
-            tempMap.put(19, createImmutableMap(0, -28.74, 1, 1.74));
-            tempMap.put(20, createImmutableMap(0, -28.55, 1, 1.41));
-            tempMap.put(21, createImmutableMap(0, -28.88, 1, -0.1));
-            tempMap.put(22, createImmutableMap(0, -28.7, 1, 0.71));
+            tempMap.put(6, createImmutableMap(0, -29.48, 1, 2.20, 2, -15.0));
+            tempMap.put(7, createImmutableMap(0, -28.18, 1, 0.51, 2, -15.0));
+            tempMap.put(8, createImmutableMap(0, -28.72, 1, -0.8, 2, -15.0));
+            tempMap.put(9, createImmutableMap(0, -29.32, 1, -0.09, 2, -15.0));
+            tempMap.put(10, createImmutableMap(0, -27.54, 1, 1.97, 2, -15.0));
+            tempMap.put(11, createImmutableMap(0, -29.03, 1, 2.13, 2, -15.0));
+            tempMap.put(17, createImmutableMap(0, -28.17, 1, 2.07, 2, -15.0));
+            tempMap.put(18, createImmutableMap(0, -29.15, 1, 1.66, 2, -15.0));
+            tempMap.put(19, createImmutableMap(0, -29.3, 1, 3.8, 2, -15.0));
+            tempMap.put(20, createImmutableMap(0, -29.33, 1, 3.95, 2, -15.0));
+            tempMap.put(21, createImmutableMap(0, -29.27, 1, 1.99, 2, -15.0));
+            tempMap.put(22, createImmutableMap(0, -28.80, 1, 1.71, 2, -15.0));
 
             m_coralReefTargets = Collections.unmodifiableMap(tempMap);
         }
         
-        private static <K, V> Map<K, V> createImmutableMap(K k1, V v1, K k2, V v2) {
+        private static <K, V> Map<K, V> createImmutableMap(K k1, V v1, K k2, V v2, K k3, V v3) {
             Map<K, V> map = new HashMap<>();
             map.put(k1, v1);
             map.put(k2, v2);
+            map.put(k3, v3);
             return Collections.unmodifiableMap(map);
         }
 
@@ -85,6 +86,10 @@ public class Calibrations {
         /* Robot-centric X-translational controller - add a little Y-translation to stay flush to the coral reef */
         public static final double kAprilTagTranslationYRate = -0.1;
 
+        /* Add a little Y-translation to get flush to the coral station during auto */
+        public static final double kRobotCentricTranslationYRate = -0.4;
+
+
         /* Amount of rumble (0-1) to apply to the driver controller */
         public static final double kControllerRumbleValue = 1;
 
@@ -116,7 +121,7 @@ public class Calibrations {
         public static final double kMaxCurrentPerMotor = 80;
 
         /* MotionMagic constraints for engame elevator */
-        public static final double kClimbSpeedMotionMagic = 18;
+        public static final double kClimbSpeedMotionMagic = 20;
 
         /* Soft limit in rotor rotations */
         public static final double kForwardSoftLimitThreshold = 61.2;
@@ -176,6 +181,9 @@ public class Calibrations {
 
         /* Barge position in inches */
         public static final double kBargePosition = 53.5;
+        
+        /* Barge position tolerance */
+        public static final double kBargePositionTolerance = 5.0;
 
         /* Servo lock position in degrees */
         public static final int kservoLockAngle = 100;
@@ -307,7 +315,7 @@ public class Calibrations {
         public static final double kBargePosition = 90;
 
         /* Barge tolerance in degrees before any elevator movement */
-        public static final double kBargeTolerance = 10;
+        public static final double kBargeTolerance = 3;
 
         /* Floor Pickup Position for Algae */
         public static final double kAlgaePickupPosition = 345;
@@ -334,7 +342,8 @@ public class Calibrations {
         public static final double kProcessorTolerance = 10;
         
         /* Position to go to after the up stroke of the climb */
-        public static final double kClimbPosition = 180;
+        public static final double kClimbPosition = 165; //180;
+        public static final double kFinishClimbPosition = 180;
 
         /* Tolerance for after the up stroke of the climb */
         public static final double kClimbTolerance = 5;
@@ -393,7 +402,7 @@ public class Calibrations {
         public static final double kIntakeZeroTolerance = 35;
 
         /* If the velocity goes from full tilt (50rps) to 25 assume algae has been fetched */
-        public static final double kIntakeAlgaeZeroTolerance = 25;
+        public static final double kIntakeAlgaeZeroTolerance = 10;
 
         /* Coral reef L4 outtake speed, in rotations per second */
         public static final double kL4OuttakeSpeed = -30;
