@@ -5,14 +5,14 @@
   "pathFolders": [],
   "autoFolders": [],
   "defaultMaxVel": 3.0,
-  "defaultMaxAccel": 3.0,
+  "defaultMaxAccel": 3.5,
   "defaultMaxAngVel": 540.0,
   "defaultMaxAngAccel": 720.0,
   "defaultNominalVoltage": 12.0,
-  "robotMass": 74.088,
+  "robotMass": 65.77,
   "robotMOI": 6.883,
   "robotTrackwidth": 0.546,
-  "driveWheelRadius": 0.0494538,
+  "driveWheelRadius": 0.049,
   "driveGearing": 6.746031746031747,
   "maxDriveSpeed": 4.73,
   "driveMotorType": "krakenX60",
@@ -28,5 +28,7 @@
   "brModuleY": -0.2413,
   "bumperOffsetX": 0.0,
   "bumperOffsetY": 0.0,
-  "robotFeatures": []
+  "robotFeatures": [
+    "{\"name\":\"Circle\",\"type\":\"circle\",\"data\":{\"center\":{\"x\":0.099,\"y\":-0.5},\"radius\":0.1,\"strokeWidth\":0.02,\"filled\":false}}"
+  ]
 }

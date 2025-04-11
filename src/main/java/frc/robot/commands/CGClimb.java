@@ -5,7 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
+import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Calibrations.ElevatorCalibrations;
@@ -35,16 +35,16 @@ public class CGClimb extends SequentialCommandGroup {
             // Make sure the servo is unlocked
             new InstantCommand(() -> elevator.setServoAngle(ElevatorCalibrations.kservoUnlockAngle)),
             // Finish the climb
-            new ParallelRaceGroup(
+            new ParallelDeadlineGroup(
+                new LockElevatorWhenDown(elevator),
                 new MoveElevatorToPosition(
                     ElevatorCalibrations.kClimbDownSetpoint, ElevatorCalibrations.kClimbDownTolerance, true, elevator),
-                new LockElevatorWhenDown(elevator)
+                new MoveWindmillToPosition(
+                    WindmillCalibrations.kFinishClimbPosition, WindmillCalibrations.kClimbTolerance, true, windmill)
             ),
-            // Hold the climb position for a few seconds
             new WaitCommand(3),
             // turn off the motors
             new InstantCommand(elevator::setElevatorZeroDutyCycle)
-
         );
     }
 }

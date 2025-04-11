@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.969,
-        "y": 5.191
+        "x": 3.829432497,
+        "y": 3.021146151
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.382075657894737,
-        "y": 5.864519736842105
+        "x": 3.329432497,
+        "y": 2.155120747215561
       },
       "isLocked": false,
-      "linkedName": "Blue_Reef_I"
+      "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.1834703947368421,
-        "y": 7.527302631578947
+        "x": 1.63969564,
+        "y": 0.6285390218
       },
       "prevControl": {
-        "x": 2.8865131578947363,
-        "y": 6.824917763157895
+        "x": 2.227297317031021,
+        "y": 1.4376893595928797
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Blue_Open_CStation"
+      "linkedName": "Red_Proc_Coral_Stat"
     }
   ],
   "rotationTargets": [],
@@ -33,10 +33,10 @@
     {
       "name": "Constraints Zone",
       "minWaypointRelativePos": 0,
-      "maxWaypointRelativePos": 0.2513368983957226,
+      "maxWaypointRelativePos": 0.3983957219251343,
       "constraints": {
-        "maxVelocity": 4.0,
-        "maxAcceleration": 2.0,
+        "maxVelocity": 3.0,
+        "maxAcceleration": 2.5,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 12.0,
@@ -47,22 +47,22 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 4.0,
-    "maxAcceleration": 3.0,
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 0,
-    "rotation": 35.96051719664484
+    "velocity": 0.5,
+    "rotation": 144.013
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -28.48218574704045
+    "rotation": 150.0
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }

@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.144,
-        "y": 3.109
+        "x": 4.102694086,
+        "y": 2.834049106
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.508309210526316,
-        "y": 1.6176348684210524
+        "x": 3.602694086,
+        "y": 1.9680237022155618
       },
       "isLocked": false,
-      "linkedName": "Blue_Reef_F"
+      "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.2587090163934425,
-        "y": 0.49462090163934364
+        "x": 1.63969564,
+        "y": 0.6285390218
       },
       "prevControl": {
-        "x": 2.5672616479723906,
-        "y": 0.9853281384814492
+        "x": 2.227297317031021,
+        "y": 1.43768935959288
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Blue_Proc_CStation"
+      "linkedName": "Red_Proc_Coral_Stat"
     }
   ],
   "rotationTargets": [],
@@ -33,10 +33,10 @@
     {
       "name": "Constraints Zone",
       "minWaypointRelativePos": 0,
-      "maxWaypointRelativePos": 0.2482369534555709,
+      "maxWaypointRelativePos": 0.3997326203208562,
       "constraints": {
         "maxVelocity": 3.0,
-        "maxAcceleration": 2.0,
+        "maxAcceleration": 2.5,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 12.0,
@@ -48,21 +48,21 @@
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 3.0,
-    "maxAcceleration": 3.0,
+    "maxAcceleration": 3.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 0,
-    "rotation": 143.13
+    "velocity": 0.5,
+    "rotation": 144.0129435
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -151.355
+    "rotation": 150.0
   },
   "useDefaultConstraints": true
 }

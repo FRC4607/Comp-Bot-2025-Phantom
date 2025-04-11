@@ -40,6 +40,7 @@ import frc.robot.commands.PrepClimb;
 import frc.robot.commands.ProcessAlgae;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.RunManipulator;
+import frc.robot.commands.TranslatationYRobotCentric;
 import frc.robot.commands.TranslationAlignToTag;
 import frc.robot.commands.ZeroElevator;
 import frc.robot.generated.TunerConstants;
@@ -97,7 +98,7 @@ public class RobotContainer {
         
         NamedCommands.registerCommand("CMD Run Intake", new RunIntake(m_manipulator));
         NamedCommands.registerCommand("CMD Intake Coral", new CoralStation(m_elevator, m_windmill)
-                                                            .alongWith(new RunIntake(m_manipulator)));
+                                                            .alongWith(new RunIntake(m_manipulator).withTimeout(3)));
         NamedCommands.registerCommand("CMD Score Coral", 
                                         new RunManipulator(ManipulatorCalibrations.kL4OuttakeSpeed,
                                         ManipulatorCalibrations.kCoralAcceleration, m_manipulator)
@@ -105,6 +106,16 @@ public class RobotContainer {
 
         NamedCommands.registerCommand("CMD Align Left", new TranslationAlignToTag(0, m_drivetrain));
         NamedCommands.registerCommand("CMD Align Right", new TranslationAlignToTag(1, m_drivetrain));
+        NamedCommands.registerCommand("CMD Align Center", new TranslationAlignToTag(2, m_drivetrain));
+        NamedCommands.registerCommand("CMD Translate Y", new TranslatationYRobotCentric(m_drivetrain));
+
+        NamedCommands.registerCommand("CMD Algae L2 Intake", new AlgaeL2Pickup(m_elevator, m_windmill, m_manipulator));
+        NamedCommands.registerCommand("CMD Algae L3 Intake", 
+            new AlgaeL3Pickup(m_elevator, m_windmill, m_manipulator).withTimeout(2.5));
+        NamedCommands.registerCommand("CMD Barge Algae", new BargeAlgae(m_elevator, m_windmill));
+        NamedCommands.registerCommand("CMD Score Algae", new RunManipulator(ManipulatorCalibrations.kAlgaeBargingVelocity,
+                                                                        ManipulatorCalibrations.kBargeAlgaeAcceleration, 
+                                                                        m_manipulator).withTimeout(1.0));
         
         m_autoChooser = AutoBuilder.buildAutoChooser("Do Nothing");
         

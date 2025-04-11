@@ -33,8 +33,7 @@ public class RunAlgaeIntake extends Command {
 
     @Override
     public void execute() {
-        if (Math.abs(m_manipulator.getVelocity() - ManipulatorCalibrations.kMaxSpeed) 
-            < ManipulatorCalibrations.kIntakeVelocityTolerance) {
+        if (Math.abs(m_manipulator.getVelocity()) > 15.0) {
             m_isAtVelocity = true;
         }
     }
