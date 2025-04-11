@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.760950226,
-        "y": 3.207331378
+        "x": 7.65,
+        "y": 5.5
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.5829453233340556,
-        "y": 3.887452825660882
+        "x": 7.15,
+        "y": 5.5
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Red_Barge_1"
     },
     {
       "anchor": {
-        "x": 6.802549342105262,
-        "y": 2.2834703947368418
+        "x": 5.349386709,
+        "y": 5.71982407
       },
       "prevControl": {
-        "x": 5.802549342105262,
-        "y": 2.2834703947368418
+        "x": 5.849386708999999,
+        "y": 6.585849473784439
       },
       "nextControl": null,
       "isLocked": false,
@@ -34,7 +34,7 @@
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 3.0,
-    "maxAcceleration": 3.5,
+    "maxAcceleration": 2.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": -29.999999999999996
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 150.0
+    "rotation": -90.0
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }

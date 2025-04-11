@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.791332497,
-        "y": 2.955155016
+        "x": 3.829432497,
+        "y": 3.021146151
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.291332497,
-        "y": 2.089129612215561
+        "x": 3.329432497,
+        "y": 2.155120747215561
       },
       "isLocked": false,
-      "linkedName": "Red_Reef_C"
+      "linkedName": null
     },
     {
       "anchor": {
@@ -33,7 +33,7 @@
     {
       "name": "Constraints Zone",
       "minWaypointRelativePos": 0,
-      "maxWaypointRelativePos": 0.24732620320855558,
+      "maxWaypointRelativePos": 0.3983957219251343,
       "constraints": {
         "maxVelocity": 3.0,
         "maxAcceleration": 2.5,
@@ -55,7 +55,7 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 0,
+    "velocity": 0.5,
     "rotation": 144.013
   },
   "reversed": false,

@@ -17,13 +17,13 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "CMD Align Left"
+                  "name": "CMD GoTo L4"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "CMD GoTo L4"
+                  "name": "CMD Align Left"
                 }
               }
             ]
@@ -106,19 +106,25 @@
           }
         },
         {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.1
+          }
+        },
+        {
           "type": "deadline",
           "data": {
             "commands": [
               {
                 "type": "named",
                 "data": {
-                  "name": "CMD Align Left"
+                  "name": "CMD GoTo L4"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "CMD GoTo L4"
+                  "name": "CMD Align Left"
                 }
               }
             ]
@@ -201,19 +207,25 @@
           }
         },
         {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.1
+          }
+        },
+        {
           "type": "deadline",
           "data": {
             "commands": [
               {
                 "type": "named",
                 "data": {
-                  "name": "CMD Align Left"
+                  "name": "CMD GoTo L4"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "CMD GoTo L4"
+                  "name": "CMD Align Right"
                 }
               }
             ]

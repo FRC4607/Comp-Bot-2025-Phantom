@@ -8,7 +8,7 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.2273396832381445,
+        "x": 2.227339683238145,
         "y": 1.4376585917318647
       },
       "isLocked": false,
@@ -16,16 +16,16 @@
     },
     {
       "anchor": {
-        "x": 3.791332497,
-        "y": 2.955155016
+        "x": 3.829432497,
+        "y": 3.021146151
       },
       "prevControl": {
-        "x": 3.291332497,
-        "y": 2.089129612215561
+        "x": 3.329432497,
+        "y": 2.155120747215561
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Red_Reef_C"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
@@ -41,7 +41,7 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 0,
+    "velocity": 0.5,
     "rotation": 150.0
   },
   "reversed": false,
