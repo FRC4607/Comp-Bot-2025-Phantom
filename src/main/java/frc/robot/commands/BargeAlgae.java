@@ -7,7 +7,6 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Calibrations.ElevatorCalibrations;
 import frc.robot.Calibrations.WindmillCalibrations;
-import frc.robot.Utils;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.WindmillSubsystem;
 
@@ -45,13 +44,12 @@ public class BargeAlgae extends Command {
   
     @Override
     public void end(boolean interrupted) {
-
     }
 
     @Override
     public boolean isFinished() {
-        return Utils.isDoubleEqual(m_windmill.getSetpoint(), WindmillCalibrations.kBargePosition, 0.01)
-               && Utils.isDoubleEqual(m_elevator.getSetpoint(), ElevatorCalibrations.kBargePosition, 0.01);
+        return m_elevator.isWithinTolerance(ElevatorCalibrations.kBargePositionTolerance)
+            && m_windmill.isWithinTolerance(WindmillCalibrations.kBargeTolerance);
     }
 
 }
