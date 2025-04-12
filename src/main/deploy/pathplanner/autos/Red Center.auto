@@ -42,9 +42,35 @@
           }
         },
         {
-          "type": "path",
+          "type": "deadline",
           "data": {
-            "pathName": "Red G to GH Algae"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Red G to GH Algae"
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.1
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "CMD Algae L2 Prep"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
           }
         },
         {
@@ -54,7 +80,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "CMD Algae L2 Intake"
+                  "name": "CMD Algae Intake"
                 }
               },
               {
@@ -215,6 +241,12 @@
           "type": "named",
           "data": {
             "name": "CMD Lollipop Stow"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Red Barge 2 off line"
           }
         }
       ]

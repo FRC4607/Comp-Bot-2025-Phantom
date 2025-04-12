@@ -313,6 +313,7 @@ public class Calibrations {
 
         /* Barge position in degrees */
         public static final double kBargePosition = 90;
+        public static final double kBargeFlickPosition = 80;
 
         /* Barge tolerance in degrees before any elevator movement */
         public static final double kBargeTolerance = 3;

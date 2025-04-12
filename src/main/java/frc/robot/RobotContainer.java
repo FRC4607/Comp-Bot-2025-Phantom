@@ -20,8 +20,10 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Calibrations.DriverCalibrations;
 import frc.robot.Calibrations.ElevatorCalibrations;
 import frc.robot.Calibrations.ManipulatorCalibrations;
+import frc.robot.Calibrations.WindmillCalibrations;
 import frc.robot.commands.AlgaeFloorPickup;
 import frc.robot.commands.AlgaeL2Pickup;
+import frc.robot.commands.AlgaeL2PickupPrep;
 import frc.robot.commands.AlgaeL3Pickup;
 import frc.robot.commands.AlgaeStandingPickup;
 import frc.robot.commands.BargeAlgae;
@@ -35,9 +37,11 @@ import frc.robot.commands.L3Stow;
 import frc.robot.commands.L4;
 import frc.robot.commands.LollipopStow;
 import frc.robot.commands.LollipopStowForAuto;
+import frc.robot.commands.MoveWindmillToPosition;
 import frc.robot.commands.PendulumStow;
 import frc.robot.commands.PrepClimb;
 import frc.robot.commands.ProcessAlgae;
+import frc.robot.commands.RunAlgaeIntake;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.RunManipulator;
 import frc.robot.commands.TranslatationYRobotCentric;
@@ -109,13 +113,22 @@ public class RobotContainer {
         NamedCommands.registerCommand("CMD Align Center", new TranslationAlignToTag(2, m_drivetrain));
         NamedCommands.registerCommand("CMD Translate Y", new TranslatationYRobotCentric(m_drivetrain));
 
+        // Go to position and run the Intake
         NamedCommands.registerCommand("CMD Algae L2 Intake", new AlgaeL2Pickup(m_elevator, m_windmill, m_manipulator));
+        // Just go to position
+        NamedCommands.registerCommand("CMD Algae L2 Prep", new AlgaeL2PickupPrep(m_elevator, m_windmill));
+        // Just run the intake
+        NamedCommands.registerCommand("CMD Algae Intake", new RunAlgaeIntake(m_manipulator));
         NamedCommands.registerCommand("CMD Algae L3 Intake", 
             new AlgaeL3Pickup(m_elevator, m_windmill, m_manipulator).withTimeout(2.5));
         NamedCommands.registerCommand("CMD Barge Algae", new BargeAlgae(m_elevator, m_windmill));
         NamedCommands.registerCommand("CMD Score Algae", new RunManipulator(ManipulatorCalibrations.kAlgaeBargingVelocity,
                                                                         ManipulatorCalibrations.kBargeAlgaeAcceleration, 
-                                                                        m_manipulator).withTimeout(1.0));
+                                                                        m_manipulator).withTimeout(.3).deadlineFor(
+                                                                            new MoveWindmillToPosition(
+                                                                                WindmillCalibrations.kBargeFlickPosition, 
+                                                                                WindmillCalibrations.kBargeTolerance,
+                                                                                false, m_windmill)));
         
         m_autoChooser = AutoBuilder.buildAutoChooser("Do Nothing");
         
@@ -221,11 +234,13 @@ public class RobotContainer {
             m_manipulator).withTimeout(1));
 
         m_joystick.back().onTrue(new BargeAlgae(m_elevator, m_windmill))
-            .onFalse(new RunManipulator(
-                ManipulatorCalibrations.kAlgaeBargingVelocity, 
-                ManipulatorCalibrations.kBargeAlgaeAcceleration, 
-                m_manipulator)
-            .withTimeout(1));
+            .onFalse(new RunManipulator(ManipulatorCalibrations.kAlgaeBargingVelocity,
+                                        ManipulatorCalibrations.kBargeAlgaeAcceleration, 
+                                        m_manipulator).withTimeout(1).deadlineFor(
+                                                            new MoveWindmillToPosition(
+                                                                WindmillCalibrations.kBargeFlickPosition, 
+                                                                WindmillCalibrations.kBargeTolerance,
+                                                                false, m_windmill)));
 
         // *********************      Configure the co-pilot controller     ***********************************************
         // Zero Elevator
