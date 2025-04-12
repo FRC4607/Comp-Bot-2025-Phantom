@@ -100,7 +100,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("CMD GoTo L4", new L4(m_elevator, m_windmill));
 
         NamedCommands.registerCommand("CMD Lollipop Stow", new LollipopStowForAuto(m_elevator, m_windmill));
-        NamedCommands.registerCommand("CMD Pendulum Stow", new PendulumStow(m_elevator, m_windmill));
+        NamedCommands.registerCommand("CMD Pendulum Stow", new PendulumStow(m_elevator, m_windmill).withTimeout(0.5));
         
         NamedCommands.registerCommand("CMD Run Intake", new RunIntake(m_manipulator));
         NamedCommands.registerCommand("CMD Intake Coral", new CoralStation(m_elevator, m_windmill)
