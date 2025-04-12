@@ -242,16 +242,9 @@ public class RobotContainer {
             ManipulatorCalibrations.kCoralAcceleration, 
             m_manipulator).withTimeout(1));
 
-        m_joystick.back().onTrue(new BargeAlgae(m_elevator, m_windmill))
-            .onFalse(new RunManipulator(ManipulatorCalibrations.kAlgaeBargingVelocity,
-                                        ManipulatorCalibrations.kBargeAlgaeAcceleration, 
-                                        m_manipulator).withTimeout(1).deadlineFor(
-                                                            new MoveWindmillToPosition(
-                                                                WindmillCalibrations.kBargeFlickPosition, 
-                                                                WindmillCalibrations.kBargeTolerance,
-                                                                false, m_windmill)));
 
         // *********************      Configure the co-pilot controller     ***********************************************
+
         // Zero Elevator
         Trigger coPilotRed1 = new Trigger(() -> m_coPilot.getRawButton(1));
         Trigger coPilotToggle1 = new Trigger(() -> m_coPilot.getRawButton(14));
@@ -263,6 +256,25 @@ public class RobotContainer {
         Trigger coPilotOrange2 = new Trigger(() -> m_coPilot.getRawButton(4));
         coPilotOrange2.whileTrue(new RunManipulator(-ManipulatorCalibrations.kL1Velocity, 
                                                                ManipulatorCalibrations.kCoralAcceleration, m_manipulator));
+
+        Trigger coPilotLowPower =  new Trigger(() -> m_coPilot.getRawButton(16));
+                
+        
+        // **********************      Driver + Copilot bindings      *******************************************************
+
+        m_joystick.back().and(coPilotLowPower).onTrue(new BargeAlgae(m_elevator, m_windmill))
+            .onFalse(new RunManipulator(ManipulatorCalibrations.kAlgaeBargingLowVelocity,
+                                        ManipulatorCalibrations.kBargeAlgaeAcceleration, 
+                                        m_manipulator).withTimeout(1));
+
+        m_joystick.back().and(coPilotLowPower.negate()).onTrue(new BargeAlgae(m_elevator, m_windmill))
+            .onFalse(new RunManipulator(ManipulatorCalibrations.kAlgaeBargingVelocity,
+                                    ManipulatorCalibrations.kBargeAlgaeAcceleration, 
+                                    m_manipulator).withTimeout(1).deadlineFor(
+                                                        new MoveWindmillToPosition(
+                                                            WindmillCalibrations.kBargeFlickPosition, 
+                                                            WindmillCalibrations.kBargeTolerance,
+                                                            false, m_windmill)));
     }
 
 
