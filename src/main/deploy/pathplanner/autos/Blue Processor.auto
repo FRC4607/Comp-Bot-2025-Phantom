@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Red Open Start to J"
+            "pathName": "Blue Proc Start to E"
           }
         },
         {
@@ -23,7 +23,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "CMD Align Right"
+                  "name": "CMD Align Left"
                 }
               }
             ]
@@ -42,7 +42,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Red J to Open CS"
+                  "pathName": "Blue E to Proc CS"
                 }
               },
               {
@@ -80,7 +80,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Red Open CS to K"
+                  "pathName": "Blue Proc CS to C"
                 }
               },
               {
@@ -137,19 +137,13 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "CMD Reset K Pose"
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Red K to Open CS"
+                  "pathName": "Blue C to Proc CS"
                 }
               },
               {
@@ -187,7 +181,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Red Open CS to L"
+                  "pathName": "Blue Proc CS to D"
                 }
               },
               {
@@ -244,19 +238,13 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "CMD Reset L Pose"
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Red L to Open CS"
+                  "pathName": "Blue D to Proc CS"
                 }
               },
               {
@@ -291,6 +279,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "RED AUTOS",
+  "folder": "BLUE AUTOS",
   "choreoAuto": false
 }

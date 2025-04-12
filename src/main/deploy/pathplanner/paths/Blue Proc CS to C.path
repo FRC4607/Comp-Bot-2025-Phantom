@@ -12,16 +12,16 @@
         "y": 1.4376585917318652
       },
       "isLocked": false,
-      "linkedName": "Red_Proc_Coral_Stat"
+      "linkedName": "Blue_Proc_Coral_Stat"
     },
     {
       "anchor": {
-        "x": 3.829,
-        "y": 3.021
+        "x": 3.829432497,
+        "y": 3.021146151
       },
       "prevControl": {
-        "x": 3.329,
-        "y": 2.154974596215561
+        "x": 3.329432497,
+        "y": 2.155120747215561
       },
       "nextControl": null,
       "isLocked": false,
@@ -45,10 +45,10 @@
     "rotation": 150.0
   },
   "reversed": false,
-  "folder": "RED PATHS",
+  "folder": "BLUE PATHS",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 144.013
+    "rotation": 144.0129435
   },
   "useDefaultConstraints": true
 }

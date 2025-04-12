@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.63969564,
-        "y": 0.6285390218
+        "x": 7.65,
+        "y": 6.25
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.2273396832381445,
-        "y": 1.4376585917318652
+        "x": 6.869901315789473,
+        "y": 6.266858552631579
       },
       "isLocked": false,
-      "linkedName": "Red_Proc_Coral_Stat"
+      "linkedName": "Blue_Barge_2"
     },
     {
       "anchor": {
-        "x": 3.829,
-        "y": 3.021
+        "x": 5.522861842105263,
+        "y": 6.25
       },
       "prevControl": {
-        "x": 3.329,
-        "y": 2.154974596215561
+        "x": 6.225745692911192,
+        "y": 6.25
       },
       "nextControl": null,
       "isLocked": false,
@@ -34,21 +34,21 @@
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 3.0,
-    "maxAcceleration": 3.5,
+    "maxAcceleration": 1.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 0.5,
-    "rotation": 150.0
+    "velocity": 0,
+    "rotation": -90.0
   },
   "reversed": false,
-  "folder": "RED PATHS",
+  "folder": "BLUE PATHS",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 144.013
+    "rotation": -90.0
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }

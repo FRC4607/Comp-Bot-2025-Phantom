@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.63969564,
-        "y": 0.6285390218
+        "x": 5.77130037,
+        "y": 3.96621
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.2273396832381445,
-        "y": 1.4376585917318652
+        "x": 6.02130037,
+        "y": 3.96621
       },
       "isLocked": false,
-      "linkedName": "Red_Proc_Coral_Stat"
+      "linkedName": "Blue_Reef_G"
     },
     {
       "anchor": {
-        "x": 3.829,
-        "y": 3.021
+        "x": 6.02530037,
+        "y": 4.13131
       },
       "prevControl": {
-        "x": 3.329,
-        "y": 2.154974596215561
+        "x": 5.790377214803523,
+        "y": 4.216815035831417
       },
       "nextControl": null,
       "isLocked": false,
@@ -41,14 +41,14 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 0.5,
-    "rotation": 150.0
+    "velocity": 0,
+    "rotation": -90.0
   },
   "reversed": false,
-  "folder": "RED PATHS",
+  "folder": "BLUE PATHS",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 144.013
+    "rotation": -90.0
   },
   "useDefaultConstraints": true
 }

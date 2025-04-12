@@ -7,108 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Red Open Start to J"
-          }
-        },
-        {
-          "type": "deadline",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "CMD GoTo L4"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "CMD Align Right"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "CMD Score Coral"
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "Red J to Open CS"
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "CMD Pendulum Stow"
-                      }
-                    },
-                    {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 0.6
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "CMD Intake Coral"
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "Red Open CS to K"
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 0.25
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "CMD Lollipop Stow"
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.1
+            "pathName": "Blue Center Start to G"
           }
         },
         {
@@ -139,17 +38,17 @@
         {
           "type": "named",
           "data": {
-            "name": "CMD Reset K Pose"
+            "name": "CMD Pendulum Stow"
           }
         },
         {
-          "type": "parallel",
+          "type": "deadline",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Red K to Open CS"
+                  "pathName": "Blue G to GH Algae"
                 }
               },
               {
@@ -157,21 +56,47 @@
                 "data": {
                   "commands": [
                     {
-                      "type": "named",
+                      "type": "wait",
                       "data": {
-                        "name": "CMD Pendulum Stow"
+                        "waitTime": 0.1
                       }
                     },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "CMD Algae L2 Prep"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "deadline",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "CMD Algae Intake"
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.6
+                        "waitTime": 0.0
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "CMD Intake Coral"
+                        "name": "CMD Translate Y"
                       }
                     }
                   ]
@@ -187,7 +112,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Red Open CS to L"
+                  "pathName": "Blue GH Algae to Blue Barge 1"
                 }
               },
               {
@@ -197,7 +122,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.25
+                        "waitTime": 0.75
                       }
                     },
                     {
@@ -213,40 +138,21 @@
           }
         },
         {
-          "type": "wait",
+          "type": "named",
           "data": {
-            "waitTime": 0.1
-          }
-        },
-        {
-          "type": "deadline",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "CMD GoTo L4"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "CMD Align Right"
-                }
-              }
-            ]
+            "name": "CMD Barge Algae"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "CMD Score Coral"
+            "name": "CMD Score Algae"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "CMD Reset L Pose"
+            "name": "CMD Lollipop Stow"
           }
         },
         {
@@ -256,7 +162,26 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Red L to Open CS"
+                  "pathName": "Blue Barge 1 to IJ Algae"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "CMD Algae Stow and L3 Prep"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "deadline",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "CMD Algae Intake"
                 }
               },
               {
@@ -264,24 +189,68 @@
                 "data": {
                   "commands": [
                     {
-                      "type": "named",
-                      "data": {
-                        "name": "CMD Pendulum Stow"
-                      }
-                    },
-                    {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.6
+                        "waitTime": 0.0
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "CMD Intake Coral"
+                        "name": "CMD Translate Y"
                       }
                     }
                   ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Blue IJ Algae to Blue Barge 2"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "CMD Lollipop Stow"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "CMD Barge Algae"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "CMD Score Algae"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Blue Barge 2 off line"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "CMD Lollipop Stow"
                 }
               }
             ]
@@ -291,6 +260,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "RED AUTOS",
+  "folder": "BLUE AUTOS",
   "choreoAuto": false
 }
