@@ -25,6 +25,7 @@ import frc.robot.commands.AlgaeFloorPickup;
 import frc.robot.commands.AlgaeL2Pickup;
 import frc.robot.commands.AlgaeL2PickupPrep;
 import frc.robot.commands.AlgaeL3Pickup;
+import frc.robot.commands.AlgaeL3PickupPrep;
 import frc.robot.commands.AlgaeStandingPickup;
 import frc.robot.commands.BargeAlgae;
 import frc.robot.commands.CGClimb;
@@ -121,6 +122,8 @@ public class RobotContainer {
         NamedCommands.registerCommand("CMD Algae Intake", new RunAlgaeIntake(m_manipulator));
         NamedCommands.registerCommand("CMD Algae L3 Intake", 
             new AlgaeL3Pickup(m_elevator, m_windmill, m_manipulator).withTimeout(2.5));
+        // Just go to position
+        NamedCommands.registerCommand("CMD Algae L3 Under", new AlgaeL3PickupPrep(m_elevator, m_windmill));
         NamedCommands.registerCommand("CMD Barge Algae", new BargeAlgae(m_elevator, m_windmill));
         NamedCommands.registerCommand("CMD Score Algae", new RunManipulator(ManipulatorCalibrations.kAlgaeBargingVelocity,
                                                                         ManipulatorCalibrations.kBargeAlgaeAcceleration, 
