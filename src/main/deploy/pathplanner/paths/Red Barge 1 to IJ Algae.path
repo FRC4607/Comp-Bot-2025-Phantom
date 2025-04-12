@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.65,
-        "y": 5.5
+        "x": 7.6,
+        "y": 5.0
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.15,
-        "y": 5.5
+        "x": 7.1,
+        "y": 5.0
       },
       "isLocked": false,
       "linkedName": "Red_Barge_1"
     },
     {
       "anchor": {
-        "x": 5.472,
-        "y": 5.678
+        "x": 5.383,
+        "y": 5.524
       },
       "prevControl": {
-        "x": 5.972,
-        "y": 6.544025403784438
+        "x": 6.53732705479452,
+        "y": 5.952057363013699
       },
       "nextControl": null,
       "isLocked": false,

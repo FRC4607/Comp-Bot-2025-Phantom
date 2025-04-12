@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -122,7 +123,12 @@ public class RobotContainer {
         NamedCommands.registerCommand("CMD Algae Intake", new RunAlgaeIntake(m_manipulator));
         NamedCommands.registerCommand("CMD Algae L3 Intake", 
             new AlgaeL3Pickup(m_elevator, m_windmill, m_manipulator).withTimeout(2.5));
-        // Just go to position
+        // timed sequents for algae L3 pickup from barge 1
+        NamedCommands.registerCommand("CMD Algae Stow and L3 Prep", new SequentialCommandGroup(
+            new PendulumStow(m_elevator, m_windmill),
+            new WaitCommand(1),
+            new AlgaeL3PickupPrep(m_elevator, m_windmill)
+        ));
         NamedCommands.registerCommand("CMD Algae L3 Under", new AlgaeL3PickupPrep(m_elevator, m_windmill));
         NamedCommands.registerCommand("CMD Barge Algae", new BargeAlgae(m_elevator, m_windmill));
         NamedCommands.registerCommand("CMD Score Algae", new RunManipulator(ManipulatorCalibrations.kAlgaeBargingVelocity,

@@ -168,7 +168,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "CMD Pendulum Stow"
+                  "name": "CMD Algae Stow and L3 Prep"
                 }
               }
             ]
@@ -181,7 +181,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "CMD Algae L3 Intake"
+                  "name": "CMD Algae Intake"
                 }
               },
               {
@@ -191,7 +191,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.1
+                        "waitTime": 0.0
                       }
                     },
                     {

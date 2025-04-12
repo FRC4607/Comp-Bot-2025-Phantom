@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.LEDSubsystem;
 import frc.robot.subsystems.ManipulatorSubsystem;
 
 /**
@@ -37,6 +38,7 @@ public class RunManipulator extends Command {
 
     @Override
     public void end(boolean interrupted) {
+        LEDSubsystem.setNeutral();
         m_manipulator.updateSetpoint(0, m_acceleration);
     }
 
