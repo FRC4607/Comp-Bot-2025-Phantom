@@ -4,28 +4,28 @@
     {
       "anchor": {
         "x": 1.63969564,
-        "y": 0.6285390218
+        "y": 7.435960978
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.2273396832381445,
-        "y": 1.4376585917318652
+        "x": 2.227297317031021,
+        "y": 6.62681064020712
       },
       "isLocked": false,
-      "linkedName": "Red_Proc_Coral_Stat"
+      "linkedName": "Red_Open_Coral_Stat"
     },
     {
       "anchor": {
-        "x": 3.829432497,
-        "y": 3.021146151
+        "x": 3.905717133,
+        "y": 5.175384984
       },
       "prevControl": {
-        "x": 3.329432497,
-        "y": 2.155120747215561
+        "x": 3.405717133,
+        "y": 6.041410387784438
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Red_Reef_K"
     }
   ],
   "rotationTargets": [],
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0.5,
-    "rotation": 150.0
+    "rotation": 29.999999999999996
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 144.013
+    "rotation": 35.987
   },
   "useDefaultConstraints": true
 }
