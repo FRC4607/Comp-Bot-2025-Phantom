@@ -108,7 +108,8 @@ public class Calibrations {
         public static final double kS = 4.2;
         public static final double kA = 0;
         public static final double kV = 0;
-        public static final double kP = 10;
+        public static final double kDownP = 10;
+        public static final double kUpP = 12;
         public static final double kD = 1;
 
         /* Gains for the MotionMagic profiler for endgame elevator */
@@ -428,6 +429,7 @@ public class Calibrations {
 
         /* Algae barge outtake speed, in rotations per second */
         public static final double kAlgaeBargingVelocity = 600;
+        public static final double kAlgaeBargingLowVelocity = 40;
         
         /* Velocity to intake Algae in the floor position at */
         public static final double kAlgaeIntakeVelocity = -75;

@@ -68,19 +68,29 @@ public class ElevatorSubsystem extends SubsystemBase {
         m_talonFxConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
         m_talonFxConfig.Slot0.GravityType = GravityTypeValue.Elevator_Static;
  
+        // Slot gains for going down
         m_talonFxConfig.Slot0.kG = ElevatorCalibrations.kG;
         m_talonFxConfig.Slot0.kS = ElevatorCalibrations.kS;
         m_talonFxConfig.Slot0.kV = ElevatorCalibrations.kV;
         m_talonFxConfig.Slot0.kA = ElevatorCalibrations.kA;
-        m_talonFxConfig.Slot0.kP = ElevatorCalibrations.kP;
+        m_talonFxConfig.Slot0.kP = ElevatorCalibrations.kDownP;
         m_talonFxConfig.Slot0.kD = ElevatorCalibrations.kD;
  
+        // Slot gains for climbing
         m_talonFxConfig.Slot1.kG = ElevatorCalibrations.kClimbG;
         m_talonFxConfig.Slot1.kS = ElevatorCalibrations.kS;
         m_talonFxConfig.Slot1.kV = ElevatorCalibrations.kV;
         m_talonFxConfig.Slot1.kA = ElevatorCalibrations.kA;
         m_talonFxConfig.Slot1.kP = ElevatorCalibrations.kClimbP;
         m_talonFxConfig.Slot1.kD = ElevatorCalibrations.kD;
+
+        // Slot gains for going up
+        m_talonFxConfig.Slot2.kG = ElevatorCalibrations.kG;
+        m_talonFxConfig.Slot2.kS = ElevatorCalibrations.kS;
+        m_talonFxConfig.Slot2.kV = ElevatorCalibrations.kV;
+        m_talonFxConfig.Slot2.kA = ElevatorCalibrations.kA;
+        m_talonFxConfig.Slot2.kP = ElevatorCalibrations.kUpP;
+        m_talonFxConfig.Slot2.kD = ElevatorCalibrations.kD;
  
         m_talonFxConfig.MotionMagic.MotionMagicCruiseVelocity = ElevatorCalibrations.kMaxSpeedMotionMagic;
         m_talonFxConfig.MotionMagic.MotionMagicAcceleration = ElevatorCalibrations.kMaxAccelerationMotionMagic;
@@ -131,9 +141,15 @@ public class ElevatorSubsystem extends SubsystemBase {
                                          .withVelocity(ElevatorCalibrations.kClimbSpeedMotionMagic)
                                          .withSlot(1));
         } else {
-            m_motor1.setControl(m_request.withPosition(newSetpoint * ElevatorConstants.kPulleyGearRatio)
-                                         .withVelocity(ElevatorCalibrations.kMaxSpeedMotionMagic)
-                                         .withSlot(0));
+            if (getPosition() >= newSetpoint) {
+                m_motor1.setControl(m_request.withPosition(newSetpoint * ElevatorConstants.kPulleyGearRatio)
+                                    .withVelocity(ElevatorCalibrations.kMaxSpeedMotionMagic)
+                                    .withSlot(0));
+            } else {
+                m_motor1.setControl(m_request.withPosition(newSetpoint * ElevatorConstants.kPulleyGearRatio)
+                                    .withVelocity(ElevatorCalibrations.kMaxSpeedMotionMagic)
+                                    .withSlot(2));
+            }
         }
     
     }
