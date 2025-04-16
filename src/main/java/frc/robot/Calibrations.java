@@ -29,18 +29,18 @@ public class Calibrations {
 
         static {
             Map<Integer, Map<Integer, Double>> tempMap = new HashMap<>();
-            tempMap.put(6, createImmutableMap(0, -29.48, 1, 2.20, 2, -15.0));
-            tempMap.put(7, createImmutableMap(0, -28.18, 1, 0.51, 2, -15.0));
-            tempMap.put(8, createImmutableMap(0, -28.72, 1, -0.8, 2, -15.0));
-            tempMap.put(9, createImmutableMap(0, -29.32, 1, -0.09, 2, -15.0));
-            tempMap.put(10, createImmutableMap(0, -27.54, 1, 1.97, 2, -15.0));
-            tempMap.put(11, createImmutableMap(0, -29.03, 1, 2.13, 2, -15.0));
-            tempMap.put(17, createImmutableMap(0, -28.17, 1, 2.07, 2, -15.0));
-            tempMap.put(18, createImmutableMap(0, -29.15, 1, 1.66, 2, -15.0));
-            tempMap.put(19, createImmutableMap(0, -29.3, 1, 3.8, 2, -15.0));
-            tempMap.put(20, createImmutableMap(0, -29.33, 1, 3.95, 2, -15.0));
-            tempMap.put(21, createImmutableMap(0, -29.27, 1, 1.99, 2, -15.0));
-            tempMap.put(22, createImmutableMap(0, -28.80, 1, 1.71, 2, -15.0));
+            tempMap.put(6, createImmutableMap(0, -30.75, 1, 2.20, 2, -0.05));
+            tempMap.put(7, createImmutableMap(0, -29.72, 1, 0.51, 2, 0.21));
+            tempMap.put(8, createImmutableMap(0, -29.88, 1, -0.8, 2, -0.28));
+            tempMap.put(9, createImmutableMap(0, -30.12, 1, -0.09, 2, 1.05));
+            tempMap.put(10, createImmutableMap(0, -30.27, 1, 1.97, 2, -0.12));
+            tempMap.put(11, createImmutableMap(0, -30.06, 1, 2.13, 2, -1.00));
+            tempMap.put(17, createImmutableMap(0, -29.27, 1, 2.07, 2, 0.94));
+            tempMap.put(18, createImmutableMap(0, -30.00, 1, 1.66, 2, -0.14));
+            tempMap.put(19, createImmutableMap(0, -30.17, 1, 3.8, 2, 0.28));
+            tempMap.put(20, createImmutableMap(0, -30.31, 1, 3.95, 2, -0.57));
+            tempMap.put(21, createImmutableMap(0, -30.00, 1, 1.99, 2, -0.14));
+            tempMap.put(22, createImmutableMap(0, -30.29, 1, 1.71, 2, 0.64));
 
             m_coralReefTargets = Collections.unmodifiableMap(tempMap);
         }
