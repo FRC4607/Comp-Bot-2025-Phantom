@@ -72,7 +72,7 @@ public final class Constants {
         public static final LEDStrip kRGBCANdle = new LEDStrip(0, 8);
         public static final LEDStrip kRGBSection1 = new LEDStrip(8, 13);
         public static final LEDStrip kRGBSection2 = new LEDStrip(21, 12);
-        public static final LEDStrip kRGBSection3 = new LEDStrip(33, 13);
+        public static final LEDStrip kRGBSection3 = new LEDStrip(33, 10);
         public static final int kRGBCount = kRGBCANdle.m_length + kRGBSection1.m_length
                                             + kRGBSection2.m_length + kRGBSection3.m_length;
 

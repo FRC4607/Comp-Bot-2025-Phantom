@@ -52,7 +52,7 @@
       "maxWaypointRelativePos": 0.5026737967914439,
       "constraints": {
         "maxVelocity": 3.0,
-        "maxAcceleration": 2.0,
+        "maxAcceleration": 3.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 12.0,
@@ -75,7 +75,7 @@
     "rotation": 144.0129435
   },
   "reversed": false,
-  "folder": null,
+  "folder": "RED PATHS",
   "idealStartingState": {
     "velocity": 0,
     "rotation": -150.0

@@ -38,7 +38,7 @@ public class RunIntake extends Command {
     @Override
     public void execute() 
     {
-        if (Math.abs(m_manipulator.getVelocity()) > 10.0) {
+        if (Math.abs(m_manipulator.getVelocity()) > 60.0) {
             m_isAtVelocity = true;
         }
     }
@@ -61,7 +61,7 @@ public class RunIntake extends Command {
     @Override
     public boolean isFinished() {
         return (m_isAtVelocity 
-            && (Math.abs(m_manipulator.getVelocity()) < 3.0));
+            && (Math.abs(m_manipulator.getVelocity()) < 50.0));
         // && (Math.abs(m_manipulator.getVelocity()) < ManipulatorCalibrations.kIntakeZeroTolerance));
     } 
 

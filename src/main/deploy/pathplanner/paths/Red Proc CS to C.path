@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 3.829432497,
-        "y": 3.021146151
+        "x": 3.829,
+        "y": 3.021
       },
       "prevControl": {
-        "x": 3.329432497,
-        "y": 2.155120747215561
+        "x": 3.329,
+        "y": 2.154974596215561
       },
       "nextControl": null,
       "isLocked": false,
@@ -45,7 +45,7 @@
     "rotation": 150.0
   },
   "reversed": false,
-  "folder": null,
+  "folder": "RED PATHS",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 144.013

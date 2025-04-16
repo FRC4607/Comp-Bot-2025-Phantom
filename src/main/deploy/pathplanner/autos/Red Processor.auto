@@ -36,35 +36,42 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "sequential",
           "data": {
             "commands": [
               {
-                "type": "path",
+                "type": "named",
                 "data": {
-                  "pathName": "Red E to Proc CS"
+                  "name": "CMD Pendulum Stow"
                 }
               },
               {
-                "type": "sequential",
+                "type": "parallel",
                 "data": {
                   "commands": [
                     {
-                      "type": "named",
+                      "type": "path",
                       "data": {
-                        "name": "CMD Pendulum Stow"
+                        "pathName": "Red E to Proc CS"
                       }
                     },
                     {
-                      "type": "wait",
+                      "type": "sequential",
                       "data": {
-                        "waitTime": 0.6
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "CMD Intake Coral"
+                        "commands": [
+                          {
+                            "type": "wait",
+                            "data": {
+                              "waitTime": 1.0
+                            }
+                          },
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "CMD Intake Coral"
+                            }
+                          }
+                        ]
                       }
                     }
                   ]
@@ -137,35 +144,42 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "sequential",
           "data": {
             "commands": [
               {
-                "type": "path",
+                "type": "named",
                 "data": {
-                  "pathName": "Red C to Proc CS"
+                  "name": "CMD Pendulum Stow"
                 }
               },
               {
-                "type": "sequential",
+                "type": "parallel",
                 "data": {
                   "commands": [
                     {
-                      "type": "named",
+                      "type": "path",
                       "data": {
-                        "name": "CMD Pendulum Stow"
+                        "pathName": "Red C to Proc CS"
                       }
                     },
                     {
-                      "type": "wait",
+                      "type": "sequential",
                       "data": {
-                        "waitTime": 0.6
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "CMD Intake Coral"
+                        "commands": [
+                          {
+                            "type": "wait",
+                            "data": {
+                              "waitTime": 1.0
+                            }
+                          },
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "CMD Intake Coral"
+                            }
+                          }
+                        ]
                       }
                     }
                   ]
@@ -238,35 +252,42 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "sequential",
           "data": {
             "commands": [
               {
-                "type": "path",
+                "type": "named",
                 "data": {
-                  "pathName": "Red D to Proc CS"
+                  "name": "CMD Pendulum Stow"
                 }
               },
               {
-                "type": "sequential",
+                "type": "parallel",
                 "data": {
                   "commands": [
                     {
-                      "type": "named",
+                      "type": "path",
                       "data": {
-                        "name": "CMD Pendulum Stow"
+                        "pathName": "Red D to Proc CS"
                       }
                     },
                     {
-                      "type": "wait",
+                      "type": "sequential",
                       "data": {
-                        "waitTime": 0.6
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "CMD Intake Coral"
+                        "commands": [
+                          {
+                            "type": "wait",
+                            "data": {
+                              "waitTime": 1.0
+                            }
+                          },
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "CMD Intake Coral"
+                            }
+                          }
+                        ]
                       }
                     }
                   ]
@@ -279,6 +300,6 @@
     }
   },
   "resetOdom": true,
-  "folder": null,
+  "folder": "RED AUTOS",
   "choreoAuto": false
 }

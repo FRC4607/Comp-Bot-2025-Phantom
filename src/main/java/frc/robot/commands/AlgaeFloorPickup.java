@@ -25,8 +25,9 @@ public class AlgaeFloorPickup extends SequentialCommandGroup {
                 ElevatorCalibrations.kAlgaePickupPosition, ElevatorCalibrations.kDefaultTolerance, false, elevator),
             new MoveWindmillToPosition(
                 WindmillCalibrations.kAlgaePickupPosition, WindmillCalibrations.kDefaultTolerance, false, windmill),
-            new RunAlgaeIntake(manipulator),
-            new LollipopStow(elevator, windmill)
+            new RunAlgaeIntake(manipulator)//,
+        // Eli request not to automate this 1/12/2025
+        //new LollipopStow(elevator, windmill)
         );
     }
 }

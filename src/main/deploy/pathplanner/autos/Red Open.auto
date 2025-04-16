@@ -137,6 +137,12 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "CMD Reset K Pose"
+          }
+        },
+        {
           "type": "parallel",
           "data": {
             "commands": [
@@ -238,6 +244,12 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "CMD Reset L Pose"
+          }
+        },
+        {
           "type": "parallel",
           "data": {
             "commands": [
@@ -279,6 +291,6 @@
     }
   },
   "resetOdom": true,
-  "folder": null,
+  "folder": "RED AUTOS",
   "choreoAuto": false
 }

@@ -3,47 +3,33 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.281,
-        "y": 5.348
+        "x": 7.256542022,
+        "y": 5.16553577
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.781,
-        "y": 6.214025403784438
+        "x": 6.756542022,
+        "y": 5.16553577
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 7.65,
-        "y": 6.25
+        "x": 4.901605914,
+        "y": 5.274444984
       },
       "prevControl": {
-        "x": 6.65,
-        "y": 6.25
+        "x": 5.343278869930064,
+        "y": 5.019444984
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Red_Barge_2"
+      "linkedName": "Blue_Reef_J"
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [
-    {
-      "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.08809523809523885,
-      "maxWaypointRelativePos": 0,
-      "constraints": {
-        "maxVelocity": 3.0,
-        "maxAcceleration": 2.0,
-        "maxAngularVelocity": 540.0,
-        "maxAngularAcceleration": 720.0,
-        "nominalVoltage": 12.0,
-        "unlimited": false
-      }
-    }
-  ],
+  "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
@@ -56,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -90.0
+    "rotation": -29.999999999999996
   },
   "reversed": false,
-  "folder": "RED PATHS",
+  "folder": "BLUE PATHS",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -29.999999999999996
+    "rotation": 0.0
   },
   "useDefaultConstraints": true
 }
