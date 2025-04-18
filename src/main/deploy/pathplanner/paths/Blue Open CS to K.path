@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.64,
-        "y": 7.435960978
+        "x": 1.639,
+        "y": 7.435
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.227601677031021,
-        "y": 6.62681064020712
+        "x": 2.226601677031021,
+        "y": 6.62584966220712
       },
       "isLocked": false,
       "linkedName": "Blue_Open_Coral_Station"

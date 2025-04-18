@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.434171602,
-        "y": 0.7777900504
+        "x": 1.434,
+        "y": 0.777
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.021815645238145,
-        "y": 1.5869096203318653
+        "x": 2.021644043238145,
+        "y": 1.5861195699318653
       },
       "isLocked": false,
       "linkedName": "Red_Proc_Coral_Stat"
