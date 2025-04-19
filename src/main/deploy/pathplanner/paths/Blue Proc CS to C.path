@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.63969564,
-        "y": 0.6285390218
+        "x": 1.614,
+        "y": 0.584
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.2273396832381445,
-        "y": 1.4376585917318652
+        "x": 2.2016440432381446,
+        "y": 1.3931195699318653
       },
       "isLocked": false,
       "linkedName": "Blue_Proc_Coral_Stat"
