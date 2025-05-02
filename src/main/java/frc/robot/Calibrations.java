@@ -211,7 +211,7 @@ public class Calibrations {
         public static final double kAlgaeStandingPosition = 10;
 
         /* Position to move to when processing algae */
-        public static final double kProcessorPosition = -0.2;
+        public static final double kProcessorPosition = 2;
 
         /* Tolerance for the processor position */
         public static final double kProcessorTolerance = 1;
@@ -338,7 +338,7 @@ public class Calibrations {
         public static final double kAlgaeStandingPosition = 0;
 
         /* Position to move to when processing algae */
-        public static final double kProcessorPosition = 26;
+        public static final double kProcessorPosition = 15;
 
         /* Tolerance for the processor position */
         public static final double kProcessorTolerance = 10;
@@ -430,6 +430,7 @@ public class Calibrations {
         /* Algae barge outtake speed, in rotations per second */
         public static final double kAlgaeBargingVelocity = 600;
         public static final double kAlgaeBargingLowVelocity = 40;
+        public static final double kAlgaeProcessorVelocity = 40;
         
         /* Velocity to intake Algae in the floor position at */
         public static final double kAlgaeIntakeVelocity = -75;
