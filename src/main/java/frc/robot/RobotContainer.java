@@ -94,6 +94,7 @@ public class RobotContainer {
         //new EventTrigger("ET Lollipop Stow").onTrue(new LollipopStow(m_elevator, m_windmill));
         //new EventTrigger("ET Pendulum Stow").onTrue(new PendulumStow(m_elevator, m_windmill));
         //new EventTrigger("ET Intake Coral").onTrue(new CoralStation(m_elevator, m_windmill));
+        NamedCommands.registerCommand("CMD Unlock Elevator", new InstantCommand(() -> m_elevator.setServoAngle(ElevatorCalibrations.kservoUnlockAngle)));
         
         NamedCommands.registerCommand("CMD GoTo L2", new L2(m_elevator, m_windmill));
         NamedCommands.registerCommand("CMD GoTo L3", new L3(m_elevator, m_windmill));

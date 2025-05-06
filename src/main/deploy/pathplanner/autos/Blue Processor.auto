@@ -5,6 +5,12 @@
     "data": {
       "commands": [
         {
+          "type": "named",
+          "data": {
+            "name": "CMD Unlock Elevator"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "Blue Proc Start to E"
