@@ -252,26 +252,44 @@ public class RobotContainer {
         Trigger coPilotOrange2 = new Trigger(() -> m_coPilot.getRawButton(4));
         Trigger coPilotOrange3 = new Trigger(() -> m_coPilot.getRawButton(5));
         Trigger coPilotOrange4 = new Trigger(() -> m_coPilot.getRawButton(6));
+        Trigger coPilotBlue2 = new Trigger(() -> m_coPilot.getRawButton(8));
+        Trigger coPilotLever1Up = new Trigger(() -> m_coPilot.getRawButton(13));
+        Trigger coPilotLever1Down = new Trigger(() -> m_coPilot.getRawButton(14));
+        Trigger coPilotLowPower =  new Trigger(() -> m_coPilot.getRawButton(16));
+
         
         coPilotRed1.onTrue(new L4(m_elevator, m_windmill));
         coPilotRed1.onFalse(new CGOuttakeThenStow(ManipulatorCalibrations.kL4OuttakeSpeed, 
-        ManipulatorCalibrations.kL4OuttakeTime, 
-        m_elevator, m_windmill, m_manipulator));
+            ManipulatorCalibrations.kL4OuttakeTime, 
+            m_elevator, m_windmill, m_manipulator));
         
         coPilotOrange1.onTrue(new L3(m_elevator, m_windmill));
         coPilotOrange1.onFalse(new CGOuttakeThenStow(ManipulatorCalibrations.kL3OuttakeSpeed,
-        ManipulatorCalibrations.kL3OuttakeTime,
-        m_elevator, m_windmill, m_manipulator));
+            ManipulatorCalibrations.kL3OuttakeTime,
+            m_elevator, m_windmill, m_manipulator));
         
         coPilotOrange2.onTrue(new AlgaeL3Pickup(m_elevator, m_windmill, m_manipulator));
 
         coPilotOrange3.onTrue(new L2(m_elevator, m_windmill));
-        coPilotOrange3.onFalse(new CGOuttakeThenStow(ManipulatorCalibrations.kL2OuttakeSpeed, ManipulatorCalibrations.kL2OuttakeTime, 
-        m_elevator, m_windmill, m_manipulator));
+        coPilotOrange3.onFalse(new CGOuttakeThenStow(ManipulatorCalibrations.kL2OuttakeSpeed,
+            ManipulatorCalibrations.kL2OuttakeTime, 
+            m_elevator, m_windmill, m_manipulator));
         
         coPilotOrange4.onTrue(new AlgaeL2Pickup(m_elevator, m_windmill, m_manipulator));
+
+        coPilotBlue2.onTrue(new ProcessAlgae(m_elevator, m_windmill))
+            .onFalse(new RunManipulator(ManipulatorCalibrations.kAlgaeProcessorVelocity, 
+                ManipulatorCalibrations.kMaxAcceleration, m_manipulator).withTimeout(3));
         
-        Trigger coPilotLowPower =  new Trigger(() -> m_coPilot.getRawButton(16));
+
+        coPilotLever1Up.onTrue(new RunManipulator(ManipulatorCalibrations.kL4OuttakeSpeed,
+                 ManipulatorCalibrations.kMaxAcceleration, m_manipulator))
+            .onFalse(new RunManipulator(0, ManipulatorCalibrations.kMaxAcceleration, m_manipulator));
+
+
+        coPilotLever1Down.onTrue(new RunManipulator(30, ManipulatorCalibrations.kMaxAcceleration, m_manipulator))
+            .onFalse(new RunManipulator(0, ManipulatorCalibrations.kMaxAcceleration, m_manipulator));
+        
         
 
         // **********************      Driver + Copilot bindings      *******************************************************
