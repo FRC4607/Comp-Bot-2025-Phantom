@@ -228,8 +228,8 @@ public class RobotContainer {
         m_joystick.a().onTrue(new AlgaeFloorPickup(m_elevator, m_windmill, m_manipulator));
 
         /* Algae on Coral Pickup */
-        m_joystick.povDown().and(m_joystick.leftBumper())
-            .onTrue(new AlgaeStandingPickup(m_elevator, m_windmill, m_manipulator));
+        // m_joystick.povDown().and(m_joystick.leftBumper())
+        //     .onTrue(new AlgaeStandingPickup(m_elevator, m_windmill, m_manipulator));
 
         //m_joystick.povRight().and(m_joystick.leftBumper()).onTrue(new AlgaeL2Pickup(m_elevator, m_windmill, m_manipulator));
 
@@ -252,6 +252,7 @@ public class RobotContainer {
         Trigger coPilotOrange2 = new Trigger(() -> m_coPilot.getRawButton(4));
         Trigger coPilotOrange3 = new Trigger(() -> m_coPilot.getRawButton(5));
         Trigger coPilotOrange4 = new Trigger(() -> m_coPilot.getRawButton(6));
+        Trigger coPilotBlue1 = new Trigger(() -> m_coPilot.getRawButton(7));
         Trigger coPilotBlue2 = new Trigger(() -> m_coPilot.getRawButton(8));
         Trigger coPilotLever1Up = new Trigger(() -> m_coPilot.getRawButton(13));
         Trigger coPilotLever1Down = new Trigger(() -> m_coPilot.getRawButton(14));
@@ -276,6 +277,9 @@ public class RobotContainer {
             m_elevator, m_windmill, m_manipulator));
         
         coPilotOrange4.onTrue(new AlgaeL2Pickup(m_elevator, m_windmill, m_manipulator));
+
+        coPilotBlue1.onTrue(new AlgaeStandingPickup(m_elevator, m_windmill, m_manipulator))
+            .onFalse(new LollipopStow(m_elevator, m_windmill));
 
         coPilotBlue2.onTrue(new ProcessAlgae(m_elevator, m_windmill))
             .onFalse(new RunManipulator(ManipulatorCalibrations.kAlgaeProcessorVelocity, 
