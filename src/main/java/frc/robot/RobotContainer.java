@@ -235,7 +235,7 @@ public class RobotContainer {
 
         //m_joystick.povLeft().and(m_joystick.leftBumper()).onTrue(new AlgaeL3Pickup(m_elevator, m_windmill, m_manipulator));
 
-        m_joystick.povUp().and(m_joystick.leftBumper()).onTrue(new ProcessAlgae(m_elevator, m_windmill));
+       // m_joystick.povUp().and(m_joystick.leftBumper()).onTrue(new ProcessAlgae(m_elevator, m_windmill));
        
         m_joystick.povUp().and(m_joystick.leftBumper()).onFalse(new RunManipulator(
             ManipulatorCalibrations.kAlgaeProcessorVelocity, 
@@ -299,12 +299,14 @@ public class RobotContainer {
         // **********************      Driver + Copilot bindings      *******************************************************
         
         
-        coPilotRed2.and(coPilotLowPower).onTrue(new BargeAlgae(m_elevator, m_windmill))
-        .onFalse(new RunManipulator(ManipulatorCalibrations.kAlgaeBargingLowVelocity,
-        ManipulatorCalibrations.kBargeAlgaeAcceleration, 
+        //coPilotRed2.and(coPilotLowPower).onTrue(new BargeAlgae(m_elevator, m_windmill))
+        m_joystick.leftBumper().and(coPilotLowPower).onTrue(new BargeAlgae(m_elevator, m_windmill))
+            .onFalse(new RunManipulator(ManipulatorCalibrations.kAlgaeBargingLowVelocity,
+            ManipulatorCalibrations.kBargeAlgaeAcceleration, 
                                         m_manipulator).withTimeout(1));
 
-        coPilotRed2.and(coPilotLowPower.negate()).onTrue(new BargeAlgae(m_elevator, m_windmill))
+        //coPilotRed2.and(coPilotLowPower.negate()).onTrue(new BargeAlgae(m_elevator, m_windmill))
+        m_joystick.leftBumper().and(coPilotLowPower.negate()).onTrue(new BargeAlgae(m_elevator, m_windmill))
             .onFalse(new RunManipulator(ManipulatorCalibrations.kAlgaeBargingVelocity,
                                     ManipulatorCalibrations.kBargeAlgaeAcceleration, 
                                     m_manipulator).withTimeout(1).deadlineFor(
