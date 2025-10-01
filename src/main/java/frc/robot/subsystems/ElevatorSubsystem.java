@@ -3,7 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
-
+import com.ctre.phoenix6.CANBus;
 import com.ctre.phoenix6.configs.CANdiConfiguration;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.DynamicMotionMagicTorqueCurrentFOC;
@@ -49,11 +49,11 @@ public class ElevatorSubsystem extends SubsystemBase {
     public ElevatorSubsystem() {
 
         /* Create the hardware and configurators */
-        m_motor1 = new TalonFX(ElevatorConstants.kmotor1CanId, "kachow");
-        m_motor2 = new TalonFX(ElevatorConstants.kmotor2CanId, "kachow");
-        m_motor3 = new TalonFX(ElevatorConstants.kmotor3CanId, "kachow");
-        m_motor4 = new TalonFX(ElevatorConstants.kmotor4CanId, "kachow");
-        m_candi = new CANdi(ElevatorConstants.kcandiCanId, "kachow");
+        m_motor1 = new TalonFX(ElevatorConstants.kmotor1CanId, CANBus.systemCore(0));
+        m_motor2 = new TalonFX(ElevatorConstants.kmotor2CanId, CANBus.systemCore(0));
+        m_motor3 = new TalonFX(ElevatorConstants.kmotor3CanId, CANBus.systemCore(0));
+        m_motor4 = new TalonFX(ElevatorConstants.kmotor4CanId, CANBus.systemCore(0));
+        m_candi = new CANdi(ElevatorConstants.kcandiCanId, CANBus.systemCore(0));
         m_lockServo = new Servo(ElevatorConstants.kservoPort);
         m_talonFxConfig = new TalonFXConfiguration();
         m_candiConfig = new CANdiConfiguration();
@@ -189,7 +189,7 @@ public class ElevatorSubsystem extends SubsystemBase {
      * Disable lock servo.
      */
     public void disableServo() {
-        m_lockServo.setDisabled();
+        m_lockServo.close(); // TODO: unknown replacement method, setDisabled() doesn't exist now
     }
   
     /**

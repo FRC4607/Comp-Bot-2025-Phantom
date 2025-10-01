@@ -56,13 +56,5 @@
     "edu.wpi.first.math.proto.*",
     "edu.wpi.first.math.**.proto.*",
     "edu.wpi.first.math.**.struct.*",
-  ],
-  "[java]": {
-    "editor.tabSize": 4,
-    "editor.detectIndentation": false,
-    "editor.insertSpaces": true
-  },
-  "editor.formatOnSave": false,
-  "java.checkstyle.configuration": "${workspaceFolder}/styleguide-frc4607.xml",
-  "java.checkstyle.version": "10.3",
+  ]
 }

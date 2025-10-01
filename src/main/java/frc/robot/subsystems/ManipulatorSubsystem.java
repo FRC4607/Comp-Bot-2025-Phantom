@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.CANBus;
 import com.ctre.phoenix6.controls.MotionMagicVelocityTorqueCurrentFOC;
 import com.ctre.phoenix6.controls.TorqueCurrentFOC;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -31,7 +32,7 @@ public class ManipulatorSubsystem extends SubsystemBase {
     public ManipulatorSubsystem() {
 
         /* Create the hardware and configurators */
-        m_motor = new TalonFX(ManipulatorConstants.kmotorCanId, "kachow");
+        m_motor = new TalonFX(ManipulatorConstants.kmotorCanId, CANBus.systemCore(0));
         m_request = new MotionMagicVelocityTorqueCurrentFOC(0);
         m_openLoopRequest = new TorqueCurrentFOC(0);
         m_talonFxConfig = new TalonFXConfiguration();
