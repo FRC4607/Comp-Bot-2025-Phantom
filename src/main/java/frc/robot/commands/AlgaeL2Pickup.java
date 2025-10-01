@@ -38,14 +38,14 @@ public class AlgaeL2Pickup extends SequentialCommandGroup {
                                 < ElevatorCalibrations.kPendulumPosition - ElevatorCalibrations.kPendulumTolerance)
                     ),
                     //Then go to the under L2 position
-                    new MoveElevatorToPosition(
-                        ElevatorCalibrations.kAlgaeUnderL2Position, 
-                        ElevatorCalibrations.kDefaultTolerance, 
-                        false, elevator),
                     new MoveWindmillToPosition(
                         WindmillCalibrations.kAlgaeUnderL2Position, 
                         ElevatorCalibrations.kDefaultTolerance, 
-                        false, windmill)),
+                        false, windmill),
+                    new MoveElevatorToPosition(
+                        ElevatorCalibrations.kAlgaeUnderL2Position, 
+                        ElevatorCalibrations.kDefaultTolerance, 
+                        false, elevator)),
                 new SequentialCommandGroup(
                     //Over L2
                     new MoveElevatorToPosition(

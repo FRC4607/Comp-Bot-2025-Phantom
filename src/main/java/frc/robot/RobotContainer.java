@@ -195,33 +195,31 @@ public class RobotContainer {
                                 .alongWith(new InstantCommand(LEDSubsystem::setNeutral)));
 
         /* Coral reef L4 dropoff sequence */
-        m_joystick.povUp().and(m_joystick.leftBumper().negate()).onTrue(new L4(m_elevator, m_windmill));
+        /* m_joystick.povUp().and(m_joystick.leftBumper().negate()).onTrue(new L4(m_elevator, m_windmill));
         m_joystick.povUp().and(m_joystick.leftBumper().negate())
             .onFalse(new CGOuttakeThenStow(ManipulatorCalibrations.kL4OuttakeSpeed, 
                                                          ManipulatorCalibrations.kL4OuttakeTime, 
-                                                         m_elevator, m_windmill, m_manipulator));
+                                                         m_elevator, m_windmill, m_manipulator)); */
 
         /* Coral reef L3 dropoff sequence */
-        m_joystick.povLeft().and(m_joystick.leftBumper().negate()).onTrue(new L3(m_elevator, m_windmill));
+       /*  m_joystick.povLeft().and(m_joystick.leftBumper().negate()).onTrue(new L3(m_elevator, m_windmill));
         m_joystick.povLeft().and(m_joystick.leftBumper().negate())
             .onFalse(new CGOuttakeThenStow(
                 ManipulatorCalibrations.kL3OuttakeSpeed,
                 ManipulatorCalibrations.kL3OuttakeTime,
-                m_elevator, m_windmill, m_manipulator));
+                m_elevator, m_windmill, m_manipulator)); */
 
         /* Coral reef L2 dropoff sequence */
-        m_joystick.povRight().and(m_joystick.leftBumper().negate()).onTrue(new L2(m_elevator, m_windmill));
+        /* m_joystick.povRight().and(m_joystick.leftBumper().negate()).onTrue(new L2(m_elevator, m_windmill));
         m_joystick.povRight().and(m_joystick.leftBumper().negate())
             .onFalse(new CGOuttakeThenStow(
                 ManipulatorCalibrations.kL2OuttakeSpeed, ManipulatorCalibrations.kL2OuttakeTime, 
-                    m_elevator, m_windmill, m_manipulator));
+                    m_elevator, m_windmill, m_manipulator)); */
 
         /* Target the left coral reef stick */
-        m_joystick.axisGreaterThan(2, 0.1).whileTrue(new TranslationAlignToTag(0, 
-                                                                                   m_drivetrain));
+        m_joystick.axisGreaterThan(2, 0.1).whileTrue(new TranslationAlignToTag(0, m_drivetrain));
         /* Target the right coral reef stick */
-        m_joystick.axisGreaterThan(3, 0.1).whileTrue(new TranslationAlignToTag(1,
-            m_drivetrain));
+        m_joystick.axisGreaterThan(3, 0.1).whileTrue(new TranslationAlignToTag(1, m_drivetrain));
         
         /* Prep Climb and finish Climb when released */
         m_joystick.y().onTrue(new PrepClimb(m_elevator, m_windmill)).onFalse(new CGClimb(m_windmill, m_elevator));
@@ -230,14 +228,14 @@ public class RobotContainer {
         m_joystick.a().onTrue(new AlgaeFloorPickup(m_elevator, m_windmill, m_manipulator));
 
         /* Algae on Coral Pickup */
-        m_joystick.povDown().and(m_joystick.leftBumper())
-            .onTrue(new AlgaeStandingPickup(m_elevator, m_windmill, m_manipulator));
+        // m_joystick.povDown().and(m_joystick.leftBumper())
+        //     .onTrue(new AlgaeStandingPickup(m_elevator, m_windmill, m_manipulator));
 
-        m_joystick.povRight().and(m_joystick.leftBumper()).onTrue(new AlgaeL2Pickup(m_elevator, m_windmill, m_manipulator));
+        //m_joystick.povRight().and(m_joystick.leftBumper()).onTrue(new AlgaeL2Pickup(m_elevator, m_windmill, m_manipulator));
 
-        m_joystick.povLeft().and(m_joystick.leftBumper()).onTrue(new AlgaeL3Pickup(m_elevator, m_windmill, m_manipulator));
+        //m_joystick.povLeft().and(m_joystick.leftBumper()).onTrue(new AlgaeL3Pickup(m_elevator, m_windmill, m_manipulator));
 
-        m_joystick.povUp().and(m_joystick.leftBumper()).onTrue(new ProcessAlgae(m_elevator, m_windmill));
+       // m_joystick.povUp().and(m_joystick.leftBumper()).onTrue(new ProcessAlgae(m_elevator, m_windmill));
        
         m_joystick.povUp().and(m_joystick.leftBumper()).onFalse(new RunManipulator(
             ManipulatorCalibrations.kAlgaeProcessorVelocity, 
@@ -249,27 +247,66 @@ public class RobotContainer {
 
         // Zero Elevator
         Trigger coPilotRed1 = new Trigger(() -> m_coPilot.getRawButton(1));
-        Trigger coPilotToggle1 = new Trigger(() -> m_coPilot.getRawButton(14));
-        coPilotRed1.and(coPilotToggle1).onTrue(new CGZeroElevator(m_elevator, m_windmill));
-
+        Trigger coPilotRed2 = new Trigger(() -> m_coPilot.getRawButton(2));
         Trigger coPilotOrange1 = new Trigger(() -> m_coPilot.getRawButton(3));
-        coPilotOrange1.whileTrue(new RunManipulator(ManipulatorCalibrations.kL1Velocity, 
-                                                               ManipulatorCalibrations.kCoralAcceleration, m_manipulator));
         Trigger coPilotOrange2 = new Trigger(() -> m_coPilot.getRawButton(4));
-        coPilotOrange2.whileTrue(new RunManipulator(-ManipulatorCalibrations.kL1Velocity, 
-                                                               ManipulatorCalibrations.kCoralAcceleration, m_manipulator));
-
+        Trigger coPilotOrange3 = new Trigger(() -> m_coPilot.getRawButton(5));
+        Trigger coPilotOrange4 = new Trigger(() -> m_coPilot.getRawButton(6));
+        Trigger coPilotBlue1 = new Trigger(() -> m_coPilot.getRawButton(7));
+        Trigger coPilotBlue2 = new Trigger(() -> m_coPilot.getRawButton(8));
+        Trigger coPilotLever1Up = new Trigger(() -> m_coPilot.getRawButton(13));
+        Trigger coPilotLever1Down = new Trigger(() -> m_coPilot.getRawButton(14));
         Trigger coPilotLowPower =  new Trigger(() -> m_coPilot.getRawButton(16));
-                
-        
-        // **********************      Driver + Copilot bindings      *******************************************************
 
-        m_joystick.back().and(coPilotLowPower).onTrue(new BargeAlgae(m_elevator, m_windmill))
+        
+        coPilotRed1.onTrue(new L4(m_elevator, m_windmill));
+        coPilotRed1.onFalse(new CGOuttakeThenStow(ManipulatorCalibrations.kL4OuttakeSpeed, 
+            ManipulatorCalibrations.kL4OuttakeTime, 
+            m_elevator, m_windmill, m_manipulator));
+        
+        coPilotOrange1.onTrue(new L3(m_elevator, m_windmill));
+        coPilotOrange1.onFalse(new CGOuttakeThenStow(ManipulatorCalibrations.kL3OuttakeSpeed,
+            ManipulatorCalibrations.kL3OuttakeTime,
+            m_elevator, m_windmill, m_manipulator));
+        
+        coPilotOrange2.onTrue(new AlgaeL3Pickup(m_elevator, m_windmill, m_manipulator));
+
+        coPilotOrange3.onTrue(new L2(m_elevator, m_windmill));
+        coPilotOrange3.onFalse(new CGOuttakeThenStow(ManipulatorCalibrations.kL2OuttakeSpeed,
+            ManipulatorCalibrations.kL2OuttakeTime, 
+            m_elevator, m_windmill, m_manipulator));
+        
+        coPilotOrange4.onTrue(new AlgaeL2Pickup(m_elevator, m_windmill, m_manipulator));
+
+        coPilotBlue1.onTrue(new AlgaeStandingPickup(m_elevator, m_windmill, m_manipulator))
+            .onFalse(new LollipopStow(m_elevator, m_windmill));
+
+        coPilotBlue2.onTrue(new ProcessAlgae(m_elevator, m_windmill))
+            .onFalse(new RunManipulator(ManipulatorCalibrations.kAlgaeProcessorVelocity, 
+                ManipulatorCalibrations.kMaxAcceleration, m_manipulator).withTimeout(3));
+        
+
+        coPilotLever1Up.onTrue(new RunManipulator(ManipulatorCalibrations.kL4OuttakeSpeed,
+                 ManipulatorCalibrations.kMaxAcceleration, m_manipulator))
+            .onFalse(new RunManipulator(0, ManipulatorCalibrations.kMaxAcceleration, m_manipulator));
+
+
+        coPilotLever1Down.onTrue(new RunManipulator(30, ManipulatorCalibrations.kMaxAcceleration, m_manipulator))
+            .onFalse(new RunManipulator(0, ManipulatorCalibrations.kMaxAcceleration, m_manipulator));
+        
+        
+
+        // **********************      Driver + Copilot bindings      *******************************************************
+        
+        
+        //coPilotRed2.and(coPilotLowPower).onTrue(new BargeAlgae(m_elevator, m_windmill))
+        m_joystick.leftBumper().and(coPilotLowPower).onTrue(new BargeAlgae(m_elevator, m_windmill))
             .onFalse(new RunManipulator(ManipulatorCalibrations.kAlgaeBargingLowVelocity,
-                                        ManipulatorCalibrations.kBargeAlgaeAcceleration, 
+            ManipulatorCalibrations.kBargeAlgaeAcceleration, 
                                         m_manipulator).withTimeout(1));
 
-        m_joystick.back().and(coPilotLowPower.negate()).onTrue(new BargeAlgae(m_elevator, m_windmill))
+        //coPilotRed2.and(coPilotLowPower.negate()).onTrue(new BargeAlgae(m_elevator, m_windmill))
+        m_joystick.leftBumper().and(coPilotLowPower.negate()).onTrue(new BargeAlgae(m_elevator, m_windmill))
             .onFalse(new RunManipulator(ManipulatorCalibrations.kAlgaeBargingVelocity,
                                     ManipulatorCalibrations.kBargeAlgaeAcceleration, 
                                     m_manipulator).withTimeout(1).deadlineFor(
