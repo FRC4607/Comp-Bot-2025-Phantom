@@ -188,8 +188,11 @@ public class ElevatorSubsystem extends SubsystemBase {
     /**
      * Disable lock servo.
      */
+
+     // TODO: Servo methods disabled until we have a solution to make it work on systemcore
     public void disableServo() {
-        m_lockServo.close(); // TODO: unknown replacement method, setDisabled() doesn't exist now
+        // TODO: Disabled
+        //m_lockServo.close();
     }
   
     /**
@@ -198,7 +201,8 @@ public class ElevatorSubsystem extends SubsystemBase {
      * @param angle servo angle in degrees
      */
     public void setServoAngle(double angle) {
-        m_lockServo.setAngle(angle);
+        // TODO: Disabled
+        //m_lockServo.setAngle(angle);
     }
   
     /**
@@ -207,7 +211,9 @@ public class ElevatorSubsystem extends SubsystemBase {
      * @return servo position in degrees
      */
     public double getServoPos() {
-        return m_lockServo.getAngle();
+        // TODO: Disabled (return 0)
+        return 0;
+        //return m_lockServo.getAngle();
     }
 
     @Override
