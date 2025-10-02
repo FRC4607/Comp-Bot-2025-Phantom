@@ -67,7 +67,7 @@ public class LEDSubsystem extends SubsystemBase {
     public LEDSubsystem() {
 
         /* Create the hardware and configurator */
-        m_candle = new CANdle(Constants.LEDConstants.kCANdleID, CANBus.systemCore(0));
+        m_candle = new CANdle(Constants.LEDConstants.kCANdleID, new CANBus("kachow"));
         m_config = new CANdleConfiguration();
 
         /* Configure hardware */

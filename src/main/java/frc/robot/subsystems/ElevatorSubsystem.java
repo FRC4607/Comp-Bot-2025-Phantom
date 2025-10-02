@@ -49,11 +49,11 @@ public class ElevatorSubsystem extends SubsystemBase {
     public ElevatorSubsystem() {
 
         /* Create the hardware and configurators */
-        m_motor1 = new TalonFX(ElevatorConstants.kmotor1CanId, CANBus.systemCore(0));
-        m_motor2 = new TalonFX(ElevatorConstants.kmotor2CanId, CANBus.systemCore(0));
-        m_motor3 = new TalonFX(ElevatorConstants.kmotor3CanId, CANBus.systemCore(0));
-        m_motor4 = new TalonFX(ElevatorConstants.kmotor4CanId, CANBus.systemCore(0));
-        m_candi = new CANdi(ElevatorConstants.kcandiCanId, CANBus.systemCore(0));
+        m_motor1 = new TalonFX(ElevatorConstants.kmotor1CanId, new CANBus("kachow"));
+        m_motor2 = new TalonFX(ElevatorConstants.kmotor2CanId, new CANBus("kachow"));
+        m_motor3 = new TalonFX(ElevatorConstants.kmotor3CanId, new CANBus("kachow"));
+        m_motor4 = new TalonFX(ElevatorConstants.kmotor4CanId, new CANBus("kachow"));
+        m_candi = new CANdi(ElevatorConstants.kcandiCanId, new CANBus("kachow"));
         m_lockServo = new Servo(ElevatorConstants.kservoPort);
         m_talonFxConfig = new TalonFXConfiguration();
         m_candiConfig = new CANdiConfiguration();

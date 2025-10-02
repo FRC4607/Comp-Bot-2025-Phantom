@@ -34,8 +34,8 @@ public class WindmillSubsystem extends SubsystemBase {
     public WindmillSubsystem() {
 
         /* Create the hardware and configurators */
-        m_motor = new TalonFX(WindmillConstants.kmotorCanId, CANBus.systemCore(0));
-        m_encoder = new CANcoder(WindmillConstants.kcanCoderCanId, CANBus.systemCore(0));
+        m_motor = new TalonFX(WindmillConstants.kmotorCanId, new CANBus("kachow"));
+        m_encoder = new CANcoder(WindmillConstants.kcanCoderCanId, new CANBus("kachow"));
         m_talonFxConfig = new TalonFXConfiguration();
         m_canCoderConfig = new CANcoderConfiguration();
 
