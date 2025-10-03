@@ -228,6 +228,10 @@ public class Calibrations {
         /* Tolerance for the down stroke of the climb */
         public static final double kClimbDownTolerance = 2;
 
+        public static final double m_servoDegMin = 0;
+        public static final double m_servoDegMax = 180;                
+        public static final double m_servoPulseMin = 500;
+        public static final double m_servoPulseMax = 2500;
     }
 
     /**
