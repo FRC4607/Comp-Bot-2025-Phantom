@@ -42,7 +42,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     private final TalonFX m_motor4; 
     private final CANdi m_candi;
     //private final Servo m_lockServo;
-    private final PWMTalonSRX m_lockServo;
+    private final PWM m_lockServo;
     private TalonFXConfiguration m_talonFxConfig;
     private CANdiConfiguration m_candiConfig;
     private final DynamicMotionMagicTorqueCurrentFOC m_request;
@@ -61,7 +61,7 @@ public class ElevatorSubsystem extends SubsystemBase {
         m_motor3 = new TalonFX(ElevatorConstants.kmotor3CanId, new CANBus("kachow"));
         m_motor4 = new TalonFX(ElevatorConstants.kmotor4CanId, new CANBus("kachow"));
         m_candi = new CANdi(ElevatorConstants.kcandiCanId, new CANBus("kachow"));
-        m_lockServo = new PWMTalonSRX(ElevatorConstants.kservoPort);
+        m_lockServo = new PWM(ElevatorConstants.kservoPort);
         m_talonFxConfig = new TalonFXConfiguration();
         m_candiConfig = new CANdiConfiguration();
 
@@ -200,7 +200,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     public void disableServo() {
         // TODO: Disabled
         //m_lockServo.close();
-        m_lockServo.disable();
+        m_lockServo.close();
     }
   
     private double rescale(double value, double oldMin, double oldMax, double newMin, double newMax) {
@@ -215,7 +215,9 @@ public class ElevatorSubsystem extends SubsystemBase {
         // TODO: Disabled
         //m_lockServo.setAngle(angle);
         //int pos = (int) rescale(angle, ElevatorCalibrations.kservoDegMin, ElevatorCalibrations.kservoDegMax, ElevatorCalibrations.kservoPulseMin, ElevatorCalibrations.kservoPulseMax);
-        m_lockServo.set(angle);
+        //m_lockServo.set(angle);
+        int rawValue = (int) Math.round(angle);
+        m_lockServo.setPulseTimeMicroseconds(rawValue);
         DriverStation.reportWarning("*********************** Servo Set: " + angle, false);
     }
   

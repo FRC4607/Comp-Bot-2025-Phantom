@@ -187,10 +187,10 @@ public class Calibrations {
         public static final double kBargePositionTolerance = 5.0;
 
         /* Servo lock position in degrees */
-        public static final double kservoLockAngle = .5;//100;
+        public static final double kservoLockAngle = 1000;//.5;//100;
 
         /* Servo unlock position in degrees */
-        public static final double kservoUnlockAngle = -.5;//28;
+        public static final double kservoUnlockAngle = 1500;//-.5;//28;
 
         /* Floor pickup position for Algae */
         public static final double kAlgaePickupPosition = 3;
