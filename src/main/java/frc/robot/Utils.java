@@ -10,4 +10,7 @@ public final class Utils {
         return Math.abs(a - b) < epsilon;
     }
 
+    public static double rescale(double value, double oldMin, double oldMax, double newMin, double newMax) {
+        return ((value - oldMin) / (oldMax - oldMin)) * (newMax - newMin) + newMin;
+    }
 }
