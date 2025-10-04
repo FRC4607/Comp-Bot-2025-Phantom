@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Calibrations.ElevatorCalibrations;
 import frc.robot.Calibrations.WindmillCalibrations;
+import frc.robot.Elastic;
 import frc.robot.Utils;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.WindmillSubsystem;
@@ -36,6 +37,7 @@ public class PrepClimb extends Command {
 
     @Override
     public void initialize() {
+        Elastic.selectTab("CLIMB CAM");
         //Shuffleboard.selectTab("CLIMB CAM");
         
         NetworkTableInstance.getDefault().getTable("limelight-two").getEntry("pipeline").setDouble(1);

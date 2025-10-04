@@ -85,6 +85,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
+        Elastic.selectTab("Teleoperated");
         //Shuffleboard.selectTab("Teleoperated");
         m_robotContainer.m_windmill.updateSetpoint(m_robotContainer.m_windmill.getPosition(), false);
         m_robotContainer.m_elevator.updateSetpoint(m_robotContainer.m_elevator.getPosition(), false);
