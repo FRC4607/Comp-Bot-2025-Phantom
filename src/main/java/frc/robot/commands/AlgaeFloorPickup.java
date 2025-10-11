@@ -21,11 +21,12 @@ public class AlgaeFloorPickup extends SequentialCommandGroup {
      */
     public AlgaeFloorPickup(ElevatorSubsystem elevator, WindmillSubsystem windmill, ManipulatorSubsystem manipulator) {
         super(
+            // TODO: Swap the elevator and windmill move commands - Resulted in a fatal error
             new MoveElevatorToPosition(
                 ElevatorCalibrations.kAlgaePickupPosition, ElevatorCalibrations.kDefaultTolerance, false, elevator),
             new MoveWindmillToPosition(
                 WindmillCalibrations.kAlgaePickupPosition, WindmillCalibrations.kDefaultTolerance, false, windmill),
-            new RunAlgaeIntake(manipulator)//,
+            new RunAlgaeIntake(manipulator)//, 
         // Eli request not to automate this 1/12/2025
         //new LollipopStow(elevator, windmill)
         );
