@@ -21,7 +21,7 @@ public class AlgaeFloorPickup extends SequentialCommandGroup {
      */
     public AlgaeFloorPickup(ElevatorSubsystem elevator, WindmillSubsystem windmill, ManipulatorSubsystem manipulator) {
         super(
-            // TODO: Swap the elevator and windmill move commands - Resulted in a fatal error
+            // TODO: Add a command to raise the elevator to passthrough height here - Filure to do so resulted in a fatal error
             new MoveElevatorToPosition(
                 ElevatorCalibrations.kAlgaePickupPosition, ElevatorCalibrations.kDefaultTolerance, false, elevator),
             new MoveWindmillToPosition(
