@@ -44,9 +44,9 @@ public class batteryCAN {
     public int firstUseSecond = 0;
 
 
-    public batteryCAN() {
-        can = new CAN(0,0); // ESP32 device number
-        pdh = new PowerDistribution(0,0, PowerDistribution.ModuleType.kRev);
+    public batteryCAN(int busID, int deviceID, int pdhCanID, PowerDistribution.ModuleType pdhType) {
+        can = new CAN(busID,deviceID); // ESP32 device number
+        pdh = new PowerDistribution(busID,pdhCanID, pdhType);
         startPolling();
         startSending();
     }

@@ -19,6 +19,7 @@ import frc.robot.Calibrations.ManipulatorCalibrations;
 import frc.robot.Utility.batteryCAN;
 import frc.robot.subsystems.LEDSubsystem;
 import java.util.Optional;
+import edu.wpi.first.wpilibj.PowerDistribution;
 
 import com.ctre.phoenix6.SignalLogger;
 import edu.wpi.first.wpilibj.DataLogManager;
@@ -39,7 +40,7 @@ public class Robot extends TimedRobot {
 
     public Robot() {
 
-        batteryCan = new batteryCAN();
+        batteryCan = new batteryCAN(0,33, 0 , PowerDistribution.ModuleType.kRev);
 
         m_robotContainer = new RobotContainer();
         //CTRE Logger Setup
@@ -48,12 +49,12 @@ public class Robot extends TimedRobot {
 
         // Starts recording to data log
         DataLogManager.start();
-        // Record both DS control and joystick data
-        DriverStation.startDataLog(DataLogManager.getLog());
-        // (alternatively) Record only DS control data
-        DriverStation.startDataLog(DataLogManager.getLog(), false);
-
         DataLog wpilog = DataLogManager.getLog();
+        // Record both DS control and joystick data
+        DriverStation.startDataLog(wpilog);
+        // (alternatively) Record only DS control data
+        DriverStation.startDataLog(wpilog, false);
+
         eventName = new StringLogEntry(wpilog, "EVENT/Event Name");
         matchNumber = new IntegerLogEntry(wpilog, "EVENT/Match Number");
 
