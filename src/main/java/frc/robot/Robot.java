@@ -4,6 +4,10 @@
 
 package frc.robot;
 
+import edu.wpi.first.datalog.DataLog;
+import edu.wpi.first.datalog.IntegerLogEntry;
+import edu.wpi.first.datalog.StringLogEntry;
+import edu.wpi.first.wpilibj.DataLogManager;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -14,6 +18,12 @@ import frc.robot.Calibrations.ManipulatorCalibrations;
 import frc.robot.subsystems.LEDSubsystem;
 import java.util.Optional;
 
+import com.ctre.phoenix6.SignalLogger;
+import edu.wpi.first.wpilibj.DataLogManager;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.datalog.StringLogEntry;
+
+
 /**
  * Robot.
  */
@@ -21,9 +31,26 @@ public class Robot extends TimedRobot {
 
     private Command m_autonomousCommand;
     private final RobotContainer m_robotContainer;
+    StringLogEntry eventName;
+    IntegerLogEntry matchNumber;
 
     public Robot() {
         m_robotContainer = new RobotContainer();
+        //CTRE Logger Setup
+        SignalLogger.setPath("/home/systemcore/logs/ctre-logs/");
+        SignalLogger.start();
+
+        // Starts recording to data log
+        DataLogManager.start();
+        // Record both DS control and joystick data
+        DriverStation.startDataLog(DataLogManager.getLog());
+        // (alternatively) Record only DS control data
+        DriverStation.startDataLog(DataLogManager.getLog(), false);
+
+        DataLog wpilog = DataLogManager.getLog();
+        eventName = new StringLogEntry(wpilog, "EVENT/Event Name");
+        matchNumber = new IntegerLogEntry(wpilog, "EVENT/Match Number");
+
     }
 
     @Override
@@ -67,6 +94,11 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
+        SignalLogger.writeString("Event Name", DriverStation.getEventName());
+        SignalLogger.writeInteger("Match Number", DriverStation.getMatchNumber());
+        eventName.append(DriverStation.getEventName());
+        matchNumber.append(DriverStation.getMatchNumber());
+
         m_robotContainer.m_windmill.updateSetpoint(m_robotContainer.m_windmill.getPosition(), false);
         m_robotContainer.m_elevator.updateSetpoint(m_robotContainer.m_elevator.getPosition(), false);
         m_robotContainer.m_manipulator.updateSetpoint(0, ManipulatorCalibrations.kCoralAcceleration);
