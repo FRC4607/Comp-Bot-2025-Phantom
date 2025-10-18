@@ -29,18 +29,18 @@ public class Calibrations {
 
         static {
             Map<Integer, Map<Integer, Double>> tempMap = new HashMap<>();
-            tempMap.put(6, createImmutableMap(0, -31.06, 1, 1.36, 2, -0.05));
-            tempMap.put(7, createImmutableMap(0, -29.70, 1, -1.83, 2, 0.21));
-            tempMap.put(8, createImmutableMap(0, -30.85, 1, -2.03, 2, -0.28));
-            tempMap.put(9, createImmutableMap(0, -31.19, 1, -1.91, 2, 1.05));
-            tempMap.put(10, createImmutableMap(0, -30.88, 1, 0.04, 2, -0.12));
-            tempMap.put(11, createImmutableMap(0, -30.38, 1, 0.22, 2, -1.00));
-            tempMap.put(17, createImmutableMap(0, -29.48, 1, -1.05, 2, 0.94));
-            tempMap.put(18, createImmutableMap(0, -30.82, 1, -1.11, 2, -0.14));
-            tempMap.put(19, createImmutableMap(0, -31.18, 1, -1.27, 2, 0.28));
-            tempMap.put(20, createImmutableMap(0, -31.09, 1, -1.29, 2, -0.57));
-            tempMap.put(21, createImmutableMap(0, -30.60, 1, -0.37, 2, -0.14));
-            tempMap.put(22, createImmutableMap(0, -30.90, 1, -1.50, 2, 0.64));
+            tempMap.put(6, createImmutableMap(0, -29.85, 1, 1.16, 2, -0.05));
+            tempMap.put(7, createImmutableMap(0, -30.82, 1, -0.1, 2, 0.21));
+            tempMap.put(8, createImmutableMap(0, -31.95, 1, 0.19, 2, -0.28));
+            tempMap.put(9, createImmutableMap(0, -30.53, 1, 2.44, 2, 1.05));
+            tempMap.put(10, createImmutableMap(0, -30.30, 1, -0.55, 2, -0.12));
+            tempMap.put(11, createImmutableMap(0, -31.71, 1, 1.09, 2, -1.00));
+            tempMap.put(17, createImmutableMap(0, -29.45, 1, 1.34, 2, 0.94));
+            tempMap.put(18, createImmutableMap(0, -30.90, 1, 1.70, 2, -0.14));
+            tempMap.put(19, createImmutableMap(0, -30.42, 1, 3.00, 2, 0.28));
+            tempMap.put(20, createImmutableMap(0, -31.10, 1, 2.90, 2, -0.57));
+            tempMap.put(21, createImmutableMap(0, -31.42, 1, 0.55, 2, -0.14));
+            tempMap.put(22, createImmutableMap(0, -30.38, 1, 1.68, 2, 0.64));
 
             m_coralReefTargets = Collections.unmodifiableMap(tempMap);
         }
@@ -228,6 +228,10 @@ public class Calibrations {
         /* Tolerance for the down stroke of the climb */
         public static final double kClimbDownTolerance = 2;
 
+        public static final double m_servoDegMin = 0;
+        public static final double m_servoDegMax = 180;                
+        public static final double m_servoPulseMin = 500;
+        public static final double m_servoPulseMax = 2500;
     }
 
     /**

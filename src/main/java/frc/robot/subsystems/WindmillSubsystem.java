@@ -2,6 +2,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
+import com.ctre.phoenix6.CANBus;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.DynamicMotionMagicTorqueCurrentFOC;
 import com.ctre.phoenix6.hardware.CANcoder;
@@ -33,8 +34,8 @@ public class WindmillSubsystem extends SubsystemBase {
     public WindmillSubsystem() {
 
         /* Create the hardware and configurators */
-        m_motor = new TalonFX(WindmillConstants.kmotorCanId, "kachow");
-        m_encoder = new CANcoder(WindmillConstants.kcanCoderCanId, "kachow");
+        m_motor = new TalonFX(WindmillConstants.kmotorCanId, new CANBus("kachow"));
+        m_encoder = new CANcoder(WindmillConstants.kcanCoderCanId, new CANBus("kachow"));
         m_talonFxConfig = new TalonFXConfiguration();
         m_canCoderConfig = new CANcoderConfiguration();
 

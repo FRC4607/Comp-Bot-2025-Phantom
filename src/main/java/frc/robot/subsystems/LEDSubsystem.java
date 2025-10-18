@@ -4,13 +4,13 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.led.CANdle;
-import com.ctre.phoenix.led.CANdle.LEDStripType;
-import com.ctre.phoenix.led.CANdleConfiguration;
-import com.ctre.phoenix.led.LarsonAnimation;
-import com.ctre.phoenix.led.SingleFadeAnimation;
-import com.ctre.phoenix.led.StrobeAnimation;
-import com.ctre.phoenix.led.TwinkleOffAnimation;
+import com.ctre.phoenix6.hardware.CANdle;
+import com.ctre.phoenix6.CANBus;
+import com.ctre.phoenix6.configs.CANdleConfiguration;
+import com.ctre.phoenix6.controls.*;
+import com.ctre.phoenix6.signals.RGBWColor;
+import com.ctre.phoenix6.signals.StripTypeValue;
+import com.ctre.phoenix6.signals.StatusLedWhenActiveValue;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -49,12 +49,10 @@ public class LEDSubsystem extends SubsystemBase {
     private final StrobeAnimation m_noAlliance;
     private final SingleFadeAnimation m_redDisabled;
     private final SingleFadeAnimation m_blueDisabled;
-    // private final LarsonAnimation m_intake;
     private final StrobeAnimation m_intake;
     private final StrobeAnimation m_error;
     private final TwinkleOffAnimation m_manipulatorNotReady;
     private final StrobeAnimation m_manipulatorReady;
-    // private final StrobeAnimation m_climbEnabled;
     private final LarsonAnimation m_climbLEFT;
     private final LarsonAnimation m_climbTOP;
     private final LarsonAnimation m_climbRIGHT;
@@ -64,23 +62,25 @@ public class LEDSubsystem extends SubsystemBase {
     private final StrobeAnimation m_coralOnTarget;
 
     /**
-     * LED subsystem constuctor.
+     * LED subsystem constructor.
      */
     public LEDSubsystem() {
 
         /* Create the hardware and configurator */
-        m_candle = new CANdle(Constants.LEDConstants.kCANdleID, "kachow");
+        m_candle = new CANdle(Constants.LEDConstants.kCANdleID, new CANBus("kachow"));
         m_config = new CANdleConfiguration();
 
         /* Configure hardware */
-        m_config.stripType = LEDStripType.RGB; // The chips we use seem to be RGB
-        m_config.brightnessScalar = 1; // Avoid drawing too much current
-        m_candle.configAllSettings(m_config);
-        m_candle.configLEDType(LEDStripType.RGB);
-        m_candle.clearAnimation(0);
-        m_candle.clearAnimation(1);
-        m_candle.clearAnimation(2);
-        m_candle.clearAnimation(3);
+        m_config.LED.StripType = StripTypeValue.RGB;
+        m_config.LED.BrightnessScalar = 1.0;
+        m_config.CANdleFeatures.StatusLedWhenActive = StatusLedWhenActiveValue.Disabled;
+        m_candle.getConfigurator().apply(m_config);
+
+        /* Clear all animation slots */
+        for (int i = 0; i < 8; i++) {
+            m_candle.setControl(new EmptyAnimation(i));
+        }
+
         SmartDashboard.putBoolean("Animation", false);
 
         /* Configure state */
@@ -88,30 +88,66 @@ public class LEDSubsystem extends SubsystemBase {
         m_currentState = LEDSubsystemState.DISABLED;
         m_pastState = null;
 
-        /* Configure animatinons */
-        m_noAlliance = new StrobeAnimation(255, 0, 255, 0, 0.5, Constants.LEDConstants.kRGBCount);
-        m_redDisabled = new SingleFadeAnimation(255, 0, 0, 0, 0.3, Constants.LEDConstants.kRGBCount);
-        m_blueDisabled = new SingleFadeAnimation(0, 0, 255, 0, 0.3, Constants.LEDConstants.kRGBCount);
-        m_intake = new StrobeAnimation(255, 255, 0, 0, 0.5, Constants.LEDConstants.kRGBCount);
-        // m_intake = new LarsonAnimation(165, 255, 0, 0, 0.25,
-        // Constants.LEDConstants.kRGBCount, LarsonAnimation.BounceMode.Back, 3);
-        m_error = new StrobeAnimation(255, 0, 0, 0, 0.5, Constants.LEDConstants.kRGBCount);
-        m_manipulatorNotReady = new TwinkleOffAnimation(0, 255, 0, 0, 1, Constants.LEDConstants.kRGBCount,
-        TwinkleOffAnimation.TwinkleOffPercent.Percent64);
-        m_manipulatorReady = new StrobeAnimation(0, 255, 0, 0, 1, Constants.LEDConstants.kRGBCount);
-        m_climbLEFT = new LarsonAnimation(255, 0, 255, 0, .1, Constants.LEDConstants.kRGBSection1.m_length,
-        LarsonAnimation.BounceMode.Back, 4, Constants.LEDConstants.kRGBSection1.m_start);
-        // m_climbEnabled = new StrobeAnimation(255, 0, 255, 0, 0.5, Constants.LEDConstants.kRGBCount);
-        m_climbTOP = new LarsonAnimation(255, 0, 255, 0, .5, Constants.LEDConstants.kRGBSection2.m_length,
-                LarsonAnimation.BounceMode.Center, 4, Constants.LEDConstants.kRGBSection2.m_start);
-        m_climbRIGHT = new LarsonAnimation(255, 0, 255, 0, .1, Constants.LEDConstants.kRGBSection3.m_length,
-                LarsonAnimation.BounceMode.Back, 4, Constants.LEDConstants.kRGBSection3.m_start);
-        m_coralTargeting = new TwinkleOffAnimation(0, 255, 0, 0, 1, Constants.LEDConstants.kRGBCount,
-                TwinkleOffAnimation.TwinkleOffPercent.Percent30);
-        m_coralCloseToTarget = new TwinkleOffAnimation(255, 0, 255, 0, 1, Constants.LEDConstants.kRGBCount,
-                TwinkleOffAnimation.TwinkleOffPercent.Percent30);
-        m_coralOnTarget = new StrobeAnimation(255, 0, 255, 0, 1, Constants.LEDConstants.kRGBCount);
+        /* Configure animations */
+        m_noAlliance = new StrobeAnimation(0, Constants.LEDConstants.kRGBCount)
+            .withColor(new RGBWColor(255, 0, 255, 0))
+            .withFrameRate(10);
 
+        m_redDisabled = new SingleFadeAnimation(0, Constants.LEDConstants.kRGBCount)
+            .withColor(new RGBWColor(255, 0, 0, 0))
+            .withFrameRate(10);
+
+        m_blueDisabled = new SingleFadeAnimation(0, Constants.LEDConstants.kRGBCount)
+            .withColor(new RGBWColor(0, 0, 255, 0))
+            .withFrameRate(10);
+
+        m_intake = new StrobeAnimation(0, Constants.LEDConstants.kRGBCount)
+            .withColor(new RGBWColor(255, 255, 0, 0))
+            .withFrameRate(10);
+
+        m_error = new StrobeAnimation(0, Constants.LEDConstants.kRGBCount)
+            .withColor(new RGBWColor(255, 0, 0, 0))
+            .withFrameRate(10);
+
+        m_manipulatorNotReady = new TwinkleOffAnimation(0, Constants.LEDConstants.kRGBCount)
+            .withColor(new RGBWColor(0, 255, 0, 0));
+            //.withTwinklePercent(0.64);
+
+        m_manipulatorReady = new StrobeAnimation(0, Constants.LEDConstants.kRGBCount)
+            .withColor(new RGBWColor(0, 255, 0, 0))
+            .withFrameRate(10);
+
+        m_climbLEFT = new LarsonAnimation(Constants.LEDConstants.kRGBSection1.m_start, 
+            Constants.LEDConstants.kRGBSection1.m_start + Constants.LEDConstants.kRGBSection1.m_length - 1)
+            .withColor(new RGBWColor(255, 0, 255, 0))
+            .withFrameRate(10)
+            .withSize(4);
+
+        m_climbTOP = new LarsonAnimation(Constants.LEDConstants.kRGBSection2.m_start, 
+            Constants.LEDConstants.kRGBSection2.m_start + Constants.LEDConstants.kRGBSection2.m_length - 1)
+            .withColor(new RGBWColor(255, 0, 255, 0))
+            .withFrameRate(10)
+            .withSize(4);
+
+        m_climbRIGHT = new LarsonAnimation(Constants.LEDConstants.kRGBSection3.m_start, 
+            Constants.LEDConstants.kRGBSection3.m_start + Constants.LEDConstants.kRGBSection3.m_length - 1)
+            .withColor(new RGBWColor(255, 0, 255, 0))
+            .withFrameRate(10)
+            .withSize(4);
+
+        m_coralTargeting = new TwinkleOffAnimation(0, Constants.LEDConstants.kRGBCount)
+            .withColor(new RGBWColor(0, 255, 0, 0))
+            .withFrameRate(10);
+            //.withTwinklePercent(0.30);
+
+        m_coralCloseToTarget = new TwinkleOffAnimation(0, Constants.LEDConstants.kRGBCount)
+            .withColor(new RGBWColor(255, 0, 255, 0))
+            .withFrameRate(10);
+            //.withTwinklePercent(0.30);
+
+        m_coralOnTarget = new StrobeAnimation(0, Constants.LEDConstants.kRGBCount)
+            .withColor(new RGBWColor(255, 0, 255, 0))
+            .withFrameRate(10);
     }
 
     @Override
@@ -129,95 +165,99 @@ public class LEDSubsystem extends SubsystemBase {
             switch (m_currentState) {
                 case DISABLED:
                     if (m_alliance == Alliance.Blue) {
-                        m_candle.clearAnimation(2);
-                        m_candle.clearAnimation(1);
-                        m_candle.animate(m_blueDisabled, 0);
+                        m_candle.setControl(new EmptyAnimation(2));
+                        m_candle.setControl(new EmptyAnimation(1));
+                        m_candle.setControl(m_blueDisabled.withSlot(0));
                     } else if (m_alliance == Alliance.Red) {
-                        m_candle.clearAnimation(2);
-                        m_candle.clearAnimation(1);
-                        m_candle.animate(m_redDisabled, 0);
+                        m_candle.setControl(new EmptyAnimation(2));
+                        m_candle.setControl(new EmptyAnimation(1));
+                        m_candle.setControl(m_redDisabled.withSlot(0));
                     } else {
-                        m_candle.clearAnimation(2);
-                        m_candle.clearAnimation(1);
-                        m_candle.clearAnimation(0);
-                        m_candle.animate(m_noAlliance, 0);
+                        m_candle.setControl(new EmptyAnimation(2));
+                        m_candle.setControl(new EmptyAnimation(1));
+                        m_candle.setControl(new EmptyAnimation(0));
+                        m_candle.setControl(m_noAlliance.withSlot(0));
                     }
                     break;
                 case NEUTRAL:
                     if (m_alliance == Alliance.Blue) {
-                        m_candle.clearAnimation(2);
-                        m_candle.clearAnimation(1);
-                        m_candle.clearAnimation(0);
-                        m_candle.setLEDs(0, 0, 255, 0, 0, Constants.LEDConstants.kRGBCount);
+                        m_candle.setControl(new EmptyAnimation(2));
+                        m_candle.setControl(new EmptyAnimation(1));
+                        m_candle.setControl(new EmptyAnimation(0));
+                        m_candle.setControl(new SolidColor(0, Constants.LEDConstants.kRGBCount)
+                            .withColor(new RGBWColor(0, 0, 255, 0)));
                     } else if (m_alliance == Alliance.Red) {
-                        m_candle.clearAnimation(2);
-                        m_candle.clearAnimation(1);
-                        m_candle.clearAnimation(0);
-                        m_candle.setLEDs(255, 0, 0, 0, 0, Constants.LEDConstants.kRGBCount);
+                        m_candle.setControl(new EmptyAnimation(2));
+                        m_candle.setControl(new EmptyAnimation(1));
+                        m_candle.setControl(new EmptyAnimation(0));
+                        m_candle.setControl(new SolidColor(0, Constants.LEDConstants.kRGBCount)
+                            .withColor(new RGBWColor(255, 0, 0, 0)));
                     } else {
-                        m_candle.clearAnimation(2);
-                        m_candle.clearAnimation(1);
-                        m_candle.animate(m_noAlliance, 0);
+                        m_candle.setControl(new EmptyAnimation(2));
+                        m_candle.setControl(new EmptyAnimation(1));
+                        m_candle.setControl(m_noAlliance.withSlot(0));
                     }
                     break;
                 case INTAKE:
-                    m_candle.clearAnimation(2);
-                    m_candle.clearAnimation(1);
-                    m_candle.animate(m_intake, 0);
+                    m_candle.setControl(new EmptyAnimation(2));
+                    m_candle.setControl(new EmptyAnimation(1));
+                    m_candle.setControl(m_intake.withSlot(0));
                     break;
                 case MANIPULATOR_NOT_READY:
-                    m_candle.clearAnimation(2);
-                    m_candle.clearAnimation(1);
-                    m_candle.animate(m_manipulatorNotReady, 0);
+                    m_candle.setControl(new EmptyAnimation(2));
+                    m_candle.setControl(new EmptyAnimation(1));
+                    m_candle.setControl(m_manipulatorNotReady.withSlot(0));
                     break;
                 case MANIPULATOR_READY:
-                    m_candle.clearAnimation(2);
-                    m_candle.clearAnimation(1);
-                    m_candle.animate(m_manipulatorReady, 0);
+                    m_candle.setControl(new EmptyAnimation(2));
+                    m_candle.setControl(new EmptyAnimation(1));
+                    m_candle.setControl(m_manipulatorReady.withSlot(0));
                     break;
                 case CLIMB_ENABLED:
-                    m_candle.clearAnimation(2);
-                    m_candle.clearAnimation(1);
-                    m_candle.clearAnimation(0);
-                    m_candle.setLEDs(255, 0, 255, 0, 0, Constants.LEDConstants.kRGBCount);
+                    m_candle.setControl(new EmptyAnimation(2));
+                    m_candle.setControl(new EmptyAnimation(1));
+                    m_candle.setControl(new EmptyAnimation(0));
+                    m_candle.setControl(new SolidColor(0, Constants.LEDConstants.kRGBCount)
+                        .withColor(new RGBWColor(255, 0, 255, 0)));
                     break;
                 case CLIMB_HOOKED:
-                    m_candle.clearAnimation(2);
-                    m_candle.clearAnimation(1);
-                    m_candle.clearAnimation(0);
-                    m_candle.setLEDs(255, 0, 255, 0, 0, Constants.LEDConstants.kRGBCount);
+                    m_candle.setControl(new EmptyAnimation(2));
+                    m_candle.setControl(new EmptyAnimation(1));
+                    m_candle.setControl(new EmptyAnimation(0));
+                    m_candle.setControl(new SolidColor(0, Constants.LEDConstants.kRGBCount)
+                        .withColor(new RGBWColor(255, 0, 255, 0)));
                     break;
                 case CLIMB_COMPLETE:
-                    m_candle.animate(m_climbRIGHT, 2);
-                    m_candle.animate(m_climbTOP, 1);
-                    m_candle.animate(m_climbLEFT, 0);
+                    m_candle.setControl(m_climbRIGHT.withSlot(2));
+                    m_candle.setControl(m_climbTOP.withSlot(1));
+                    m_candle.setControl(m_climbLEFT.withSlot(0));
                     break;
                 case ERROR:
-                    m_candle.clearAnimation(2);
-                    m_candle.clearAnimation(1);
-                    m_candle.animate(m_error, 0);
+                    m_candle.setControl(new EmptyAnimation(2));
+                    m_candle.setControl(new EmptyAnimation(1));
+                    m_candle.setControl(m_error.withSlot(0));
                     break;
                 case CORAL_ON_TARGET:
-                    m_candle.clearAnimation(2);
-                    m_candle.clearAnimation(1);
-                    m_candle.animate(m_coralOnTarget, 0);
+                    m_candle.setControl(new EmptyAnimation(2));
+                    m_candle.setControl(new EmptyAnimation(1));
+                    m_candle.setControl(m_coralOnTarget.withSlot(0));
                     break;
                 case CORAL_TARGETING:
-                    m_candle.clearAnimation(2);
-                    m_candle.clearAnimation(1);
-                    m_candle.animate(m_coralTargeting, 0);
+                    m_candle.setControl(new EmptyAnimation(2));
+                    m_candle.setControl(new EmptyAnimation(1));
+                    m_candle.setControl(m_coralTargeting.withSlot(0));
                     break;
                 case CORAL_CLOSETOTARGET:
-                    m_candle.clearAnimation(2);
-                    m_candle.clearAnimation(1);
-                    m_candle.animate(m_coralCloseToTarget, 0);
+                    m_candle.setControl(new EmptyAnimation(2));
+                    m_candle.setControl(new EmptyAnimation(1));
+                    m_candle.setControl(m_coralCloseToTarget.withSlot(0));
                     break;
                 default:
-                    m_candle.clearAnimation(2);
-                    m_candle.clearAnimation(1);
-                    m_candle.animate(m_error, 0);
+                    m_candle.setControl(new EmptyAnimation(2));
+                    m_candle.setControl(new EmptyAnimation(1));
+                    m_candle.setControl(m_error.withSlot(0));
             }
-            // System.out.println(m_currentState);
+            colorUpdate = false;
         }
         m_pastState = m_currentState;
     }
@@ -268,7 +308,7 @@ public class LEDSubsystem extends SubsystemBase {
     }
 
     public static void setCoralCloseToTarget() {
-        m_currentState = LEDSubsystemState.CORAL_ON_TARGET;
+        m_currentState = LEDSubsystemState.CORAL_CLOSETOTARGET;
     }
 
     public static void setCoralOnTarget() {
