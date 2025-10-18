@@ -1,5 +1,6 @@
 package frc.robot.Utility;
 
+import edu.wpi.first.hal.can.CANReceiveMessage;
 import edu.wpi.first.wpilibj.CAN;
 //import edu.wpi.first.hal.CANData;
 import edu.wpi.first.wpilibj.PowerDistribution;
@@ -56,9 +57,9 @@ public class batteryCAN {
             @Override
             public void run() {
                 try {
-                    CANData rx1 = new CANData();
-                    CANData rx2 = new CANData();
-                    CANData rx3 = new CANData();
+                    CANReceiveMessage rx1 = new CANReceiveMessage();
+                    CANReceiveMessage rx2 = new CANReceiveMessage();
+                    CANReceiveMessage rx3 = new CANReceiveMessage();
 
                     byte[] snPart1 = new byte[8];
                     byte[] snPart2 = new byte[8];
