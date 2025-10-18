@@ -11,10 +11,12 @@ import edu.wpi.first.wpilibj.DataLogManager;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Calibrations.ManipulatorCalibrations;
+import frc.robot.Utility.batteryCAN;
 import frc.robot.subsystems.LEDSubsystem;
 import java.util.Optional;
 
@@ -33,8 +35,12 @@ public class Robot extends TimedRobot {
     private final RobotContainer m_robotContainer;
     StringLogEntry eventName;
     IntegerLogEntry matchNumber;
+    private batteryCAN batteryCan;
 
     public Robot() {
+
+        batteryCan = new batteryCAN();
+
         m_robotContainer = new RobotContainer();
         //CTRE Logger Setup
         SignalLogger.setPath("/home/systemcore/logs/ctre-logs/");
@@ -56,6 +62,25 @@ public class Robot extends TimedRobot {
     @Override
     public void robotPeriodic() {
         CommandScheduler.getInstance().run();
+
+        if (batteryCan != null && batteryCan.valid) {
+            SmartDashboard.putString("Battery SN", batteryCan.serialNumber);
+            SmartDashboard.putString("Battery First Use (UTC)", 
+                String.format("%04d-%02d-%02d",
+                    batteryCan.firstUseYear,
+                    batteryCan.firstUseMonth,
+                    batteryCan.firstUseDay
+                )
+            );
+            SmartDashboard.putString("Battery Note", batteryCan.noteText);
+            SmartDashboard.putNumber("Battery Cycle Count", batteryCan.cycleCount);
+        } else {
+            SmartDashboard.putString("Battery SN", "INVALID");
+            SmartDashboard.putString("Battery First Use (UTC)", "0000-00-00");
+            SmartDashboard.putString("Battery Note", "INVALID");
+            SmartDashboard.putNumber("Battery Cycle Count", 0);
+        }
+
     }
 
     @Override
